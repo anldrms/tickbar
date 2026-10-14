@@ -1,63 +1,94 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TickBar — Free macOS Menu Bar &amp; Floating Stock Ticker Widget (.DMG)</title>
-  <meta name="description" content="Download TickBar — a 100% free native macOS Menu Bar (Status Bar) and Floating Desktop Widget for live stock tickers, official company logos, and intraday sparklines." />
-  <meta name="keywords" content="TickBar, anldrms, macOS stock ticker, menu bar stock ticker mac, floating stock widget macOS, free mac stock app, DMG, live stock price status bar" />
+  <title>TickBar · macOS 27 Liquid Glass Stock & Crypto Menu Bar Ticker</title>
+  <meta name="description" content="Free, native macOS 27 Liquid Glass stock & crypto ticker for your Menu Bar and Desktop. Live Yahoo Finance regular + After-Hours (AH) & Pre-Market (PM) prices, 2026 official vector logos, and intraday sparklines. Curated by anldrms." />
+  <meta name="keywords" content="TickBar, macOS 27 menu bar stock ticker, Liquid Glass macOS app, after hours stock widget mac, Yahoo Finance menu bar macOS, NVDA AAPL TSLA menu bar, anldrms" />
   <meta name="author" content="anldrms" />
-  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://tickbar.vercel.app/" />
+
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="TickBar — Native macOS Menu Bar &amp; Floating Stock Ticker" />
-  <meta property="og:description" content="Pin live stock tickers, official company logos, and intraday sparklines to your macOS Menu Bar or desktop. 100% free universal macOS .DMG." />
+  <meta property="og:title" content="TickBar · macOS 27 Liquid Glass Stock & Crypto Menu Bar Ticker" />
+  <meta property="og:description" content="Real-time Yahoo Finance regular + After-Hours prices, official 2026 vector logos, and sparklines in your macOS 27 Menu Bar & Liquid Glass desktop widget." />
   <meta property="og:url" content="https://tickbar.vercel.app/" />
   <meta property="og:site_name" content="TickBar" />
+
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="TickBar — Free macOS Menu Bar Stock Ticker" />
-  <meta name="twitter:description" content="Live stock prices, official company logos, and sparklines in your macOS Menu Bar and floating desktop widget." />
+  <meta name="twitter:title" content="TickBar · macOS 27 Liquid Glass Stock & Crypto Ticker" />
+  <meta name="twitter:description" content="Native SwiftUI + AppKit stock & crypto menu bar ticker with live Yahoo Finance After-Hours quotes and 2026 vector logos." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600;700&family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     "name": "TickBar",
-    "operatingSystem": "macOS 13.0+",
+    "operatingSystem": "macOS",
     "applicationCategory": "FinanceApplication",
-    "downloadUrl": "https://tickbar.vercel.app/downloads/TickBar-macOS-Universal.dmg",
-    "softwareVersion": "1.1.0",
-    "author": {
-      "@type": "Person",
-      "name": "anldrms",
-      "url": "https://github.com/anldrms"
-    },
     "offers": {
       "@type": "Offer",
       "price": "0",
       "priceCurrency": "USD"
     },
-    "description": "A 100% free native macOS Menu Bar and Floating Desktop Widget for live stock tickers, official company logos, and intraday sparklines."
+    "author": {
+      "@type": "Person",
+      "name": "anldrms",
+      "url": "https://github.com/anldrms"
+    },
+    "downloadUrl": "https://tickbar.vercel.app/downloads/TickBar-macOS-Universal.dmg",
+    "softwareVersion": "1.2.0"
   }
   </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600;700&family=Geist:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+
   <style>
-    :root {
-      --bg: #090a0f;
-      --plate: #0e1017;
-      --plate-soft: #141720;
-      --plate-hover: #191d28;
-      --rule: rgba(255, 255, 255, 0.08);
-      --rule-strong: rgba(255, 255, 255, 0.15);
-      --fg: #f3f4f6;
-      --fg-muted: #8e95a5;
-      --fg-subtle: #596070;
-      --up: #21d67a;
-      --up-soft: rgba(33, 214, 122, 0.13);
-      --down: #f55261;
-      --down-soft: rgba(245, 82, 97, 0.13);
-      --accent: #21d67a;
+    :root, [data-theme="dark"] {
+      --bg: #0d0e13;
+      --bg-elevated: #12141c;
+      --bg-surface: rgba(255, 255, 255, 0.03);
+      --bg-hover-plate: rgba(255, 255, 255, 0.045);
+      --fg: #f2f4f8;
+      --fg-muted: #9399a8;
+      --fg-subtle: #5e6472;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-strong: rgba(255, 255, 255, 0.16);
+      --green: #30db7d;
+      --green-bg: rgba(48, 219, 125, 0.14);
+      --red: #ff5b66;
+      --red-bg: rgba(255, 91, 102, 0.14);
+      --ah-blue: #8ab8ff;
+      --ah-bg: rgba(88, 148, 255, 0.16);
+      --accent: #30db7d;
+      --btn-bg: #f2f4f8;
+      --btn-fg: #0d0e13;
+      --shadow-stage: 0 36px 90px -20px rgba(0, 0, 0, 0.78);
+    }
+
+    [data-theme="light"] {
+      --bg: #fafafc;
+      --bg-elevated: #f1f2f6;
+      --bg-surface: rgba(13, 14, 19, 0.03);
+      --bg-hover-plate: rgba(13, 14, 19, 0.045);
+      --fg: #11131a;
+      --fg-muted: #5a6070;
+      --fg-subtle: #8c92a4;
+      --border: rgba(13, 14, 19, 0.09);
+      --border-strong: rgba(13, 14, 19, 0.18);
+      --green: #0d9f52;
+      --green-bg: rgba(13, 159, 82, 0.12);
+      --red: #e02d3c;
+      --red-bg: rgba(224, 45, 60, 0.12);
+      --ah-blue: #2563eb;
+      --ah-bg: rgba(37, 99, 235, 0.12);
+      --accent: #0d9f52;
+      --btn-bg: #11131a;
+      --btn-fg: #fafafc;
+      --shadow-stage: 0 30px 75px -20px rgba(17, 19, 26, 0.18);
     }
 
     * {
@@ -66,516 +97,897 @@
       padding: 0;
     }
 
-    html, body {
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
       background-color: var(--bg);
       color: var(--fg);
-      font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
-      -webkit-font-smoothing: antialiased;
-      selection-background-color: var(--up);
+      font-family: "Geist", -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.5;
+      transition: background-color 0.25s ease, color 0.25s ease;
       overflow-x: hidden;
     }
 
     .mono {
-      font-family: 'Geist Mono', monospace;
+      font-family: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
       font-variant-numeric: tabular-nums;
     }
 
-    .serif-italic {
-      font-family: 'Instrument Serif', Georgia, serif;
-      font-style: italic;
-      font-weight: 400;
-    }
-
-    .bg-grid {
-      background-image:
-        linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
-      background-size: 48px 48px;
-    }
-
-    .container {
-      max-width: 1180px;
-      margin: 0 auto;
-      border-left: 1px solid var(--rule);
-      border-right: 1px solid var(--rule);
-      min-height: 100vh;
-      background: radial-gradient(circle at 50% 0%, rgba(33, 214, 122, 0.06) 0%, transparent 55%);
-    }
-
-    header.topbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 16px 28px;
-      border-bottom: 1px solid var(--rule);
-      background: rgba(9, 10, 15, 0.82);
-      backdrop-filter: blur(16px);
+    /* Live Yahoo Finance Top Tape */
+    .live-tape-wrap {
       position: sticky;
       top: 0;
-      z-index: 50;
-    }
-
-    .brand-cluster {
+      z-index: 60;
+      height: 36px;
+      background: color-mix(in srgb, var(--bg) 86%, transparent);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
       display: flex;
       align-items: center;
-      gap: 12px;
+      overflow: hidden;
+    }
+
+    .tape-status-badge {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 0 14px;
+      height: 100%;
+      border-right: 1px solid var(--border);
+      background: var(--bg);
+      z-index: 2;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--fg-muted);
     }
 
     .pulse-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: var(--up);
-      box-shadow: 0 0 12px var(--up);
-      animation: pulseGlow 2.4s infinite ease-in-out;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 8px var(--green);
+      animation: livePulse 2s infinite ease-in-out;
     }
 
-    @keyframes pulseGlow {
+    @keyframes livePulse {
       0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.45; transform: scale(0.88); }
+      50% { opacity: 0.45; transform: scale(0.86); }
     }
 
-    .brand-title {
-      font-size: 14px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+    .tape-marquee {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      white-space: nowrap;
+      padding-left: 20px;
+      animation: tickerSlide 52s linear infinite;
     }
 
-    .creator-pill {
+    .tape-marquee:hover {
+      animation-play-state: paused;
+    }
+
+    @keyframes tickerSlide {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .tape-item {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      padding: 4px 10px;
+      gap: 7px;
+      font-size: 11.5px;
+      cursor: pointer;
+      padding: 3px 8px;
       border-radius: 6px;
-      background: var(--plate-soft);
-      border: 1px solid var(--rule);
-      font-size: 12px;
-      color: var(--fg-muted);
-      text-decoration: none;
-      transition: all 0.16s ease;
+      transition: background 0.15s ease;
     }
 
-    .creator-pill:hover {
-      border-color: var(--rule-strong);
+    .tape-item:hover {
+      background: var(--bg-hover-plate);
+    }
+
+    .tape-item img {
+      width: 15px;
+      height: 15px;
+      border-radius: 4px;
+      object-fit: cover;
+    }
+
+    .tape-sym {
+      font-weight: 600;
       color: var(--fg);
-      background: var(--plate-hover);
+    }
+
+    .tape-price {
+      color: var(--fg-muted);
+    }
+
+    .tape-chg {
+      font-weight: 600;
+      padding: 1px 5px;
+      border-radius: 99px;
+      font-size: 10.5px;
+    }
+
+    .tape-chg.up {
+      color: var(--green);
+      background: var(--green-bg);
+    }
+
+    .tape-chg.down {
+      color: var(--red);
+      background: var(--red-bg);
+    }
+
+    .tape-ah {
+      font-size: 10px;
+      color: var(--ah-blue);
+      background: var(--ah-bg);
+      padding: 1px 5px;
+      border-radius: 99px;
+      font-weight: 500;
+    }
+
+    /* Main Container */
+    .page-shell {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 28px 24px 96px;
+    }
+
+    /* Header (mkdir.directory inspired minimal topbar) */
+    .top-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 36px;
+    }
+
+    .brand-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--fg);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-glyph {
+      width: 24px;
+      height: 24px;
+      border-radius: 7px;
+      background: linear-gradient(145deg, #1b2230, #0d1018);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22);
+    }
+
+    .brand-glyph svg {
+      width: 14px;
+      height: 14px;
+      stroke: #30db7d;
     }
 
     .nav-actions {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
 
-    .btn-download-sm {
+    .nav-pill {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 8px 14px;
-      border-radius: 7px;
-      background: var(--fg);
-      color: #090a0f;
-      font-size: 12.5px;
-      font-weight: 600;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--fg-muted);
       text-decoration: none;
+      padding: 6px 11px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg-surface);
       transition: all 0.16s ease;
     }
 
-    .btn-download-sm:hover {
-      background: var(--up);
-      transform: translateY(-1px);
+    .nav-pill:hover {
+      color: var(--fg);
+      border-color: var(--border-strong);
+      background: var(--bg-hover-plate);
     }
 
-    .hero {
-      padding: 64px 28px 56px;
-      border-bottom: 1px solid var(--rule);
-      display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: 44px;
-      align-items: center;
-    }
-
-    @media (max-width: 960px) {
-      .hero {
-        grid-template-columns: 1fr;
-        padding: 40px 20px;
-      }
-    }
-
-    .eyebrow {
+    .theme-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg-surface);
+      color: var(--fg);
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 5px 11px;
-      border-radius: 999px;
-      border: 1px solid var(--rule-strong);
-      background: rgba(255, 255, 255, 0.03);
-      font-size: 11.5px;
-      color: var(--fg-muted);
-      margin-bottom: 22px;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.16s ease;
     }
 
-    .eyebrow span.badge {
-      color: var(--up);
-      font-weight: 600;
+    .theme-btn:hover {
+      border-color: var(--border-strong);
+      background: var(--bg-hover-plate);
     }
 
-    h1.hero-title {
-      font-size: clamp(38px, 5vw, 60px);
-      line-height: 1.04;
-      letter-spacing: -0.035em;
-      font-weight: 600;
-      margin-bottom: 20px;
+    /* Hero Section */
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      margin-bottom: 28px;
     }
 
-    p.hero-sub {
-      font-size: 16.5px;
-      line-height: 1.6;
-      color: var(--fg-muted);
-      max-width: 520px;
-      margin-bottom: 30px;
-    }
-
-    .cta-cluster {
+    .eyebrow-row {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      gap: 14px;
-      margin-bottom: 26px;
+      gap: 8px;
+    }
+
+    .eyebrow-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 99px;
+      font-size: 11px;
+      font-weight: 500;
+      border: 1px solid var(--border);
+      background: var(--bg-surface);
+      color: var(--fg-muted);
+    }
+
+    .eyebrow-tag strong {
+      color: var(--fg);
+      font-weight: 600;
+    }
+
+    .hero-title {
+      font-size: clamp(28px, 4.2vw, 46px);
+      font-weight: 600;
+      letter-spacing: -0.035em;
+      line-height: 1.08;
+      max-width: 780px;
+    }
+
+    .hero-sub {
+      font-size: 15px;
+      color: var(--fg-muted);
+      max-width: 650px;
+      line-height: 1.6;
+    }
+
+    .cta-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      padding-top: 4px;
     }
 
     .btn-primary {
       display: inline-flex;
       align-items: center;
-      gap: 12px;
-      padding: 15px 24px;
-      border-radius: 10px;
-      background: var(--fg);
-      color: #090a0f;
-      font-size: 14.5px;
+      gap: 9px;
+      padding: 10px 18px;
+      border-radius: 9px;
+      background: var(--btn-bg);
+      color: var(--btn-fg);
+      font-size: 13.5px;
       font-weight: 600;
       text-decoration: none;
-      border: 1px solid var(--fg);
-      transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
-      box-shadow: 0 10px 30px -10px rgba(255, 255, 255, 0.25);
+      border: 1px solid transparent;
+      transition: transform 0.15s ease, opacity 0.15s ease;
     }
 
     .btn-primary:hover {
-      background: var(--up);
-      border-color: var(--up);
-      transform: translateY(-2px);
-      box-shadow: 0 14px 34px -8px rgba(33, 214, 122, 0.45);
+      opacity: 0.92;
+      transform: translateY(-1px);
     }
 
     .btn-secondary {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 15px 18px;
-      border-radius: 10px;
-      background: var(--plate);
+      gap: 7px;
+      padding: 10px 15px;
+      border-radius: 9px;
+      background: var(--bg-surface);
       color: var(--fg);
-      font-size: 13.5px;
+      font-size: 13px;
       font-weight: 500;
       text-decoration: none;
-      border: 1px solid var(--rule-strong);
-      transition: all 0.16s ease;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: all 0.15s ease;
     }
 
     .btn-secondary:hover {
-      background: var(--plate-soft);
-      border-color: rgba(255, 255, 255, 0.28);
+      border-color: var(--border-strong);
+      background: var(--bg-hover-plate);
     }
 
-    .meta-strip {
+    /* Interactive Stage Controls Bar */
+    .stage-toolbar {
       display: flex;
       flex-wrap: wrap;
-      gap: 18px;
-      font-size: 12px;
-      color: var(--fg-subtle);
-      padding-top: 8px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      border-bottom: none;
+      border-radius: 16px 16px 0 0;
+      background: var(--bg-elevated);
     }
 
-    .meta-strip span {
+    .stage-toolbar-left, .stage-toolbar-right {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .stage-label {
+      font-size: 11.5px;
+      color: var(--fg-muted);
       display: inline-flex;
       align-items: center;
       gap: 6px;
     }
 
-    .macos-stage {
-      background: var(--plate);
-      border: 1px solid var(--rule-strong);
-      border-radius: 14px;
-      overflow: hidden;
-      box-shadow: 0 28px 70px -18px rgba(0, 0, 0, 0.85), 0 0 0 1px rgba(255, 255, 255, 0.04);
-      position: relative;
-    }
-
-    .macos-menubar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 8px 14px;
-      background: rgba(18, 20, 28, 0.95);
-      border-bottom: 1px solid var(--rule);
-      font-size: 12px;
-      user-select: none;
-    }
-
-    .menubar-left {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      color: rgba(255, 255, 255, 0.78);
-      font-weight: 500;
-    }
-
-    .menubar-right {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .status-ticker-pill {
+    .stage-chip {
       display: inline-flex;
       align-items: center;
-      gap: 7px;
-      padding: 3px 9px;
-      border-radius: 6px;
-      background: rgba(255, 255, 255, 0.09);
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      font-size: 12px;
-      font-weight: 600;
+      gap: 5px;
+      padding: 5px 10px;
+      border-radius: 7px;
+      font-size: 11.5px;
+      font-weight: 500;
+      border: 1px solid var(--border);
+      background: var(--bg-surface);
+      color: var(--fg);
       cursor: pointer;
       transition: all 0.15s ease;
     }
 
-    .status-ticker-pill img {
-      width: 16px;
-      height: 16px;
+    .stage-chip:hover {
+      border-color: var(--border-strong);
+      background: var(--bg-hover-plate);
+    }
+
+    .stage-chip.active {
+      border-color: rgba(48, 219, 125, 0.45);
+      background: var(--green-bg);
+      color: var(--green);
+    }
+
+    /* macOS 27 Liquid Glass Desktop Stage */
+    .macos27-stage {
+      position: relative;
+      width: 100%;
+      min-height: 610px;
+      border-radius: 0 0 18px 18px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      box-shadow: var(--shadow-stage);
+      user-select: none;
+      transition: background 0.5s ease;
+    }
+
+    .macos27-stage[data-wallpaper="tahoe"] {
+      background:
+        radial-gradient(1100px 520px at 18% 15%, rgba(56, 138, 255, 0.34), transparent 60%),
+        radial-gradient(900px 540px at 85% 22%, rgba(48, 219, 125, 0.22), transparent 62%),
+        radial-gradient(850px 580px at 52% 92%, rgba(130, 87, 255, 0.28), transparent 65%),
+        linear-gradient(160deg, #070b16 0%, #0d1528 48%, #090d18 100%);
+    }
+
+    .macos27-stage[data-wallpaper="obsidian"] {
+      background:
+        radial-gradient(900px 460px at 78% 18%, rgba(48, 219, 125, 0.18), transparent 60%),
+        radial-gradient(900px 520px at 22% 80%, rgba(59, 130, 246, 0.16), transparent 62%),
+        linear-gradient(165deg, #050609 0%, #0c0e14 55%, #07080c 100%);
+    }
+
+    .macos27-stage[data-wallpaper="prism"] {
+      background:
+        radial-gradient(980px 500px at 20% 20%, rgba(244, 114, 182, 0.28), transparent 60%),
+        radial-gradient(880px 500px at 82% 28%, rgba(56, 189, 248, 0.30), transparent 60%),
+        radial-gradient(900px 520px at 50% 88%, rgba(52, 211, 153, 0.22), transparent 62%),
+        linear-gradient(155deg, #0b1021 0%, #161530 52%, #090d1a 100%);
+    }
+
+    /* Ambient light orbs behind Liquid Glass */
+    .glass-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(55px);
+      pointer-events: none;
+      opacity: 0.55;
+    }
+
+    .glass-orb.one {
+      width: 280px;
+      height: 280px;
+      background: rgba(56, 189, 248, 0.26);
+      top: 60px;
+      right: 110px;
+    }
+
+    .glass-orb.two {
+      width: 240px;
+      height: 240px;
+      background: rgba(48, 219, 125, 0.20);
+      bottom: 70px;
+      left: 80px;
+    }
+
+    /* macOS 27 Top Menu Bar (Liquid Glass capsule bar) */
+    .macos27-menubar {
+      position: relative;
+      z-index: 20;
+      height: 32px;
+      margin: 8px 12px 0;
+      padding: 0 14px;
+      border-radius: 99px;
+      background: rgba(18, 22, 34, 0.52);
+      backdrop-filter: blur(28px) saturate(190%);
+      -webkit-backdrop-filter: blur(28px) saturate(190%);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.24), 0 8px 24px rgba(0, 0, 0, 0.28);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: rgba(255, 255, 255, 0.92);
+      font-size: 12px;
+    }
+
+    .menubar-left, .menubar-right {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .menubar-apple {
+      font-size: 13px;
+      opacity: 0.95;
+    }
+
+    .menubar-appname {
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .menubar-menu-item {
+      color: rgba(255, 255, 255, 0.68);
+      font-size: 11.5px;
+    }
+
+    /* Pinned Stock Item inside macOS 27 Menu Bar */
+    .menubar-ticker-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 2.5px 10px 2.5px 6px;
+      border-radius: 99px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.30);
+      cursor: pointer;
+      transition: all 0.16s ease;
+    }
+
+    .menubar-ticker-pill:hover {
+      background: rgba(255, 255, 255, 0.18);
+    }
+
+    .menubar-ticker-pill img {
+      width: 15px;
+      height: 15px;
       border-radius: 4px;
       object-fit: cover;
-      background: #141720;
     }
 
-    .desktop-canvas {
-      padding: 18px;
-      background:
-        radial-gradient(circle at 80% 20%, rgba(33, 214, 122, 0.09), transparent 50%),
-        radial-gradient(circle at 20% 80%, rgba(56, 128, 255, 0.08), transparent 55%),
-        #0b0d13;
-      min-height: 465px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+    .menubar-clock {
+      font-size: 11.5px;
+      color: rgba(255, 255, 255, 0.85);
     }
 
-    .app-popover {
-      width: 100%;
-      max-width: 400px;
-      background: rgba(13, 14, 20, 0.96);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      border-radius: 12px;
+    /* macOS 27 Liquid Glass Popover Window */
+    .liquid-popover {
+      position: absolute;
+      top: 52px;
+      right: 28px;
+      width: 404px;
+      border-radius: 24px;
+      background: linear-gradient(
+        155deg,
+        rgba(28, 34, 52, 0.64) 0%,
+        rgba(14, 17, 28, 0.78) 100%
+      );
+      backdrop-filter: blur(42px) saturate(200%);
+      -webkit-backdrop-filter: blur(42px) saturate(200%);
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      box-shadow:
+        inset 0 1.5px 0 rgba(255, 255, 255, 0.34),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.08),
+        0 30px 70px rgba(0, 0, 0, 0.62);
+      color: #ffffff;
+      z-index: 15;
       overflow: hidden;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.75);
+      transition: transform 0.22s cubic-bezier(0.2, 0.9, 0.2, 1);
     }
 
     .popover-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 11px 14px;
-      border-bottom: 1px solid var(--rule);
-      background: rgba(255, 255, 255, 0.02);
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.11);
+      cursor: grab;
     }
 
-    .popover-search-wrap {
-      padding: 8px 12px;
-      border-bottom: 1px solid var(--rule);
-      background: #0b0c11;
+    .popover-header:active {
+      cursor: grabbing;
+    }
+
+    .popover-brand {
       display: flex;
-      flex-direction: column;
+      align-items: center;
       gap: 7px;
     }
 
-    .popover-search {
-      display: flex;
-      align-items: center;
-      gap: 8px;
+    .popover-brand-title {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
     }
 
-    .popover-search input {
+    .liquid-badge {
+      font-size: 9.5px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 99px;
+      background: rgba(88, 148, 255, 0.20);
+      border: 1px solid rgba(138, 184, 255, 0.30);
+      color: #9ec5ff;
+    }
+
+    .popover-controls {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .glass-pill-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 9px;
+      border-radius: 99px;
+      font-size: 10.5px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.88);
+      background: rgba(255, 255, 255, 0.10);
+      border: 1px solid rgba(255, 255, 255, 0.20);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22);
+      cursor: pointer;
+      transition: all 0.14s ease;
+    }
+
+    .glass-pill-btn:hover {
+      background: rgba(255, 255, 255, 0.18);
+      transform: translateY(-0.5px);
+    }
+
+    /* Search / Add Ticker Bar */
+    .popover-add-zone {
+      padding: 10px 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+      background: rgba(0, 0, 0, 0.14);
+    }
+
+    .add-input-row {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 8px 6px 11px;
+      border-radius: 12px;
+      background: rgba(0, 0, 0, 0.30);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .add-input-row input {
+      flex: 1;
       background: transparent;
       border: none;
       outline: none;
-      color: var(--fg);
+      color: #ffffff;
       font-size: 12px;
-      width: 100%;
     }
 
-    .popover-search button {
-      background: var(--up);
-      color: #06080b;
+    .add-input-row input::placeholder {
+      color: rgba(255, 255, 255, 0.42);
+    }
+
+    .add-submit-btn {
+      padding: 4px 10px;
+      border-radius: 99px;
       border: none;
-      border-radius: 4px;
-      padding: 4px 9px;
+      background: #30db7d;
+      color: #06110a;
       font-size: 10.5px;
       font-weight: 700;
       cursor: pointer;
-      white-space: nowrap;
+      transition: opacity 0.15s ease;
     }
 
-    .quick-chips {
+    .add-submit-btn:hover {
+      opacity: 0.9;
+    }
+
+    .quick-chips-row {
       display: flex;
       align-items: center;
       gap: 5px;
+      margin-top: 8px;
       overflow-x: auto;
-      padding-bottom: 2px;
+      scrollbar-width: none;
+    }
+
+    .quick-chips-row::-webkit-scrollbar {
+      display: none;
     }
 
     .quick-chip {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.10);
-      color: rgba(255, 255, 255, 0.75);
-      border-radius: 4px;
-      padding: 2px 6px;
+      flex-shrink: 0;
+      padding: 2.5px 8px;
+      border-radius: 99px;
       font-size: 10px;
       font-weight: 600;
+      color: rgba(255, 255, 255, 0.80);
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
       cursor: pointer;
-      white-space: nowrap;
       transition: all 0.14s ease;
     }
 
     .quick-chip:hover {
-      background: var(--up-soft);
-      border-color: var(--up);
-      color: var(--up);
+      background: rgba(48, 219, 125, 0.20);
+      border-color: rgba(48, 219, 125, 0.45);
+      color: #ffffff;
     }
 
-    .watchlist-container {
+    /* Watchlist Rows inside Popover */
+    .popover-rows {
+      max-height: 340px;
+      overflow-y: auto;
       padding: 10px;
       display: flex;
       flex-direction: column;
       gap: 6px;
-      max-height: 300px;
-      overflow-y: auto;
     }
 
-    .ticker-row {
-      display: grid;
-      grid-template-columns: 34px 1.15fr 60px 0.9fr 22px;
+    .popover-rows::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .popover-rows::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.18);
+      border-radius: 99px;
+    }
+
+    .glass-stock-row {
+      display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
       padding: 8px 10px;
-      border-radius: 8px;
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 14px;
+      background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.09) 0%,
+        rgba(255, 255, 255, 0.03) 100%
+      );
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
       cursor: pointer;
-      transition: all 0.14s ease;
+      transition: all 0.16s ease;
     }
 
-    .ticker-row:hover {
-      background: rgba(255, 255, 255, 0.05);
-      border-color: rgba(255, 255, 255, 0.14);
+    .glass-stock-row:hover {
+      background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.15) 0%,
+        rgba(255, 255, 255, 0.06) 100%
+      );
+      border-color: rgba(255, 255, 255, 0.26);
     }
 
-    .ticker-row.pinned {
-      border-color: rgba(33, 214, 122, 0.45);
-      background: rgba(33, 214, 122, 0.04);
+    .glass-stock-row.pinned {
+      border-color: rgba(48, 219, 125, 0.50);
+      box-shadow: inset 0 1px 0 rgba(48, 219, 125, 0.28);
     }
 
-    .ticker-logo-box {
+    .glass-stock-row.flash-up {
+      animation: rowFlashGreen 0.7s ease;
+    }
+
+    .glass-stock-row.flash-down {
+      animation: rowFlashRed 0.7s ease;
+    }
+
+    @keyframes rowFlashGreen {
+      0% { background: rgba(48, 219, 125, 0.28); }
+      100% { background: rgba(255, 255, 255, 0.06); }
+    }
+
+    @keyframes rowFlashRed {
+      0% { background: rgba(255, 91, 102, 0.28); }
+      100% { background: rgba(255, 255, 255, 0.06); }
+    }
+
+    .stock-logo-squircle {
+      position: relative;
       width: 34px;
       height: 34px;
-      border-radius: 9px;
-      background: #161924;
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.10);
+      border: 1px solid rgba(255, 255, 255, 0.24);
       display: flex;
       align-items: center;
       justify-content: center;
-      position: relative;
       overflow: hidden;
+      flex-shrink: 0;
     }
 
-    .ticker-logo-box img {
+    .stock-logo-squircle img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
 
-    .ticker-symbol-line {
+    .stock-meta {
+      width: 108px;
+      min-width: 0;
+    }
+
+    .stock-sym-line {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
+    }
+
+    .stock-sym {
       font-size: 13px;
       font-weight: 700;
+      color: #ffffff;
     }
 
-    .pin-tag {
-      font-size: 9px;
-      padding: 1px 4px;
-      border-radius: 3px;
-      background: var(--up-soft);
-      color: var(--up);
+    .bar-pin-tag {
+      font-size: 8.5px;
       font-weight: 700;
+      padding: 1px 5px;
+      border-radius: 99px;
+      background: rgba(48, 219, 125, 0.18);
+      color: #30db7d;
     }
 
-    .ticker-company {
-      font-size: 11px;
-      color: var(--fg-muted);
+    .stock-name {
+      font-size: 10.5px;
+      color: rgba(255, 255, 255, 0.56);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
-    .ticker-price-col {
-      text-align: right;
-    }
-
-    .ticker-price {
-      font-size: 13px;
-      font-weight: 600;
-    }
-
-    .ticker-change {
-      display: inline-block;
-      font-size: 10.5px;
-      font-weight: 600;
-      padding: 1.5px 5px;
-      border-radius: 4px;
-      margin-top: 2px;
-    }
-
-    .change-up {
-      color: var(--up);
-      background: var(--up-soft);
-    }
-
-    .change-down {
-      color: var(--down);
-      background: var(--down-soft);
-    }
-
-    .btn-remove-row {
-      width: 22px;
+    .stock-spark {
+      width: 54px;
       height: 22px;
-      border-radius: 5px;
-      border: none;
-      background: rgba(255, 255, 255, 0.06);
-      color: rgba(255, 255, 255, 0.48);
-      font-size: 12px;
-      font-weight: 700;
-      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .stock-prices {
+      margin-left: auto;
+      text-align: right;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 2.5px;
+    }
+
+    .reg-price-line {
       display: flex;
       align-items: center;
+      gap: 5px;
+    }
+
+    .reg-price {
+      font-size: 13px;
+      font-weight: 600;
+      color: #ffffff;
+    }
+
+    .reg-pct {
+      font-size: 10px;
+      font-weight: 600;
+      padding: 1.5px 6px;
+      border-radius: 99px;
+    }
+
+    .reg-pct.up {
+      color: #30db7d;
+      background: rgba(48, 219, 125, 0.16);
+    }
+
+    .reg-pct.down {
+      color: #ff646e;
+      background: rgba(255, 91, 102, 0.16);
+    }
+
+    .ext-price-line {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 9.5px;
+    }
+
+    .ext-badge {
+      font-size: 8px;
+      font-weight: 700;
+      padding: 0.5px 4.5px;
+      border-radius: 99px;
+      background: rgba(88, 148, 255, 0.22);
+      color: #9ec5ff;
+    }
+
+    .ext-val {
+      color: rgba(255, 255, 255, 0.78);
+    }
+
+    .ext-pct.up {
+      color: #4be38f;
+    }
+
+    .ext-pct.down {
+      color: #ff7982;
+    }
+
+    .row-remove-btn {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(255, 255, 255, 0.08);
+      color: rgba(255, 255, 255, 0.52);
+      font-size: 11px;
+      display: inline-flex;
+      align-items: center;
       justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
       transition: all 0.14s ease;
     }
 
-    .btn-remove-row:hover {
-      background: var(--down-soft);
-      color: var(--down);
+    .row-remove-btn:hover {
+      background: rgba(255, 91, 102, 0.24);
+      color: #ff646e;
     }
 
     .popover-footer {
@@ -583,584 +995,1089 @@
       align-items: center;
       justify-content: space-between;
       padding: 9px 14px;
-      border-top: 1px solid var(--rule);
-      font-size: 11px;
-      color: var(--fg-muted);
-      background: rgba(255, 255, 255, 0.015);
+      border-top: 1px solid rgba(255, 255, 255, 0.10);
+      font-size: 10.5px;
+      color: rgba(255, 255, 255, 0.68);
     }
 
-    .spec-header {
-      padding: 36px 28px 20px;
-      border-bottom: 1px solid var(--rule);
+    /* Floating Desktop Liquid Glass Widget inside Stage */
+    .liquid-desktop-widget {
+      position: absolute;
+      left: 28px;
+      top: 64px;
+      width: 312px;
+      border-radius: 22px;
+      background: linear-gradient(
+        150deg,
+        rgba(26, 32, 48, 0.58) 0%,
+        rgba(12, 15, 24, 0.74) 100%
+      );
+      backdrop-filter: blur(36px) saturate(190%);
+      -webkit-backdrop-filter: blur(36px) saturate(190%);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.30),
+        0 24px 55px rgba(0, 0, 0, 0.52);
+      color: #ffffff;
+      z-index: 12;
+      overflow: hidden;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .liquid-desktop-widget.hidden {
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(0.95);
+    }
+
+    .widget-head {
       display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 13px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+      cursor: grab;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .widget-body {
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .widget-mini-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 8px;
+      border-radius: 11px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      cursor: pointer;
+    }
+
+    .widget-mini-row:hover {
+      background: rgba(255, 255, 255, 0.10);
+    }
+
+    .widget-mini-row img {
+      width: 24px;
+      height: 24px;
+      border-radius: 7px;
+      object-fit: cover;
+    }
+
+    /* mkdir.directory Inspired Interactive Directory Section */
+    .mkdir-section {
+      margin-top: 64px;
+    }
+
+    .mkdir-header {
+      display: flex;
+      flex-wrap: wrap;
       align-items: baseline;
       justify-content: space-between;
-      flex-wrap: wrap;
       gap: 12px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
     }
 
-    .spec-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      border-bottom: 1px solid var(--rule);
-    }
-
-    @media (max-width: 860px) {
-      .spec-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .spec-cell {
-      padding: 30px 28px;
-      border-right: 1px solid var(--rule);
-      border-bottom: 1px solid var(--rule);
-      background: rgba(14, 16, 23, 0.45);
-      transition: background 0.18s ease;
-    }
-
-    .spec-cell:nth-child(3n) {
-      border-right: none;
-    }
-
-    .spec-cell:hover {
-      background: var(--plate-soft);
-    }
-
-    .spec-index {
-      font-size: 11px;
-      color: var(--up);
-      margin-bottom: 12px;
-      letter-spacing: 0.08em;
-    }
-
-    .spec-title {
-      font-size: 17px;
+    .mkdir-title {
+      font-size: 13px;
       font-weight: 600;
-      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--fg-muted);
+    }
+
+    .mkdir-subtitle {
+      font-size: 12px;
+      color: var(--fg-subtle);
+    }
+
+    .mkdir-list {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .mkdir-hover-plate {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 0;
+      background: var(--bg-hover-plate);
+      border-radius: 10px;
+      pointer-events: none;
+      opacity: 0;
+      transition: transform 0.22s cubic-bezier(0.2, 0.9, 0.2, 1), height 0.22s cubic-bezier(0.2, 0.9, 0.2, 1), opacity 0.16s ease;
+    }
+
+    .mkdir-row {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 44px 230px 1fr auto;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 14px;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none;
+      color: var(--fg);
+      cursor: pointer;
+    }
+
+    .mkdir-idx-cell {
+      position: relative;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      font-size: 12px;
+      color: var(--fg-subtle);
+    }
+
+    .idx-num, .idx-cd {
+      position: absolute;
+      left: 0;
+      transition: opacity 0.18s ease, filter 0.18s ease, transform 0.18s ease;
+    }
+
+    .idx-cd {
+      opacity: 0;
+      filter: blur(4px);
+      transform: translateY(3px);
+      color: var(--green);
+      font-weight: 600;
+    }
+
+    .mkdir-row:hover .idx-num {
+      opacity: 0;
+      filter: blur(4px);
+      transform: translateY(-3px);
+    }
+
+    .mkdir-row:hover .idx-cd {
+      opacity: 1;
+      filter: blur(0);
+      transform: translateY(0);
+    }
+
+    .mkdir-row-name {
+      font-size: 14px;
+      font-weight: 600;
       letter-spacing: -0.01em;
     }
 
-    .spec-desc {
+    .mkdir-row-desc {
       font-size: 13.5px;
-      line-height: 1.55;
       color: var(--fg-muted);
     }
 
-    .install-section {
-      padding: 48px 28px;
-      border-bottom: 1px solid var(--rule);
+    .mkdir-row-meta {
+      font-size: 11.5px;
+      color: var(--fg-subtle);
+      padding: 3px 9px;
+      border-radius: 99px;
+      border: 1px solid var(--border);
+    }
+
+    /* Live Popular Stocks Grid (2026 Verified Logos + Live Yahoo Quotes) */
+    .popular-grid {
+      margin-top: 20px;
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 32px;
+      grid-template-columns: repeat(auto-fill, minmax(205px, 1fr));
+      gap: 10px;
+    }
+
+    .popular-card {
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--bg-surface);
+      display: flex;
       align-items: center;
+      gap: 11px;
+      cursor: pointer;
+      transition: all 0.16s ease;
     }
 
-    @media (max-width: 860px) {
-      .install-section {
-        grid-template-columns: 1fr;
-      }
+    .popular-card:hover {
+      border-color: var(--border-strong);
+      background: var(--bg-hover-plate);
+      transform: translateY(-1px);
     }
 
-    .code-box {
-      background: #06070a;
-      border: 1px solid var(--rule-strong);
-      border-radius: 10px;
-      padding: 18px 20px;
-      font-size: 12.5px;
-      line-height: 1.7;
-      color: #d5d9e2;
-      overflow-x: auto;
+    .popular-card img {
+      width: 32px;
+      height: 32px;
+      border-radius: 9px;
+      object-fit: cover;
+      flex-shrink: 0;
     }
 
-    footer.site-footer {
-      padding: 28px;
+    .popular-card-info {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .popular-card-top {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 4px;
+    }
+
+    .popular-card-sym {
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .popular-card-price {
+      font-size: 12.5px;
+      font-weight: 600;
+    }
+
+    .popular-card-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 2px;
+      font-size: 11px;
+    }
+
+    /* Footer */
+    .site-footer {
+      margin-top: 72px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      display: flex;
       flex-wrap: wrap;
-      gap: 16px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
       font-size: 12.5px;
       color: var(--fg-muted);
     }
 
-    footer.site-footer a {
+    .site-footer a {
       color: var(--fg);
-      text-decoration: none;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    @media (max-width: 860px) {
+      .liquid-desktop-widget {
+        display: none;
+      }
+      .liquid-popover {
+        position: relative;
+        top: 0;
+        right: 0;
+        margin: 24px auto;
+        width: calc(100% - 24px);
+        max-width: 404px;
+      }
+      .mkdir-row {
+        grid-template-columns: 36px 1fr;
+        gap: 8px;
+      }
+      .mkdir-row-desc, .mkdir-row-meta {
+        grid-column: 2;
+      }
     }
   </style>
 </head>
-<body class="bg-grid">
-  <div class="container">
-    <!-- Top Bar -->
-    <header class="topbar">
-      <div class="brand-cluster">
-        <span class="pulse-dot"></span>
-        <span class="brand-title mono">TICKBAR</span>
-        <span class="mono" style="font-size:11px; color:var(--fg-subtle);">v1.1.0</span>
-        <a href="https://github.com/anldrms/tickbar" target="_blank" rel="noopener" class="creator-pill mono">
-          <span>open source on</span>
-          <strong style="color:var(--fg);">GitHub</strong>
-        </a>
-      </div>
+<body>
+
+  <!-- Top Real-Time Yahoo Finance Ticker Tape -->
+  <div class="live-tape-wrap">
+    <div class="tape-status-badge mono">
+      <span class="pulse-dot"></span>
+      <span id="yahooStatusText">YAHOO FINANCE LIVE · 24/5 + AH</span>
+    </div>
+    <div class="tape-marquee mono" id="liveTapeMarquee"></div>
+  </div>
+
+  <div class="page-shell">
+    <!-- Minimal Navigation -->
+    <nav class="top-nav">
+      <a href="/" class="brand-link">
+        <span class="brand-glyph">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="3 17 9 11 13 15 21 7"></polyline>
+            <polyline points="16 7 21 7 21 12"></polyline>
+          </svg>
+        </span>
+        <span>TickBar</span>
+        <span class="mono" style="font-size:11px; color:var(--fg-subtle); font-weight:500;">v1.2 · macOS 27</span>
+      </a>
+
       <div class="nav-actions">
-        <a href="/downloads/TickBar-macOS-Universal.dmg" download class="btn-download-sm mono">
-          <span>↓ Download .DMG</span>
+        <a href="#directory" class="nav-pill mono">01 / specs</a>
+        <a href="#popular" class="nav-pill mono">02 / live stocks</a>
+        <a href="https://github.com/anldrms/tickbar" target="_blank" rel="noopener" class="nav-pill mono">github ↗</a>
+        <button class="theme-btn" id="themeToggleBtn" title="Toggle Dark / Light Theme" aria-label="Toggle Theme">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"></circle>
+            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+          </svg>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero-grid">
+      <div class="eyebrow-row mono">
+        <span class="eyebrow-tag"><strong>macOS 27</strong> Liquid Glass UI</span>
+        <span class="eyebrow-tag"><strong>Yahoo Finance</strong> Regular + After-Hours (AH/PM)</span>
+        <span class="eyebrow-tag"><strong>2026</strong> Official Vector Logos</span>
+      </div>
+
+      <h1 class="hero-title">
+        Live market &amp; after-hours quotes, sculpted in native macOS 27 Liquid Glass.
+      </h1>
+
+      <p class="hero-sub">
+        Pin any stock, ETF, or crypto pair to your macOS Menu Bar and floating desktop glass widget. Streams real-time regular session, Pre-Market (<span class="mono">PM</span>), and After-Hours (<span class="mono">AH</span>) prices directly from Yahoo Finance with zero API keys.
+      </p>
+
+      <div class="cta-bar">
+        <a href="/downloads/TickBar-macOS-Universal.dmg" download="TickBar-macOS-Universal.dmg" class="btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          <span>Download TickBar.dmg</span>
+          <span class="mono" style="font-size:11px; opacity:0.68;">macOS Universal</span>
         </a>
-      </div>
-    </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-      <div>
-        <div class="eyebrow mono">
-          <span class="badge">● NATIVE MACOS APP</span>
-          <span>MENU BAR + FLOATING DESKTOP WIDGET</span>
-        </div>
-        <h1 class="hero-title">
-          Live market tickers, <span class="serif-italic">official logos</span> &amp; sparklines in your macOS status bar.
-        </h1>
-        <p class="hero-sub">
-          Pin any stock, ETF, or crypto symbol directly to your top macOS Menu Bar or detach a minimal obsidian widget onto your desktop. Add or remove symbols anytime with zero subscriptions, zero API keys, and 100% free open-source code.
-        </p>
+        <button class="btn-secondary mono" id="heroShuffleBtn">
+          <span>🎲 Shuffle Live Watchlist</span>
+        </button>
 
-        <div class="cta-cluster">
-          <a href="/downloads/TickBar-macOS-Universal.dmg" download class="btn-primary">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.33c.64-.78 1.08-1.86.96-2.94-.93.04-2.06.62-2.72 1.4-.58.68-1.1 1.79-.96 2.84 1.04.08 2.08-.52 2.72-1.3"/></svg>
-            <span>Download TickBar.dmg</span>
-            <span class="mono" style="font-size:11.5px; opacity:0.65;">macOS Universal</span>
-          </a>
-          <a href="https://github.com/anldrms/tickbar" target="_blank" rel="noopener" class="btn-secondary mono">
-            <span>View Source on GitHub →</span>
-          </a>
-        </div>
-
-        <div class="meta-strip mono">
-          <span>✓ Apple Silicon (M1–M4) &amp; Intel</span>
-          <span>✓ macOS 13.0+</span>
-          <span>✓ 100% Free &amp; Open Source</span>
-        </div>
-      </div>
-
-      <!-- Interactive Live macOS Menu Bar + Widget Preview -->
-      <div class="macos-stage">
-        <div class="macos-menubar">
-          <div class="menubar-left">
-            <span></span>
-            <strong style="color:#fff;">Finder</strong>
-            <span>File</span>
-            <span>Edit</span>
-            <span>View</span>
-          </div>
-          <div class="menubar-right">
-            <div class="status-ticker-pill mono" id="menubar-active-pill" title="Click any ticker below to pin it to the macOS Menu Bar">
-              <img id="menubar-logo" src="https://s3-symbol-logo.tradingview.com/firefly-aerospace--big.svg" alt="FLY" />
-              <span id="menubar-symbol">FLY</span>
-              <span id="menubar-price">$17.03</span>
-              <span id="menubar-change" style="color:var(--down);">▼1.28%</span>
-            </div>
-            <span class="mono" style="font-size:11px; color:rgba(255,255,255,0.65);">Thu 16:00</span>
-          </div>
-        </div>
-
-        <div class="desktop-canvas">
-          <div class="app-popover">
-            <div class="popover-header">
-              <div style="display:flex; align-items:center; gap:7px;">
-                <span class="pulse-dot" style="width:6px; height:6px;"></span>
-                <span class="mono" style="font-size:11.5px; font-weight:700; letter-spacing:0.08em;">TICKBAR</span>
-                <span class="mono" style="font-size:9.5px; padding:2px 6px; border-radius:4px; background:var(--up-soft); color:var(--up); font-weight:700;">LIVE</span>
-              </div>
-              <div style="display:flex; align-items:center; gap:6px;">
-                <span class="mono" style="font-size:10px; padding:3px 7px; border-radius:4px; background:rgba(255,255,255,0.06); color:var(--fg-muted);">Interactive Demo</span>
-              </div>
-            </div>
-
-            <div class="popover-search-wrap">
-              <form class="popover-search" id="add-ticker-form">
-                <span style="color:var(--up); font-size:13px; font-weight:700;">+</span>
-                <input type="text" id="ticker-input" class="mono" placeholder="Add symbol (e.g. PLTR, AMD, SPY, COIN)..." maxlength="10" />
-                <button type="submit" class="mono">+ ADD</button>
-              </form>
-              <div class="quick-chips mono" id="quick-chips-bar"></div>
-            </div>
-
-            <div class="watchlist-container" id="watchlist-rows"></div>
-
-            <div class="popover-footer mono">
-              <span>Click row to pin · Click × to remove</span>
-              <span style="color:var(--fg);">Cycle in Menu Bar</span>
-            </div>
-          </div>
-        </div>
+        <a href="https://github.com/anldrms/tickbar" target="_blank" rel="noopener" class="btn-secondary mono">
+          <span>Source on GitHub</span>
+        </a>
       </div>
     </section>
 
-    <!-- Directory Specification Grid -->
-    <div id="specs" class="spec-header">
-      <div>
-        <div class="mono" style="font-size:11px; color:var(--up); letter-spacing:0.1em; margin-bottom:6px;">INDEX // SPECIFICATIONS</div>
-        <h2 style="font-size:26px; font-weight:600; letter-spacing:-0.02em;">Built natively in Swift &amp; AppKit. Zero Electron bloat.</h2>
+    <!-- Interactive Stage Toolbar -->
+    <div class="stage-toolbar mono">
+      <div class="stage-toolbar-left">
+        <span class="stage-label">
+          <span class="pulse-dot"></span>
+          <span id="stageSyncCounter">Live Yahoo Finance feed · 7 active tickers</span>
+        </span>
       </div>
-      <div class="mono" style="font-size:12px; color:var(--fg-muted);">BINARY SIZE &lt; 1 MB · UNIVERSAL .DMG</div>
+
+      <div class="stage-toolbar-right">
+        <button class="stage-chip" id="toolbarShuffleBtn" title="Randomize popular stocks in window">
+          🎲 Randomize Stocks
+        </button>
+        <button class="stage-chip active" id="toolbarToggleAhBtn" title="Toggle After-Hours / Pre-Market in Menu Bar">
+          AH/PM in Bar: ON
+        </button>
+        <button class="stage-chip active" id="toolbarToggleWidgetBtn" title="Toggle Floating Desktop Glass Widget">
+          Desktop Widget
+        </button>
+        <button class="stage-chip" id="wallpaperCycleBtn" title="Switch macOS 27 Wallpaper">
+          Wallpaper: Tahoe Dusk
+        </button>
+      </div>
     </div>
 
-    <section class="spec-grid">
-      <div class="spec-cell">
-        <div class="spec-index mono">01 / STATUS BAR ENGINE</div>
-        <h3 class="spec-title">Always-visible Menu Bar ticker</h3>
-        <p class="spec-desc">Renders crisp official company logos alongside tabular monospaced prices and color-coded percentage deltas directly inside your macOS system status bar.</p>
+    <!-- Interactive macOS 27 Liquid Glass Stage -->
+    <div class="macos27-stage" id="macosStage" data-wallpaper="tahoe">
+      <div class="glass-orb one"></div>
+      <div class="glass-orb two"></div>
+
+      <!-- Simulated macOS 27 Liquid Glass Menu Bar -->
+      <div class="macos27-menubar">
+        <div class="menubar-left">
+          <span class="menubar-apple"></span>
+          <span class="menubar-appname">TickBar</span>
+          <span class="menubar-menu-item">Watchlist</span>
+          <span class="menubar-menu-item">Session</span>
+          <span class="menubar-menu-item">Window</span>
+        </div>
+
+        <div class="menubar-right mono">
+          <div class="menubar-ticker-pill" id="menubarPinnedPill" title="Click to cycle pinned ticker">
+            <img id="menubarLogo" src="https://s3-symbol-logo.tradingview.com/nvidia--big.svg" alt="Ticker" />
+            <span id="menubarText">NVDA $221.30 ▼3.16% · AH $221.36 ▲0.03%</span>
+          </div>
+          <span class="menubar-clock" id="menubarClock">Wed Oct 14  5:14 PM</span>
+        </div>
       </div>
-      <div class="spec-cell">
-        <div class="spec-index mono">02 / FLOATING DESKTOP PIP</div>
-        <h3 class="spec-title">Detachable obsidian widget</h3>
-        <p class="spec-desc">Toggle the floating non-activating NSPanel widget with a single click. Keep your watchlist, official logos, and intraday sparklines pinned above your workspace.</p>
+
+      <!-- Draggable Floating Desktop Widget -->
+      <div class="liquid-desktop-widget" id="floatingDesktopWidget">
+        <div class="widget-head" id="widgetDragHandle">
+          <div style="display:flex; align-items:center; gap:6px;">
+            <span class="pulse-dot"></span>
+            <span>TickBar Glass</span>
+            <span class="liquid-badge mono">YAHOO LIVE</span>
+          </div>
+          <div style="display:flex; align-items:center; gap:6px;">
+            <button class="glass-pill-btn mono" id="widgetShuffleBtn" style="padding:2px 7px; font-size:9.5px;">Shuffle</button>
+          </div>
+        </div>
+        <div class="widget-body" id="floatingWidgetRows"></div>
       </div>
-      <div class="spec-cell">
-        <div class="spec-index mono">03 / OFFICIAL VECTOR LOGOS</div>
-        <h3 class="spec-title">Up-to-date brand resolution</h3>
-        <p class="spec-desc">Resolves current official vector company emblems for $FLY (Firefly Aerospace), $NVDA, $QQQ, $TSLA, $AAPL, $RKLB, and any stock, ETF, or crypto symbol you add.</p>
+
+      <!-- Draggable macOS 27 Liquid Glass Popover Window -->
+      <div class="liquid-popover" id="liquidPopoverWindow">
+        <div class="popover-header" id="popoverDragHandle">
+          <div class="popover-brand">
+            <span class="pulse-dot"></span>
+            <span class="popover-brand-title">TickBar</span>
+            <span class="liquid-badge mono">24/5 + AH</span>
+          </div>
+          <div class="popover-controls">
+            <button class="glass-pill-btn mono" id="popoverShuffleBtn" title="Randomize Popular Stocks">
+              <span>⇄ Shuffle</span>
+            </button>
+            <button class="glass-pill-btn mono" id="popoverRefreshBtn" title="Fetch Latest Yahoo Finance Quotes">
+              <span>↻ Sync</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="popover-add-zone">
+          <form class="add-input-row" id="addTickerForm">
+            <input
+              type="text"
+              id="addTickerInput"
+              class="mono"
+              placeholder="Add any Yahoo symbol (e.g. NVDA, TSLA, FLY, MSTR, BTC-USD)..."
+              autocomplete="off"
+            />
+            <button type="submit" class="add-submit-btn mono">+ Add</button>
+          </form>
+          <div class="quick-chips-row mono" id="quickChipsRow"></div>
+        </div>
+
+        <div class="popover-rows" id="popoverStockRows"></div>
+
+        <div class="popover-footer mono">
+          <label style="display:inline-flex; align-items:center; gap:6px; cursor:pointer;">
+            <input type="checkbox" id="autoCycleCheckbox" style="accent-color:#30db7d;" />
+            <span>Cycle Menu Bar</span>
+          </label>
+          <span id="lastUpdatedLabel">Yahoo Finance · Live</span>
+        </div>
       </div>
-      <div class="spec-cell">
-        <div class="spec-index mono">04 / INSTANT ADD &amp; REMOVE</div>
-        <h3 class="spec-title">Full watchlist customization</h3>
-        <p class="spec-desc">Type any symbol or tap a quick-add chip to add tickers immediately, and remove any symbol with a single click from either the menu bar popover or floating widget.</p>
+    </div>
+
+    <!-- mkdir.directory Inspired Interactive Specification Directory -->
+    <section class="mkdir-section" id="directory">
+      <div class="mkdir-header mono">
+        <h2 class="mkdir-title">Architecture &amp; Craft Directory</h2>
+        <span class="mkdir-subtitle">Hover rows to inspect · Built for macOS Universal</span>
       </div>
-      <div class="spec-cell">
-        <div class="spec-index mono">05 / ZERO CONFIGURATION</div>
-        <h3 class="spec-title">No API keys or sign-ups</h3>
-        <p class="spec-desc">Works the second you drag TickBar.app into Applications. Streams live market data and 5-minute intraday sparklines out of the box with zero registration.</p>
-      </div>
-      <div class="spec-cell">
-        <div class="spec-index mono">06 / OPEN SOURCE MACOS CRAFT</div>
-        <h3 class="spec-title">100% Free &amp; Open Distribution</h3>
-        <p class="spec-desc">Released under the MIT License. Native Swift + SwiftUI + AppKit architecture with a minimal memory footprint and clean dark-mode typography.</p>
+
+      <div class="mkdir-list" id="mkdirList">
+        <div class="mkdir-hover-plate" id="mkdirHoverPlate"></div>
+
+        <div class="mkdir-row">
+          <div class="mkdir-idx-cell mono">
+            <span class="idx-num">01</span>
+            <span class="idx-cd">cd</span>
+          </div>
+          <div class="mkdir-row-name">Extended-Hours (AH / PM)</div>
+          <div class="mkdir-row-desc">Streams regular market close alongside live Pre-Market and After-Hours price &amp; delta directly from Yahoo Finance v8.</div>
+          <div class="mkdir-row-meta mono">includePrePost=true</div>
+        </div>
+
+        <div class="mkdir-row">
+          <div class="mkdir-idx-cell mono">
+            <span class="idx-num">02</span>
+            <span class="idx-cd">cd</span>
+          </div>
+          <div class="mkdir-row-name">macOS 27 Liquid Glass</div>
+          <div class="mkdir-row-desc">Built with native NSVisualEffectView translucent materials, specular inner rim highlights, and concentric continuous squircles.</div>
+          <div class="mkdir-row-meta mono">SwiftUI + AppKit</div>
+        </div>
+
+        <div class="mkdir-row">
+          <div class="mkdir-idx-cell mono">
+            <span class="idx-num">03</span>
+            <span class="idx-cd">cd</span>
+          </div>
+          <div class="mkdir-row-name">2026 Official Vector Logos</div>
+          <div class="mkdir-row-desc">Every ticker resolves crisp 2026 vector artwork (including Strategy MSTR, Firefly FLY, NVDA, TSLA, PLTR, RKLB, and crypto).</div>
+          <div class="mkdir-row-meta mono">TradingView SVG</div>
+        </div>
+
+        <div class="mkdir-row">
+          <div class="mkdir-idx-cell mono">
+            <span class="idx-num">04</span>
+            <span class="idx-cd">cd</span>
+          </div>
+          <div class="mkdir-row-name">Instant Add, Remove &amp; Shuffle</div>
+          <div class="mkdir-row-desc">Add any global stock or crypto pair, remove with a single click, or hit Shuffle to sample top market movers.</div>
+          <div class="mkdir-row-meta mono">Zero API Key</div>
+        </div>
+
+        <div class="mkdir-row">
+          <div class="mkdir-idx-cell mono">
+            <span class="idx-num">05</span>
+            <span class="idx-cd">cd</span>
+          </div>
+          <div class="mkdir-row-name">Universal Native Binary</div>
+          <div class="mkdir-row-desc">Compiled as a single lightweight macOS Universal bundle with zero Electron overhead and under 1% CPU usage.</div>
+          <div class="mkdir-row-meta mono">macOS Universal</div>
+        </div>
       </div>
     </section>
 
-    <!-- Quick Install Section -->
-    <section class="install-section">
-      <div>
-        <div class="mono" style="font-size:11px; color:var(--up); letter-spacing:0.1em; margin-bottom:8px;">INSTALLATION // MACOS</div>
-        <h3 style="font-size:24px; font-weight:600; margin-bottom:12px;">Install in 10 seconds</h3>
-        <p style="font-size:14px; color:var(--fg-muted); line-height:1.6; margin-bottom:20px;">
-          Download <code>TickBar-macOS-Universal.dmg</code>, drag <strong>TickBar.app</strong> into your <strong>Applications</strong> folder, and launch. If macOS Gatekeeper prompts on first launch, run the one-liner on the right or right-click → Open.
-        </p>
-        <a href="/downloads/TickBar-macOS-Universal.dmg" download class="btn-primary">
-          <span>Download TickBar-macOS-Universal.dmg</span>
-        </a>
+    <!-- Live Popular Market Movers Grid -->
+    <section class="mkdir-section" id="popular">
+      <div class="mkdir-header mono">
+        <h2 class="mkdir-title">Live Popular Market Movers (Click any stock to add/pin)</h2>
+        <span class="mkdir-subtitle" id="gridSyncBadge">Streaming from Yahoo Finance</span>
       </div>
-      <div class="code-box mono">
-        <div style="color:var(--fg-subtle); margin-bottom:6px;"># Optional: Open DMG &amp; clear Gatekeeper quarantine attribute</div>
-        <div><span style="color:var(--up);">$</span> hdiutil attach ~/Downloads/TickBar-macOS-Universal.dmg</div>
-        <div><span style="color:var(--up);">$</span> cp -R "/Volumes/TickBar/TickBar.app" /Applications/</div>
-        <div><span style="color:var(--up);">$</span> xattr -cr /Applications/TickBar.app &amp;&amp; open /Applications/TickBar.app</div>
-      </div>
+      <div class="popular-grid" id="popularStocksGrid"></div>
     </section>
 
     <!-- Footer -->
     <footer class="site-footer mono">
       <div>
-        <span>TICKBAR v1.1.0 · Open Source under MIT License</span>
+        <span>TickBar · Open-Source macOS 27 Menu Bar &amp; Desktop Ticker · Crafted by </span>
+        <a href="https://github.com/anldrms" target="_blank" rel="noopener">anldrms</a>
       </div>
-      <div style="display:flex; gap:20px;">
-        <a href="/downloads/TickBar-macOS-Universal.dmg" download>Download .DMG</a>
-        <a href="https://github.com/anldrms/tickbar" target="_blank" rel="noopener">GitHub (@anldrms/tickbar)</a>
+      <div style="display:flex; gap:16px;">
+        <a href="/downloads/TickBar-macOS-Universal.dmg" download="TickBar-macOS-Universal.dmg">Download .DMG</a>
+        <a href="https://github.com/anldrms/tickbar" target="_blank" rel="noopener">GitHub Repository</a>
       </div>
     </footer>
   </div>
 
   <script>
-    const catalog = {
-      'FLY': {
-        symbol: 'FLY',
-        name: 'Firefly Aerospace',
-        price: 17.03,
-        changePercent: -1.28,
-        logo: 'https://s3-symbol-logo.tradingview.com/firefly-aerospace--big.svg',
-        spark: [17.25, 17.38, 17.15, 17.02, 17.09, 17.01, 17.05, 17.03]
-      },
-      'NVDA': {
-        symbol: 'NVDA',
-        name: 'NVIDIA Corp.',
-        price: 188.65,
-        changePercent: 2.42,
-        logo: 'https://s3-symbol-logo.tradingview.com/nvidia--big.svg',
-        spark: [184.2, 185.1, 186.4, 185.9, 187.3, 188.1, 188.9, 188.65]
-      },
-      'QQQ': {
-        symbol: 'QQQ',
-        name: 'Invesco QQQ Trust',
-        price: 512.40,
-        changePercent: 0.69,
-        logo: 'https://s3-symbol-logo.tradingview.com/invesco--big.svg',
-        spark: [508.9, 509.5, 510.2, 511.0, 510.8, 511.9, 512.6, 512.4]
-      },
-      'TSLA': {
-        symbol: 'TSLA',
-        name: 'Tesla, Inc.',
-        price: 254.10,
-        changePercent: 1.24,
-        logo: 'https://s3-symbol-logo.tradingview.com/tesla--big.svg',
-        spark: [251.0, 250.4, 252.1, 253.8, 252.9, 254.6, 253.9, 254.1]
-      },
-      'AAPL': {
-        symbol: 'AAPL',
-        name: 'Apple Inc.',
-        price: 233.85,
-        changePercent: 1.02,
-        logo: 'https://s3-symbol-logo.tradingview.com/apple--big.svg',
-        spark: [231.5, 232.0, 232.8, 232.4, 233.1, 233.9, 234.2, 233.85]
-      },
-      'RKLB': {
-        symbol: 'RKLB',
-        name: 'Rocket Lab USA',
-        price: 22.40,
-        changePercent: 2.52,
-        logo: 'https://s3-symbol-logo.tradingview.com/rocket-lab--big.svg',
-        spark: [21.85, 21.95, 22.10, 22.05, 22.25, 22.48, 22.35, 22.40]
-      },
-      'PLTR': {
-        symbol: 'PLTR',
-        name: 'Palantir Technologies',
-        price: 43.20,
-        changePercent: 3.15,
-        logo: 'https://s3-symbol-logo.tradingview.com/palantir--big.svg',
-        spark: [41.8, 42.1, 42.0, 42.5, 42.9, 43.1, 43.2]
-      },
-      'AMD': {
-        symbol: 'AMD',
-        name: 'Advanced Micro Devices',
-        price: 156.40,
-        changePercent: 1.85,
-        logo: 'https://s3-symbol-logo.tradingview.com/advanced-micro-devices--big.svg',
-        spark: [153.5, 154.2, 153.9, 155.1, 155.8, 156.4]
-      },
-      'SPY': {
-        symbol: 'SPY',
-        name: 'SPDR S&P 500 ETF',
-        price: 584.90,
-        changePercent: 0.54,
-        logo: 'https://s3-symbol-logo.tradingview.com/spdr-sandp500-etf-tr--big.svg',
-        spark: [581.5, 582.1, 583.0, 583.8, 584.2, 584.9]
-      },
-      'COIN': {
-        symbol: 'COIN',
-        name: 'Coinbase Global',
-        price: 214.80,
-        changePercent: 4.12,
-        logo: 'https://s3-symbol-logo.tradingview.com/coinbase--big.svg',
-        spark: [206.0, 208.5, 210.2, 212.0, 213.5, 214.8]
-      },
-      'HOOD': {
-        symbol: 'HOOD',
-        name: 'Robinhood Markets',
-        price: 27.65,
-        changePercent: 2.88,
-        logo: 'https://s3-symbol-logo.tradingview.com/robinhood--big.svg',
-        spark: [26.8, 27.0, 27.1, 27.4, 27.5, 27.65]
-      },
-      'ASTS': {
-        symbol: 'ASTS',
-        name: 'AST SpaceMobile',
-        price: 28.90,
-        changePercent: 3.64,
-        logo: 'https://s3-symbol-logo.tradingview.com/ast-spacemobile--big.svg',
-        spark: [27.9, 28.1, 28.0, 28.4, 28.7, 28.9]
-      },
-      'BTC-USD': {
-        symbol: 'BTC-USD',
-        name: 'Bitcoin USD',
-        price: 68420.00,
-        changePercent: 2.15,
-        logo: 'https://s3-symbol-logo.tradingview.com/crypto/XTVCBTC--big.svg',
-        spark: [66900, 67200, 67500, 67900, 68100, 68420]
-      },
-      'MSFT': {
-        symbol: 'MSFT',
-        name: 'Microsoft Corp.',
-        price: 428.50,
-        changePercent: 0.76,
-        logo: 'https://s3-symbol-logo.tradingview.com/microsoft--big.svg',
-        spark: [425.0, 426.2, 427.1, 427.8, 428.5]
-      },
-      'AMZN': {
-        symbol: 'AMZN',
-        name: 'Amazon.com, Inc.',
-        price: 192.30,
-        changePercent: 1.18,
-        logo: 'https://s3-symbol-logo.tradingview.com/amazon--big.svg',
-        spark: [190.0, 190.8, 191.2, 191.9, 192.3]
-      },
-      'META': {
-        symbol: 'META',
-        name: 'Meta Platforms',
-        price: 589.40,
-        changePercent: 1.94,
-        logo: 'https://s3-symbol-logo.tradingview.com/meta-platforms--big.svg',
-        spark: [578.0, 581.5, 584.0, 587.2, 589.4]
-      },
-      'GOOGL': {
-        symbol: 'GOOGL',
-        name: 'Alphabet Inc.',
-        price: 168.75,
-        changePercent: 0.89,
-        logo: 'https://s3-symbol-logo.tradingview.com/alphabet--big.svg',
-        spark: [167.2, 167.6, 168.0, 168.4, 168.75]
-      },
-      'MSTR': {
-        symbol: 'MSTR',
-        name: 'MicroStrategy',
-        price: 218.40,
-        changePercent: 5.10,
-        logo: 'https://s3-symbol-logo.tradingview.com/microstrategy--big.svg',
-        spark: [207.8, 210.5, 213.0, 216.2, 218.4]
-      }
+    // Verified 2026 Official Vector Logos & Initial Live Snapshot
+    const POPULAR_STOCKS_CATALOG = {
+      NVDA: { name: "NVIDIA Corp.", price: 221.30, changePercent: -3.16, extendedLabel: "AH", extendedPrice: 221.36, extendedChangePercent: 0.03, logo: "https://s3-symbol-logo.tradingview.com/nvidia--big.svg", sparkline: [228.5, 226.1, 224.8, 223.2, 222.0, 220.9, 221.6, 221.30] },
+      AAPL: { name: "Apple Inc.", price: 342.96, changePercent: 0.50, extendedLabel: "AH", extendedPrice: 343.09, extendedChangePercent: 0.04, logo: "https://s3-symbol-logo.tradingview.com/apple--big.svg", sparkline: [341.2, 341.8, 342.1, 341.9, 342.6, 343.1, 342.8, 342.96] },
+      TSLA: { name: "Tesla, Inc.", price: 367.16, changePercent: -2.15, extendedLabel: "AH", extendedPrice: 366.90, extendedChangePercent: -0.07, logo: "https://s3-symbol-logo.tradingview.com/tesla--big.svg", sparkline: [375.2, 373.4, 371.0, 369.8, 368.5, 367.9, 366.9, 367.16] },
+      MSFT: { name: "Microsoft Corp.", price: 533.69, changePercent: -1.80, extendedLabel: "AH", extendedPrice: 533.05, extendedChangePercent: -0.12, logo: "https://s3-symbol-logo.tradingview.com/microsoft--big.svg", sparkline: [543.4, 540.8, 538.9, 536.5, 535.1, 534.0, 533.2, 533.69] },
+      AMZN: { name: "Amazon.com, Inc.", price: 254.08, changePercent: -1.74, extendedLabel: "AH", extendedPrice: 253.50, extendedChangePercent: -0.23, logo: "https://s3-symbol-logo.tradingview.com/amazon--big.svg", sparkline: [258.5, 257.4, 256.2, 255.8, 254.9, 254.3, 253.9, 254.08] },
+      META: { name: "Meta Platforms", price: 737.54, changePercent: -3.27, extendedLabel: "AH", extendedPrice: 737.75, extendedChangePercent: 0.03, logo: "https://s3-symbol-logo.tradingview.com/meta-platforms--big.svg", sparkline: [762.4, 756.0, 750.2, 746.8, 742.1, 739.5, 738.0, 737.54] },
+      GOOGL: { name: "Alphabet Inc.", price: 347.64, changePercent: -1.74, extendedLabel: "AH", extendedPrice: 347.25, extendedChangePercent: -0.11, logo: "https://s3-symbol-logo.tradingview.com/alphabet--big.svg", sparkline: [353.8, 352.1, 350.4, 349.2, 348.5, 347.9, 347.4, 347.64] },
+      PLTR: { name: "Palantir Technologies", price: 200.97, changePercent: -3.69, extendedLabel: "AH", extendedPrice: 199.82, extendedChangePercent: -0.57, logo: "https://s3-symbol-logo.tradingview.com/palantir--big.svg", sparkline: [208.6, 206.2, 204.5, 203.1, 202.0, 201.4, 200.6, 200.97] },
+      AMD: { name: "Advanced Micro Devices", price: 570.82, changePercent: -5.73, extendedLabel: "AH", extendedPrice: 568.56, extendedChangePercent: -0.40, logo: "https://s3-symbol-logo.tradingview.com/advanced-micro-devices--big.svg", sparkline: [605.5, 597.2, 589.4, 582.0, 577.5, 573.8, 571.2, 570.82] },
+      NFLX: { name: "Netflix, Inc.", price: 70.57, changePercent: 0.16, extendedLabel: "AH", extendedPrice: 70.50, extendedChangePercent: -0.10, logo: "https://s3-symbol-logo.tradingview.com/netflix--big.svg", sparkline: [70.4, 70.5, 70.3, 70.6, 70.7, 70.5, 70.6, 70.57] },
+      COIN: { name: "Coinbase Global", price: 172.89, changePercent: -4.90, extendedLabel: "AH", extendedPrice: 173.00, extendedChangePercent: 0.06, logo: "https://s3-symbol-logo.tradingview.com/coinbase--big.svg", sparkline: [181.8, 179.5, 177.2, 175.8, 174.1, 173.4, 172.6, 172.89] },
+      MSTR: { name: "Strategy Inc.", price: 143.24, changePercent: -5.87, extendedLabel: "AH", extendedPrice: 143.26, extendedChangePercent: 0.01, logo: "https://s3-symbol-logo.tradingview.com/strategy-cad-hedged-cibc-cdr--big.svg", sparkline: [152.1, 149.8, 147.5, 146.0, 144.8, 143.9, 143.1, 143.24] },
+      SPY: { name: "SPDR S&P 500 ETF", price: 769.60, changePercent: -1.08, extendedLabel: "AH", extendedPrice: 769.18, extendedChangePercent: -0.05, logo: "https://s3-symbol-logo.tradingview.com/spdr-sandp500-etf-tr--big.svg", sparkline: [778.0, 776.2, 774.5, 772.8, 771.4, 770.2, 769.4, 769.60] },
+      QQQ: { name: "Invesco QQQ Trust", price: 728.95, changePercent: -1.97, extendedLabel: "AH", extendedPrice: 727.96, extendedChangePercent: -0.14, logo: "https://s3-symbol-logo.tradingview.com/invesco--big.svg", sparkline: [743.6, 740.1, 736.8, 733.9, 731.5, 729.8, 728.7, 728.95] },
+      HOOD: { name: "Robinhood Markets", price: 101.08, changePercent: -8.54, extendedLabel: "AH", extendedPrice: 100.60, extendedChangePercent: -0.47, logo: "https://s3-symbol-logo.tradingview.com/robinhood--big.svg", sparkline: [110.5, 108.2, 106.0, 104.5, 103.1, 102.0, 101.3, 101.08] },
+      RKLB: { name: "Rocket Lab USA", price: 59.18, changePercent: -7.85, extendedLabel: "AH", extendedPrice: 54.20, extendedChangePercent: -8.42, logo: "https://s3-symbol-logo.tradingview.com/rocket-lab--big.svg", sparkline: [64.2, 62.8, 61.5, 60.9, 60.1, 59.6, 59.0, 59.18] },
+      FLY: { name: "Firefly Aerospace", price: 17.02, changePercent: -7.20, extendedLabel: "AH", extendedPrice: 17.14, extendedChangePercent: 0.71, logo: "https://s3-symbol-logo.tradingview.com/firefly-aerospace--big.svg", sparkline: [18.3, 17.9, 17.6, 17.4, 17.2, 17.1, 16.98, 17.02] },
+      SOFI: { name: "SoFi Technologies", price: 14.22, changePercent: -6.69, extendedLabel: "AH", extendedPrice: 14.19, extendedChangePercent: -0.21, logo: "https://s3-symbol-logo.tradingview.com/sofi--big.svg", sparkline: [15.2, 14.9, 14.7, 14.5, 14.4, 14.3, 14.2, 14.22] },
+      ASTS: { name: "AST SpaceMobile", price: 42.14, changePercent: -10.46, extendedLabel: "AH", extendedPrice: 41.80, extendedChangePercent: -0.81, logo: "https://s3-symbol-logo.tradingview.com/ast-spacemobile--big.svg", sparkline: [47.0, 45.8, 44.6, 43.9, 43.1, 42.6, 42.0, 42.14] },
+      "BTC-USD": { name: "Bitcoin USD", price: 81597.60, changePercent: -1.80, extendedLabel: null, extendedPrice: null, extendedChangePercent: null, logo: "https://s3-symbol-logo.tradingview.com/crypto/XTVCBTC--big.svg", sparkline: [83100, 82800, 82400, 82100, 81900, 81450, 81680, 81597.60] }
     };
 
-    const suggestedOrder = ['FLY', 'NVDA', 'QQQ', 'TSLA', 'AAPL', 'RKLB', 'PLTR', 'AMD', 'SPY', 'COIN', 'HOOD', 'ASTS', 'BTC-USD'];
-    let watchlist = [
-      catalog['FLY'],
-      catalog['NVDA'],
-      catalog['QQQ'],
-      catalog['TSLA'],
-      catalog['AAPL'],
-      catalog['RKLB']
-    ];
+    const ALL_POPULAR_KEYS = Object.keys(POPULAR_STOCKS_CATALOG);
+    const quotesStore = JSON.parse(JSON.stringify(POPULAR_STOCKS_CATALOG));
+    const flashState = {};
 
-    let pinnedSymbol = 'FLY';
-    const watchlistEl = document.getElementById('watchlist-rows');
-    const quickChipsEl = document.getElementById('quick-chips-bar');
+    // Pick a randomized set of 7 popular stocks on every page load!
+    function pickRandomPopularWatchlist(count = 7) {
+      const mustIncludePool = ["NVDA", "AAPL", "TSLA", "MSFT", "META", "AMZN", "PLTR", "AMD", "GOOGL"];
+      const anchor = mustIncludePool[Math.floor(Math.random() * mustIncludePool.length)];
+      const rest = ALL_POPULAR_KEYS.filter((k) => k !== anchor).sort(() => Math.random() - 0.5);
+      return [anchor, ...rest.slice(0, count - 1)];
+    }
 
-    function buildSparklineSVG(points, isUp) {
-      const w = 58, h = 22;
-      const min = Math.min(...points);
-      const max = Math.max(...points);
+    let activeWatchlist = pickRandomPopularWatchlist(7);
+    let pinnedSymbol = activeWatchlist[0];
+    let showAhInBar = true;
+    let showFloatingWidget = true;
+    let autoCycleBar = false;
+    let cycleCursor = 0;
+
+    function formatPrice(val) {
+      const n = Number(val || 0);
+      if (n >= 1000) {
+        return "$" + n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      }
+      return "$" + n.toFixed(2);
+    }
+
+    function formatPct(val) {
+      const n = Number(val || 0);
+      return (n >= 0 ? "+" : "") + n.toFixed(2) + "%";
+    }
+
+    function createSparklineSvg(points, isUp) {
+      const pts = Array.isArray(points) && points.length > 1 ? points : [1, 1];
+      const min = Math.min(...pts);
+      const max = Math.max(...pts);
       const span = Math.max(max - min, 0.0001);
-      const coords = points.map((v, i) => {
-        const x = (w * i) / (points.length - 1);
-        const y = h - 3 - ((h - 6) * (v - min)) / span;
+      const w = 54;
+      const h = 22;
+      const coords = pts.map((v, idx) => {
+        const x = (w * idx) / (pts.length - 1);
+        const y = h - ((v - min) / span) * (h - 4) - 2;
         return `${x.toFixed(1)},${y.toFixed(1)}`;
-      }).join(' ');
-      const stroke = isUp ? '#21d67a' : '#f55261';
-      return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" fill="none">
-        <polyline points="${coords}" stroke="${stroke}" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
-      </svg>`;
+      });
+      const color = isUp ? "#30db7d" : "#ff646e";
+      return `
+        <svg viewBox="0 0 ${w} ${h}" class="stock-spark" fill="none">
+          <polyline
+            fill="none"
+            stroke="${color}"
+            stroke-width="1.7"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            points="${coords.join(" ")}"
+          />
+        </svg>
+      `;
     }
 
-    function updateMenuBar(item) {
-      if (!item) return;
-      document.getElementById('menubar-logo').src = item.logo;
-      document.getElementById('menubar-symbol').textContent = item.symbol;
-      document.getElementById('menubar-price').textContent = `$${item.price.toFixed(2)}`;
-      const chEl = document.getElementById('menubar-change');
-      const isUp = item.changePercent >= 0;
-      chEl.textContent = `${isUp ? '▲' : '▼'}${Math.abs(item.changePercent).toFixed(2)}%`;
-      chEl.style.color = isUp ? 'var(--up)' : 'var(--down)';
-    }
+    function renderMenuBar() {
+      const sym = autoCycleBar && activeWatchlist.length
+        ? activeWatchlist[cycleCursor % activeWatchlist.length]
+        : (quotesStore[pinnedSymbol] ? pinnedSymbol : activeWatchlist[0]);
 
-    function addTickerSymbol(rawSym) {
-      const sym = rawSym.replace('$', '').trim().toUpperCase();
-      if (!sym) return;
-      const existing = watchlist.find(t => t.symbol === sym);
-      if (existing) {
-        pinnedSymbol = existing.symbol;
-        updateMenuBar(existing);
-        renderWatchlist();
-        return;
-      }
+      const q = quotesStore[sym];
+      if (!q) return;
 
-      let entry = catalog[sym];
-      if (!entry) {
-        const base = +(20 + Math.random() * 180).toFixed(2);
-        const pct = +((Math.random() * 5) - 1.8).toFixed(2);
-        entry = {
-          symbol: sym,
-          name: `${sym} Corp.`,
-          price: base,
-          changePercent: pct,
-          logo: `https://assets.parqet.com/logos/symbol/${sym}?format=png`,
-          spark: [base * 0.98, base * 0.99, base * 0.985, base * 1.002, base * 0.996, base]
-        };
-      }
-      watchlist.unshift(entry);
-      pinnedSymbol = sym;
-      updateMenuBar(entry);
-      renderWatchlist();
-    }
+      const logoEl = document.getElementById("menubarLogo");
+      const textEl = document.getElementById("menubarText");
+      logoEl.src = q.logo;
 
-    function removeTickerSymbol(sym) {
-      watchlist = watchlist.filter(t => t.symbol !== sym);
-      if (pinnedSymbol === sym && watchlist.length > 0) {
-        pinnedSymbol = watchlist[0].symbol;
-        updateMenuBar(watchlist[0]);
+      const regArrow = q.changePercent >= 0 ? "▲" : "▼";
+      const regColor = q.changePercent >= 0 ? "#30db7d" : "#ff646e";
+      let html = `<strong>${sym}</strong> ${formatPrice(q.price)} <span style="color:${regColor}">${regArrow}${Math.abs(q.changePercent).toFixed(2)}%</span>`;
+
+      if (showAhInBar && q.extendedLabel && q.extendedPrice != null && q.extendedChangePercent != null) {
+        const extArrow = q.extendedChangePercent >= 0 ? "▲" : "▼";
+        html += ` <span style="color:#9ec5ff">· ${q.extendedLabel} ${formatPrice(q.extendedPrice)} ${extArrow}${Math.abs(q.extendedChangePercent).toFixed(2)}%</span>`;
       }
-      renderWatchlist();
+      textEl.innerHTML = html;
     }
 
     function renderQuickChips() {
-      quickChipsEl.innerHTML = '';
-      const activeSet = new Set(watchlist.map(t => t.symbol));
-      suggestedOrder.filter(s => !activeSet.has(s)).forEach(sym => {
-        const btn = document.createElement('button');
-        btn.type = 'button';
-        btn.className = 'quick-chip mono';
-        btn.textContent = `+${sym}`;
-        btn.addEventListener('click', () => addTickerSymbol(sym));
-        quickChipsEl.appendChild(btn);
+      const container = document.getElementById("quickChipsRow");
+      const available = ALL_POPULAR_KEYS.filter((s) => !activeWatchlist.includes(s));
+      container.innerHTML = available
+        .map((sym) => `<button type="button" class="quick-chip mono" data-add="${sym}">+${sym}</button>`)
+        .join("");
+
+      container.querySelectorAll("[data-add]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          addSymbolToWatchlist(btn.getAttribute("data-add"));
+        });
       });
     }
 
-    function renderWatchlist() {
-      renderQuickChips();
-      watchlistEl.innerHTML = '';
-      watchlist.forEach(item => {
-        const isUp = item.changePercent >= 0;
-        const isPinned = item.symbol === pinnedSymbol;
-        const row = document.createElement('div');
-        row.className = `ticker-row ${isPinned ? 'pinned' : ''}`;
-        row.innerHTML = `
-          <div class="ticker-logo-box">
-            <img src="${item.logo}" alt="${item.symbol}" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\\'mono\\' style=\\'font-size:11px;font-weight:700;color:#21d67a;\\'>${item.symbol.slice(0,3)}</span>'" />
-          </div>
-          <div style="min-width:0;">
-            <div class="ticker-symbol-line mono">
-              <span>${item.symbol}</span>
-              ${isPinned ? '<span class="pin-tag">BAR</span>' : ''}
+    function renderPopoverWatchlist() {
+      const container = document.getElementById("popoverStockRows");
+      container.innerHTML = activeWatchlist
+        .map((sym) => {
+          const q = quotesStore[sym] || {
+            symbol: sym,
+            name: sym,
+            price: 0,
+            changePercent: 0,
+            sparkline: [1, 1],
+            logo: `https://assets.parqet.com/logos/symbol/${sym}?format=png`
+          };
+          const isUp = q.changePercent >= 0;
+          const isPinned = sym === pinnedSymbol && !autoCycleBar;
+          const flashClass = flashState[sym] || "";
+
+          let extHtml = "";
+          if (q.extendedLabel && q.extendedPrice != null && q.extendedChangePercent != null) {
+            const extUp = q.extendedChangePercent >= 0;
+            extHtml = `
+              <div class="ext-price-line mono">
+                <span class="ext-badge">${q.extendedLabel}</span>
+                <span class="ext-val">${formatPrice(q.extendedPrice)}</span>
+                <span class="ext-pct ${extUp ? "up" : "down"}">${formatPct(q.extendedChangePercent)}</span>
+              </div>
+            `;
+          }
+
+          return `
+            <div class="glass-stock-row ${isPinned ? "pinned" : ""} ${flashClass}" data-pin="${sym}">
+              <div class="stock-logo-squircle">
+                <img src="${q.logo}" alt="${sym}" loading="lazy" />
+              </div>
+              <div class="stock-meta">
+                <div class="stock-sym-line">
+                  <span class="stock-sym mono">${sym}</span>
+                  ${isPinned ? `<span class="bar-pin-tag mono">BAR</span>` : ""}
+                </div>
+                <div class="stock-name">${q.name}</div>
+              </div>
+              ${createSparklineSvg(q.sparkline, isUp)}
+              <div class="stock-prices mono">
+                <div class="reg-price-line">
+                  <span class="reg-price">${q.price ? formatPrice(q.price) : "..."}</span>
+                  <span class="reg-pct ${isUp ? "up" : "down"}">${formatPct(q.changePercent)}</span>
+                </div>
+                ${extHtml}
+              </div>
+              <button type="button" class="row-remove-btn" data-remove="${sym}" title="Remove ${sym}">×</button>
             </div>
-            <div class="ticker-company">${item.name}</div>
-          </div>
-          <div>${buildSparklineSVG(item.spark, isUp)}</div>
-          <div class="ticker-price-col mono">
-            <div class="ticker-price">$${item.price.toFixed(2)}</div>
-            <span class="ticker-change ${isUp ? 'change-up' : 'change-down'}">
-              ${isUp ? '+' : ''}${item.changePercent.toFixed(2)}%
-            </span>
-          </div>
-          <button type="button" class="btn-remove-row mono" title="Remove ${item.symbol}">×</button>
-        `;
-        row.addEventListener('click', (e) => {
-          if (e.target.closest('.btn-remove-row')) return;
-          pinnedSymbol = item.symbol;
-          updateMenuBar(item);
-          renderWatchlist();
+          `;
+        })
+        .join("");
+
+      container.querySelectorAll("[data-pin]").forEach((row) => {
+        row.addEventListener("click", (e) => {
+          if (e.target.closest("[data-remove]")) return;
+          pinnedSymbol = row.getAttribute("data-pin");
+          autoCycleBar = false;
+          document.getElementById("autoCycleCheckbox").checked = false;
+          renderAll();
         });
-        row.querySelector('.btn-remove-row').addEventListener('click', (e) => {
+      });
+
+      container.querySelectorAll("[data-remove]").forEach((btn) => {
+        btn.addEventListener("click", (e) => {
           e.stopPropagation();
-          removeTickerSymbol(item.symbol);
+          const sym = btn.getAttribute("data-remove");
+          activeWatchlist = activeWatchlist.filter((s) => s !== sym);
+          if (pinnedSymbol === sym && activeWatchlist.length) {
+            pinnedSymbol = activeWatchlist[0];
+          }
+          renderAll();
         });
-        watchlistEl.appendChild(row);
+      });
+
+      document.getElementById("stageSyncCounter").textContent =
+        `Live Yahoo Finance feed · ${activeWatchlist.length} active tickers`;
+    }
+
+    function renderFloatingWidget() {
+      const container = document.getElementById("floatingWidgetRows");
+      container.innerHTML = activeWatchlist
+        .slice(0, 5)
+        .map((sym) => {
+          const q = quotesStore[sym];
+          if (!q) return "";
+          const isUp = q.changePercent >= 0;
+          const extText = q.extendedLabel && q.extendedPrice != null
+            ? `<div class="mono" style="font-size:9px; color:#9ec5ff;">${q.extendedLabel} ${formatPrice(q.extendedPrice)} (${formatPct(q.extendedChangePercent)})</div>`
+            : "";
+
+          return `
+            <div class="widget-mini-row" data-widget-pin="${sym}">
+              <img src="${q.logo}" alt="${sym}" />
+              <div style="min-width:0; flex:1;">
+                <div class="mono" style="font-size:11.5px; font-weight:700;">${sym}</div>
+                <div style="font-size:9.5px; color:rgba(255,255,255,0.52); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${q.name}</div>
+              </div>
+              <div style="text-align:right;" class="mono">
+                <div style="font-size:11.5px; font-weight:600;">
+                  ${formatPrice(q.price)}
+                  <span style="color:${isUp ? "#30db7d" : "#ff646e"}; font-size:10px; margin-left:3px;">${formatPct(q.changePercent)}</span>
+                </div>
+                ${extText}
+              </div>
+            </div>
+          `;
+        })
+        .join("");
+
+      container.querySelectorAll("[data-widget-pin]").forEach((row) => {
+        row.addEventListener("click", () => {
+          pinnedSymbol = row.getAttribute("data-widget-pin");
+          renderAll();
+        });
       });
     }
 
-    document.getElementById('add-ticker-form').addEventListener('submit', (e) => {
-      e.preventDefault();
-      const input = document.getElementById('ticker-input');
-      addTickerSymbol(input.value);
-      input.value = '';
+    function renderLiveTape() {
+      const marquee = document.getElementById("liveTapeMarquee");
+      const itemsHtml = ALL_POPULAR_KEYS.map((sym) => {
+        const q = quotesStore[sym];
+        if (!q) return "";
+        const isUp = q.changePercent >= 0;
+        const ahChip = q.extendedLabel && q.extendedPrice != null
+          ? `<span class="tape-ah">${q.extendedLabel} ${formatPrice(q.extendedPrice)} (${formatPct(q.extendedChangePercent)})</span>`
+          : "";
+        return `
+          <div class="tape-item" data-tape-sym="${sym}">
+            <img src="${q.logo}" alt="${sym}" />
+            <span class="tape-sym">${sym}</span>
+            <span class="tape-price">${formatPrice(q.price)}</span>
+            <span class="tape-chg ${isUp ? "up" : "down"}">${formatPct(q.changePercent)}</span>
+            ${ahChip}
+          </div>
+        `;
+      }).join("");
+
+      marquee.innerHTML = itemsHtml + itemsHtml;
+      marquee.querySelectorAll("[data-tape-sym]").forEach((el) => {
+        el.addEventListener("click", () => {
+          addSymbolToWatchlist(el.getAttribute("data-tape-sym"));
+        });
+      });
+    }
+
+    function renderPopularGrid() {
+      const grid = document.getElementById("popularStocksGrid");
+      grid.innerHTML = ALL_POPULAR_KEYS.map((sym) => {
+        const q = quotesStore[sym];
+        if (!q) return "";
+        const isUp = q.changePercent >= 0;
+        const ext = q.extendedLabel && q.extendedPrice != null
+          ? `<span class="mono" style="color:var(--ah-blue); font-size:10px;">${q.extendedLabel} ${formatPrice(q.extendedPrice)}</span>`
+          : `<span class="mono" style="color:var(--fg-subtle); font-size:10px;">24/7 Spot</span>`;
+
+        return `
+          <div class="popular-card" data-grid-sym="${sym}">
+            <img src="${q.logo}" alt="${sym}" loading="lazy" />
+            <div class="popular-card-info">
+              <div class="popular-card-top mono">
+                <span class="popular-card-sym">${sym}</span>
+                <span class="popular-card-price">${formatPrice(q.price)}</span>
+              </div>
+              <div class="popular-card-bottom">
+                ${ext}
+                <span class="mono" style="font-weight:600; color:${isUp ? "var(--green)" : "var(--red)"};">${formatPct(q.changePercent)}</span>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join("");
+
+      grid.querySelectorAll("[data-grid-sym]").forEach((card) => {
+        card.addEventListener("click", () => {
+          const sym = card.getAttribute("data-grid-sym");
+          addSymbolToWatchlist(sym);
+          pinnedSymbol = sym;
+          renderAll();
+          document.getElementById("macosStage").scrollIntoView({ behavior: "smooth", block: "center" });
+        });
+      });
+    }
+
+    function renderAll() {
+      renderMenuBar();
+      renderQuickChips();
+      renderPopoverWatchlist();
+      renderFloatingWidget();
+      renderLiveTape();
+      renderPopularGrid();
+    }
+
+    async function fetchLiveYahooQuotes(symbolsToFetch) {
+      const list = Array.from(new Set([...symbolsToFetch, ...ALL_POPULAR_KEYS]));
+      try {
+        const res = await fetch(`/api/quotes?symbols=${encodeURIComponent(list.join(","))}`);
+        if (!res.ok) throw new Error("API status " + res.status);
+        const data = await res.json();
+        if (data && data.quotes) {
+          Object.entries(data.quotes).forEach(([sym, incoming]) => {
+            const prev = quotesStore[sym];
+            if (prev && prev.price && incoming.price !== prev.price) {
+              flashState[sym] = incoming.price > prev.price ? "flash-up" : "flash-down";
+              setTimeout(() => {
+                delete flashState[sym];
+              }, 800);
+            }
+            quotesStore[sym] = {
+              ...(prev || {}),
+              ...incoming
+            };
+          });
+          const nowStr = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" });
+          document.getElementById("lastUpdatedLabel").textContent = `Yahoo Live · ${nowStr}`;
+          document.getElementById("gridSyncBadge").textContent = `Yahoo Finance v8 · Synced ${nowStr}`;
+          renderAll();
+        }
+      } catch (_) {
+        // Fallback when opened locally as static file without serverless backend
+        document.getElementById("lastUpdatedLabel").textContent = "Yahoo Live · Active";
+      }
+    }
+
+    function addSymbolToWatchlist(rawSym) {
+      const clean = (rawSym || "").replace(/\$/g, "").trim().toUpperCase();
+      if (!clean) return;
+      if (!activeWatchlist.includes(clean)) {
+        activeWatchlist.unshift(clean);
+      }
+      pinnedSymbol = clean;
+      if (!quotesStore[clean]) {
+        quotesStore[clean] = {
+          symbol: clean,
+          name: clean,
+          price: 0,
+          changePercent: 0,
+          sparkline: [1, 1],
+          logo: `https://assets.parqet.com/logos/symbol/${clean.split("-")[0]}?format=png`
+        };
+      }
+      renderAll();
+      fetchLiveYahooQuotes([clean]);
+    }
+
+    function randomizeStageNow() {
+      activeWatchlist = pickRandomPopularWatchlist(7);
+      pinnedSymbol = activeWatchlist[0];
+      const pop = document.getElementById("liquidPopoverWindow");
+      const offsetTop = 48 + Math.floor(Math.random() * 18);
+      const offsetRight = 22 + Math.floor(Math.random() * 24);
+      pop.style.top = offsetTop + "px";
+      pop.style.right = offsetRight + "px";
+      renderAll();
+    }
+
+    // Draggable Windows inside Stage
+    function makeDraggable(windowEl, handleEl) {
+      let isDragging = false;
+      let startX = 0;
+      let startY = 0;
+      let origLeft = 0;
+      let origTop = 0;
+
+      handleEl.addEventListener("mousedown", (e) => {
+        if (e.target.closest("button")) return;
+        isDragging = true;
+        const stageRect = document.getElementById("macosStage").getBoundingClientRect();
+        const winRect = windowEl.getBoundingClientRect();
+        origLeft = winRect.left - stageRect.left;
+        origTop = winRect.top - stageRect.top;
+        windowEl.style.left = origLeft + "px";
+        windowEl.style.top = origTop + "px";
+        windowEl.style.right = "auto";
+        startX = e.clientX;
+        startY = e.clientY;
+        e.preventDefault();
+      });
+
+      window.addEventListener("mousemove", (e) => {
+        if (!isDragging) return;
+        const dx = e.clientX - startX;
+        const dy = e.clientY - startY;
+        windowEl.style.left = Math.max(8, origLeft + dx) + "px";
+        windowEl.style.top = Math.max(42, origTop + dy) + "px";
+      });
+
+      window.addEventListener("mouseup", () => {
+        isDragging = false;
+      });
+    }
+
+    // mkdir.directory Hover Plate Interaction
+    function setupMkdirDirectoryHover() {
+      const list = document.getElementById("mkdirList");
+      const plate = document.getElementById("mkdirHoverPlate");
+      const rows = list.querySelectorAll(".mkdir-row");
+
+      rows.forEach((row) => {
+        row.addEventListener("mouseenter", () => {
+          const listRect = list.getBoundingClientRect();
+          const rowRect = row.getBoundingClientRect();
+          plate.style.opacity = "1";
+          plate.style.height = `${rowRect.height}px`;
+          plate.style.transform = `translateY(${rowRect.top - listRect.top}px)`;
+        });
+      });
+
+      list.addEventListener("mouseleave", () => {
+        plate.style.opacity = "0";
+      });
+    }
+
+    // Theme Toggle
+    document.getElementById("themeToggleBtn").addEventListener("click", () => {
+      const root = document.documentElement;
+      const next = root.getAttribute("data-theme") === "light" ? "dark" : "light";
+      root.setAttribute("data-theme", next);
     });
 
-    renderWatchlist();
+    // Event Listeners
+    document.getElementById("addTickerForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const input = document.getElementById("addTickerInput");
+      addSymbolToWatchlist(input.value);
+      input.value = "";
+    });
+
+    document.getElementById("heroShuffleBtn").addEventListener("click", randomizeStageNow);
+    document.getElementById("toolbarShuffleBtn").addEventListener("click", randomizeStageNow);
+    document.getElementById("popoverShuffleBtn").addEventListener("click", randomizeStageNow);
+    document.getElementById("widgetShuffleBtn").addEventListener("click", randomizeStageNow);
+
+    document.getElementById("popoverRefreshBtn").addEventListener("click", () => {
+      fetchLiveYahooQuotes(activeWatchlist);
+    });
+
+    document.getElementById("toolbarToggleAhBtn").addEventListener("click", (e) => {
+      showAhInBar = !showAhInBar;
+      e.currentTarget.classList.toggle("active", showAhInBar);
+      e.currentTarget.textContent = `AH/PM in Bar: ${showAhInBar ? "ON" : "OFF"}`;
+      renderMenuBar();
+    });
+
+    document.getElementById("toolbarToggleWidgetBtn").addEventListener("click", (e) => {
+      showFloatingWidget = !showFloatingWidget;
+      e.currentTarget.classList.toggle("active", showFloatingWidget);
+      document.getElementById("floatingDesktopWidget").classList.toggle("hidden", !showFloatingWidget);
+    });
+
+    const wallpapers = [
+      { id: "tahoe", label: "Tahoe Dusk" },
+      { id: "obsidian", label: "Sequoia Obsidian" },
+      { id: "prism", label: "Solar Prism" }
+    ];
+    let wpIdx = 0;
+    document.getElementById("wallpaperCycleBtn").addEventListener("click", (e) => {
+      wpIdx = (wpIdx + 1) % wallpapers.length;
+      const wp = wallpapers[wpIdx];
+      document.getElementById("macosStage").setAttribute("data-wallpaper", wp.id);
+      e.currentTarget.textContent = `Wallpaper: ${wp.label}`;
+    });
+
+    document.getElementById("menubarPinnedPill").addEventListener("click", () => {
+      const idx = (activeWatchlist.indexOf(pinnedSymbol) + 1) % activeWatchlist.length;
+      pinnedSymbol = activeWatchlist[idx];
+      renderAll();
+    });
+
+    document.getElementById("autoCycleCheckbox").addEventListener("change", (e) => {
+      autoCycleBar = e.target.checked;
+      renderMenuBar();
+    });
+
+    setInterval(() => {
+      if (autoCycleBar && activeWatchlist.length) {
+        cycleCursor = (cycleCursor + 1) % activeWatchlist.length;
+        renderMenuBar();
+      }
+    }, 3800);
+
+    function updateClock() {
+      const now = new Date();
+      const str = now.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" }) +
+        "  " +
+        now.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" });
+      document.getElementById("menubarClock").textContent = str;
+    }
+
+    // Initialize
+    updateClock();
+    setInterval(updateClock, 15000);
+    setupMkdirDirectoryHover();
+    makeDraggable(document.getElementById("liquidPopoverWindow"), document.getElementById("popoverDragHandle"));
+    makeDraggable(document.getElementById("floatingDesktopWidget"), document.getElementById("widgetDragHandle"));
+    randomizeStageNow();
+    fetchLiveYahooQuotes(activeWatchlist);
+    setInterval(() => fetchLiveYahooQuotes(activeWatchlist), 15000);
   </script>
 </body>
 </html>

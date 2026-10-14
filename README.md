@@ -1,18 +1,17 @@
 # TickBar
 
-**A native macOS Menu Bar (Status Bar) and floating desktop stock ticker widget with live quotes, official company logos, and intraday sparklines.**
+**A native macOS 27 Liquid Glass Menu Bar and floating desktop stock & crypto ticker with live Yahoo Finance regular + After-Hours (`AH`) & Pre-Market (`PM`) quotes, 2026 official vector logos, and intraday sparklines.**
 
-TickBar pins live stock, ETF, and crypto prices directly to your macOS top status bar and includes a detachable non-activating obsidian desktop widget. Built natively in Swift, SwiftUI, and AppKit (`< 1 MB` Universal binary for Apple Silicon & Intel) with zero Electron overhead and zero API keys required.
+TickBar pins live stock, ETF, and crypto prices directly to your macOS top Menu Bar and includes a detachable non-activating Liquid Glass desktop widget. Built natively in Swift, SwiftUI, and AppKit (`< 1 MB` macOS Universal binary) with zero Electron overhead and zero API keys required.
 
 ## Features
 
-- **Native macOS Status Bar Engine**: Pins your active ticker symbol, official company logo, live price, and color-coded daily percentage move directly in the macOS Menu Bar.
-- **Floating Desktop Widget (PiP)**: Detachable, translucent dark-mode `NSPanel` that floats seamlessly across workspaces without stealing window focus.
-- **Instant Add & Remove Watchlist**: Add any stock, ETF, or crypto symbol (`FLY`, `NVDA`, `QQQ`, `TSLA`, `AAPL`, `RKLB`, `PLTR`, `AMD`, `SPY`, `COIN`, `HOOD`, `ASTS`, `BTC-USD`, etc.) via the search bar or one-click quick-add chips, and remove any row anytime with `×`.
-- **Up-to-Date Official Company Logos**: Resolves current official vector company emblems (including recent IPOs like Firefly Aerospace `$FLY`) with automatic multi-CDN fallback and local memory caching.
-- **5-Minute Intraday Sparklines**: Renders smooth vector range curves and gradient fills from live intraday market data.
-- **Auto-Cycle Mode**: Either pin a single ticker to your macOS Menu Bar or automatically cycle through your entire watchlist every 4.5 seconds.
-- **Interactive Directory Landing Page**: Ships with a dark architectural showcase and live interactive web demo ready for instant Vercel deployment.
+- **Regular + Extended-Hours (`AH` / `PM`) Live Feed**: Streams real-time regular session quotes alongside Pre-Market (`PM`) and After-Hours (`AH`) prices and percentage changes directly from Yahoo Finance (`includePrePost=true`).
+- **macOS 27 Liquid Glass Design Language**: Crafted with native `NSVisualEffectView` translucent materials, specular inner rim highlights, concentric continuous squircles, and SF Pro / SF Mono typography.
+- **2026 Official Vector Logos**: Resolves crisp 2026 official TradingView SVG vector company logos (`NVDA`, `AAPL`, `TSLA`, `MSFT`, `AMZN`, `META`, `GOOGL`, `PLTR`, `AMD`, `MSTR` Strategy Inc., `FLY` Firefly Aerospace, `RKLB`, `BTC-USD`, and any custom ticker).
+- **Instant Add, Remove & Shuffle**: Add any stock, ETF, or crypto symbol via the search bar or quick-add chips, remove any ticker with `×`, or hit **Shuffle** to randomize from top market movers.
+- **5-Minute Intraday Sparklines**: Renders smooth vector intraday curves and gradient fills.
+- **Interactive Web Stage + Live Yahoo API**: Ships with an interactive `mkdir.directory`-inspired showcase and a Vercel serverless Yahoo Finance proxy (`/api/quotes`) that continuously streams live market and after-hours data.
 
 ## Quick Start
 
@@ -36,36 +35,32 @@ cd tickbar
 bash macos-app/build_dmg.sh
 ```
 
-This compiles both `arm64` and `x86_64` binaries, merges them via `lipo` into a Universal `TickBar.app` bundle, signs the bundle, and packages `public/downloads/TickBar-macOS-Universal.dmg`.
+This compiles both `arm64` and `x86_64` binaries, merges them via `lipo` into a macOS Universal `TickBar.app` bundle, signs the bundle, and packages `public/downloads/TickBar-macOS-Universal.dmg`.
 
 ## Managing Tickers
 
-- **Add a Ticker**: Click the TickBar item in your macOS Menu Bar, type any symbol (e.g. `PLTR`, `AMD`, `SPY`, `BTC-USD`) into the input bar, and press `Return` or click `+ ADD`. You can also click any of the `+SYMBOL` quick-add chips below the search field.
+- **Add a Ticker**: Click TickBar in your macOS Menu Bar, type any Yahoo Finance symbol (e.g. `NVDA`, `PLTR`, `AMD`, `MSTR`, `FLY`, `BTC-USD`), and press `Return` or click `+ Add`.
 - **Remove a Ticker**: Click the `×` button on the right side of any ticker row in the Menu Bar popover or floating desktop widget.
-- **Pin to Menu Bar**: Click any ticker row (or its logo) to pin that symbol to your top macOS Status Bar, or enable **Cycle in Menu Bar** to rotate through all watched symbols automatically.
-
-## Deploy to Vercel
-
-1. Push or fork this repository to GitHub.
-2. Import the repository on [Vercel](https://vercel.com/new).
-3. Leave the **Framework Preset** as `Other` (static site served from `public/` via `vercel.json`).
-4. Click **Deploy**. Your landing page and direct `.dmg` download will be live immediately.
+- **Shuffle Watchlist**: Click **Shuffle** in the header to sample a fresh set of popular market movers.
+- **After-Hours in Menu Bar**: Toggle **Show AH/PM in Bar** in the footer to display extended-hours price and delta right next to the regular close in your macOS Menu Bar.
 
 ## Project Structure
 
 ```text
 tickbar/
+├── api/
+│   └── quotes.js                  # Vercel serverless live Yahoo Finance (Regular + AH/PM) endpoint
 ├── macos-app/
 │   ├── Sources/
-│   │   └── TickBar.swift          # Native SwiftUI + AppKit Menu Bar & Floating Widget app
-│   └── build_dmg.sh               # Universal (arm64 + x86_64) compiler, icon generator & DMG packager
+│   │   └── TickBar.swift          # Native SwiftUI + AppKit macOS 27 Liquid Glass app
+│   └── build_dmg.sh               # Universal compiler, icon generator & DMG packager
 ├── public/
-│   ├── index.html                 # Interactive landing page & live web demo
+│   ├── index.html                 # Interactive mkdir.directory + macOS 27 Liquid Glass web stage
 │   ├── downloads/
 │   │   └── TickBar-macOS-Universal.dmg
 │   ├── robots.txt
 │   └── sitemap.xml
-└── vercel.json                    # Vercel CDN & security headers for .dmg distribution
+└── vercel.json                    # Vercel routing & DMG headers
 ```
 
 ## License
