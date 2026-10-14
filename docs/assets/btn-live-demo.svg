@@ -1,6 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="235" height="48" viewBox="0 0 235 48" fill="none">
-  <rect x="0.5" y="0.5" width="234" height="47" rx="12" fill="#131620" stroke="#2D3348"/>
-  <circle cx="24" cy="24" r="5" fill="#30DB7D"/>
-  <text x="38" y="24" fill="#F2F4F8" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Geist', sans-serif" font-size="14" font-weight="600">Interactive Web Stage</text>
-  <text x="38" y="37" fill="#9399A8" font-family="ui-monospace, SFMono-Regular, 'Geist Mono', monospace" font-size="10.5" font-weight="500">tickbar.vercel.app ↗</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="210" height="44" viewBox="0 0 210 44" fill="none">
+  <rect x="0.5" y="0.5" width="209" height="43" rx="21.5" fill="#171922" stroke="#232530"/>
+  <circle cx="24" cy="22" r="3.5" fill="#42C97A"/>
+  <text x="36" y="26.5" fill="#ECEDF3" font-family="ui-monospace, SFMono-Regular, 'Geist Mono', monospace" font-size="12.5" font-weight="500">tickbar.vercel.app ↗</text>
 </svg>

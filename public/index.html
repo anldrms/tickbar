@@ -1483,8 +1483,23 @@
     updateClock();
     setInterval(updateClock, 15000);
 
-    // Initialize with a randomized popular watchlist
-    randomizeWatchlist(6);
+    // Initialize with a randomized popular watchlist (or flagship order for ?demo=1 / ?demo=dir)
+    if (window.location.search.includes("demo=")) {
+      watchlist = ["NVDA", "AAPL", "TSLA", "MSFT", "PLTR", "MSTR"];
+      pinnedSymbol = "NVDA";
+      renderAll();
+      if (window.location.search.includes("demo=dir")) {
+        document.querySelector(".site-header").style.display = "none";
+        document.querySelector(".hero-group").style.display = "none";
+        document.querySelector(".stage-wrapper").style.display = "none";
+        document.querySelector(".wordmark-band").style.display = "none";
+        document.querySelector(".site-footer").style.display = "none";
+        document.querySelector(".directory-section").style.marginTop = "4px";
+        document.querySelectorAll(".dir-row").forEach((r, i) => { if (i >= 6) r.style.display = "none"; });
+      }
+    } else {
+      randomizeWatchlist(6);
+    }
     setInterval(() => fetchLiveQuotes(watchlist), 25000);
   </script>
 </body>
