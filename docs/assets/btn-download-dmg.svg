@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="270" height="48" viewBox="0 0 270 48" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="270" y2="48" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#30DB7D"/>
+      <stop offset="100%" stop-color="#19B35E"/>
+    </linearGradient>
+  </defs>
+  <rect x="0.5" y="0.5" width="269" height="47" rx="12" fill="url(#bg)" stroke="#65F0A3" stroke-opacity="0.5"/>
+  <path d="M31 27v3a2 2 0 0 1-2 2H17a2 2 0 0 1-2-2v-3M20 22l3 3 3-3M23 25V15" stroke="#06120B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="44" y="24" fill="#06120B" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Geist', sans-serif" font-size="14" font-weight="700">Download for macOS</text>
+  <text x="44" y="37" fill="#06120B" fill-opacity="0.75" font-family="ui-monospace, SFMono-Regular, 'Geist Mono', monospace" font-size="10.5" font-weight="600">Universal .DMG · Free</text>
+</svg>
