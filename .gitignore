@@ -1,0 +1,4 @@
+.DS_Store
+macos-app/build/
+.vercel/
+node_modules/
