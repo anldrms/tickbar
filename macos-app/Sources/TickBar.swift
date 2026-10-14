@@ -25,6 +25,33 @@ final class LogoCache: ObservableObject {
     @Published private(set) var images: [String: NSImage] = [:]
     private var inFlight: Set<String> = []
 
+    private let directLogoMap: [String: String] = [
+        "FLY": "https://s3-symbol-logo.tradingview.com/firefly-aerospace--big.svg",
+        "NVDA": "https://s3-symbol-logo.tradingview.com/nvidia--big.svg",
+        "QQQ": "https://s3-symbol-logo.tradingview.com/invesco--big.svg",
+        "TSLA": "https://s3-symbol-logo.tradingview.com/tesla--big.svg",
+        "AAPL": "https://s3-symbol-logo.tradingview.com/apple--big.svg",
+        "RKLB": "https://s3-symbol-logo.tradingview.com/rocket-lab--big.svg",
+        "PLTR": "https://s3-symbol-logo.tradingview.com/palantir--big.svg",
+        "AMD": "https://s3-symbol-logo.tradingview.com/advanced-micro-devices--big.svg",
+        "SPY": "https://s3-symbol-logo.tradingview.com/spdr-sandp500-etf-tr--big.svg",
+        "COIN": "https://s3-symbol-logo.tradingview.com/coinbase--big.svg",
+        "HOOD": "https://s3-symbol-logo.tradingview.com/robinhood--big.svg",
+        "ASTS": "https://s3-symbol-logo.tradingview.com/ast-spacemobile--big.svg",
+        "SOFI": "https://s3-symbol-logo.tradingview.com/sofi--big.svg",
+        "MSFT": "https://s3-symbol-logo.tradingview.com/microsoft--big.svg",
+        "AMZN": "https://s3-symbol-logo.tradingview.com/amazon--big.svg",
+        "META": "https://s3-symbol-logo.tradingview.com/meta-platforms--big.svg",
+        "GOOG": "https://s3-symbol-logo.tradingview.com/alphabet--big.svg",
+        "GOOGL": "https://s3-symbol-logo.tradingview.com/alphabet--big.svg",
+        "NFLX": "https://s3-symbol-logo.tradingview.com/netflix--big.svg",
+        "IONQ": "https://s3-symbol-logo.tradingview.com/ionq--big.svg",
+        "MSTR": "https://s3-symbol-logo.tradingview.com/microstrategy--big.svg",
+        "BTC-USD": "https://s3-symbol-logo.tradingview.com/crypto/XTVCBTC--big.svg",
+        "ETH-USD": "https://s3-symbol-logo.tradingview.com/crypto/XTVCETH--big.svg",
+        "SOL-USD": "https://s3-symbol-logo.tradingview.com/crypto/XTVCSOL--big.svg"
+    ]
+
     private let domainMap: [String: String] = [
         "FLY": "fireflyspace.com",
         "NVDA": "nvidia.com",
@@ -63,21 +90,71 @@ final class LogoCache: ObservableObject {
         guard images[clean] == nil, !inFlight.contains(clean) else { return }
         inFlight.insert(clean)
 
+        if let direct = directLogoMap[clean], let directURL = URL(string: direct) {
+            tryNextURL(urls: [directURL] + fallbackURLs(for: clean), index: 0, symbol: clean)
+            return
+        }
+
+        resolveTradingViewLogo(for: clean) { [weak self] resolvedURL in
+            guard let self = self else { return }
+            var candidates: [URL] = []
+            if let resolvedURL = resolvedURL {
+                candidates.append(resolvedURL)
+            }
+            candidates.append(contentsOf: self.fallbackURLs(for: clean))
+            self.tryNextURL(urls: candidates, index: 0, symbol: clean)
+        }
+    }
+
+    private func fallbackURLs(for clean: String) -> [URL] {
         let baseTicker = clean.components(separatedBy: "-").first ?? clean
-        var candidateURLs: [URL] = []
-
-        if let url1 = URL(string: "https://assets.parqet.com/logos/symbol/\(baseTicker)?format=png") {
-            candidateURLs.append(url1)
-        }
+        var urls: [URL] = []
         if let domain = domainMap[clean],
-           let url2 = URL(string: "https://www.google.com/s2/favicons?domain=\(domain)&sz=128") {
-            candidateURLs.append(url2)
+           let urlFav = URL(string: "https://www.google.com/s2/favicons?domain=\(domain)&sz=128") {
+            urls.append(urlFav)
         }
-        if let url3 = URL(string: "https://financialmodelingprep.com/image-stock/\(baseTicker).png") {
-            candidateURLs.append(url3)
+        if clean != "FLY",
+           let urlParqet = URL(string: "https://assets.parqet.com/logos/symbol/\(baseTicker)?format=png") {
+            urls.append(urlParqet)
+        }
+        return urls
+    }
+
+    private func resolveTradingViewLogo(for symbol: String, completion: @escaping (URL?) -> Void) {
+        let baseTicker = symbol.components(separatedBy: "-").first ?? symbol
+        let encoded = baseTicker.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? baseTicker
+        guard let searchURL = URL(string: "https://symbol-search.tradingview.com/symbol_search/v3/?text=\(encoded)&hl=0&lang=en") else {
+            completion(nil)
+            return
         }
 
-        tryNextURL(urls: candidateURLs, index: 0, symbol: clean)
+        var request = URLRequest(url: searchURL)
+        request.timeoutInterval = 5
+        request.setValue("https://www.tradingview.com", forHTTPHeaderField: "Origin")
+        request.setValue("Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0) AppleWebKit/605.1.15", forHTTPHeaderField: "User-Agent")
+
+        URLSession.shared.dataTask(with: request) { data, _, _ in
+            guard let data = data,
+                  let root = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+                  let symbols = root["symbols"] as? [[String: Any]] else {
+                completion(nil)
+                return
+            }
+
+            let exactMatch = symbols.first { item in
+                let sym = (item["symbol"] as? String)?.uppercased() ?? ""
+                return sym == baseTicker && (item["logoid"] as? String)?.isEmpty == false
+            } ?? symbols.first { item in
+                (item["logoid"] as? String)?.isEmpty == false
+            }
+
+            if let logoid = exactMatch?["logoid"] as? String,
+               let svgURL = URL(string: "https://s3-symbol-logo.tradingview.com/\(logoid)--big.svg") {
+                completion(svgURL)
+            } else {
+                completion(nil)
+            }
+        }.resume()
     }
 
     private func tryNextURL(urls: [URL], index: Int, symbol: String) {
@@ -97,7 +174,7 @@ final class LogoCache: ObservableObject {
             if let http = response as? HTTPURLResponse,
                http.statusCode == 200,
                let data = data,
-               data.count > 100,
+               data.count > 80,
                let img = NSImage(data: data),
                img.size.width > 8 {
                 DispatchQueue.main.async {
@@ -142,6 +219,11 @@ final class TickerStore: ObservableObject {
     @Published var newTickerInput: String = ""
     @Published var hoveredSymbol: String? = nil
 
+    let suggestedSymbols: [String] = [
+        "FLY", "NVDA", "QQQ", "TSLA", "AAPL", "RKLB",
+        "PLTR", "AMD", "SPY", "COIN", "HOOD", "ASTS", "BTC-USD"
+    ]
+
     var onMenuBarUpdate: (() -> Void)?
     var onFloatingWidgetToggle: ((Bool) -> Void)?
 
@@ -158,6 +240,9 @@ final class TickerStore: ObservableObject {
         "AMD": "Advanced Micro Devices",
         "PLTR": "Palantir Technologies",
         "SPY": "SPDR S&P 500 ETF",
+        "COIN": "Coinbase Global",
+        "HOOD": "Robinhood Markets",
+        "ASTS": "AST SpaceMobile",
         "MSFT": "Microsoft Corp.",
         "AMZN": "Amazon.com, Inc.",
         "META": "Meta Platforms",
@@ -226,10 +311,16 @@ final class TickerStore: ObservableObject {
     }
 
     func addSymbol(_ raw: String) {
-        let cleaned = raw.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+        let cleaned = raw
+            .replacingOccurrences(of: "$", with: "")
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+            .uppercased()
         guard !cleaned.isEmpty else { return }
         if !symbols.contains(cleaned) {
             symbols.append(cleaned)
+        }
+        if symbols.count == 1 {
+            pinnedSymbol = cleaned
         }
         LogoCache.shared.fetchLogoIfNeeded(for: cleaned)
         fetchQuote(for: cleaned)
@@ -290,9 +381,9 @@ final class TickerStore: ObservableObject {
                 ?? regularPrice
             let dayHigh = (meta["regularMarketDayHigh"] as? Double) ?? regularPrice
             let dayLow = (meta["regularMarketDayLow"] as? Double) ?? regularPrice
-            let shortName = (meta["shortName"] as? String)
+            let shortName = self.fallbackNames[symbol]
+                ?? (meta["shortName"] as? String)
                 ?? (meta["longName"] as? String)
-                ?? self.fallbackNames[symbol]
                 ?? symbol
 
             var closes: [Double] = []
@@ -366,19 +457,15 @@ struct TickerLogoView: View {
 
     var body: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: size * 0.26, style: .continuous)
+            RoundedRectangle(cornerRadius: size * 0.25, style: .continuous)
                 .fill(Color(red: 0.11, green: 0.12, blue: 0.16))
-                .overlay(
-                    RoundedRectangle(cornerRadius: size * 0.26, style: .continuous)
-                        .stroke(Color.white.opacity(0.10), lineWidth: 1)
-                )
 
             if let nsImg = cache.image(for: symbol) {
                 Image(nsImage: nsImg)
                     .resizable()
-                    .scaledToFit()
-                    .frame(width: size * 0.72, height: size * 0.72)
-                    .clipShape(RoundedRectangle(cornerRadius: size * 0.18, style: .continuous))
+                    .scaledToFill()
+                    .frame(width: size, height: size)
+                    .clipShape(RoundedRectangle(cornerRadius: size * 0.25, style: .continuous))
             } else {
                 Text(String(symbol.prefix(3)))
                     .font(.system(size: size * 0.34, weight: .bold, design: .monospaced))
@@ -386,6 +473,10 @@ struct TickerLogoView: View {
             }
         }
         .frame(width: size, height: size)
+        .overlay(
+            RoundedRectangle(cornerRadius: size * 0.25, style: .continuous)
+                .stroke(Color.white.opacity(0.12), lineWidth: 1)
+        )
     }
 }
 
@@ -499,10 +590,14 @@ struct TickerRowView: View {
                     .foregroundColor(Color.white.opacity(0.50))
                     .lineLimit(1)
             }
-            .frame(width: 112, alignment: .leading)
+            .frame(width: 108, alignment: .leading)
+            .contentShape(Rectangle())
+            .onTapGesture {
+                onPin()
+            }
 
             SparklineView(points: quote.sparkline, isPositive: quote.isPositive)
-                .frame(width: 58, height: 22)
+                .frame(width: 54, height: 22)
 
             Spacer(minLength: 4)
 
@@ -520,18 +615,16 @@ struct TickerRowView: View {
                     .cornerRadius(4)
             }
 
-            if isHovered {
-                Button(action: onDelete) {
-                    Image(systemName: "xmark")
-                        .font(.system(size: 9, weight: .bold))
-                        .foregroundColor(Color.white.opacity(0.45))
-                        .frame(width: 18, height: 18)
-                        .background(Color.white.opacity(0.08))
-                        .cornerRadius(4)
-                }
-                .buttonStyle(.plain)
-                .help("Remove \(quote.symbol)")
+            Button(action: onDelete) {
+                Image(systemName: "xmark")
+                    .font(.system(size: 9, weight: .bold))
+                    .foregroundColor(isHovered ? Color(red: 0.96, green: 0.32, blue: 0.38) : Color.white.opacity(0.42))
+                    .frame(width: 20, height: 20)
+                    .background(isHovered ? Color(red: 0.96, green: 0.32, blue: 0.38).opacity(0.16) : Color.white.opacity(0.06))
+                    .cornerRadius(5)
             }
+            .buttonStyle(.plain)
+            .help("Remove \(quote.symbol) from watchlist")
         }
         .padding(.horizontal, 10)
         .padding(.vertical, 7)
@@ -552,6 +645,10 @@ struct TickerRowView: View {
 struct PopoverContentView: View {
     @ObservedObject var store: TickerStore
 
+    private var availableSuggestions: [String] {
+        store.suggestedSymbols.filter { !store.symbols.contains($0) }
+    }
+
     var body: some View {
         VStack(spacing: 0) {
             // Header
@@ -564,9 +661,13 @@ struct PopoverContentView: View {
                         .font(.system(size: 12, weight: .bold, design: .monospaced))
                         .tracking(1.2)
                         .foregroundColor(.white)
-                    Text("by @anldrms")
-                        .font(.system(size: 10, weight: .medium, design: .monospaced))
-                        .foregroundColor(Color.white.opacity(0.42))
+                    Text("LIVE")
+                        .font(.system(size: 9, weight: .bold, design: .monospaced))
+                        .foregroundColor(Color(red: 0.13, green: 0.84, blue: 0.48))
+                        .padding(.horizontal, 5)
+                        .padding(.vertical, 1.5)
+                        .background(Color(red: 0.13, green: 0.84, blue: 0.48).opacity(0.14))
+                        .cornerRadius(4)
                 }
 
                 Spacer()
@@ -604,34 +705,59 @@ struct PopoverContentView: View {
 
             Divider().background(Color.white.opacity(0.08))
 
-            // Add Ticker Input Bar
-            HStack(spacing: 8) {
-                Image(systemName: "magnifyingglass")
-                    .font(.system(size: 11))
-                    .foregroundColor(Color.white.opacity(0.38))
+            // Add Ticker Input + Quick-Add Chips
+            VStack(spacing: 7) {
+                HStack(spacing: 8) {
+                    Image(systemName: "plus.circle.fill")
+                        .font(.system(size: 12))
+                        .foregroundColor(Color(red: 0.13, green: 0.84, blue: 0.48))
 
-                TextField("Add symbol (e.g. FLY, NVDA, PLTR, BTC-USD)...", text: $store.newTickerInput, onCommit: {
-                    store.addSymbol(store.newTickerInput)
-                    store.newTickerInput = ""
-                })
-                .textFieldStyle(.plain)
-                .font(.system(size: 11.5, design: .monospaced))
-                .foregroundColor(.white)
+                    TextField("Add symbol (e.g. PLTR, AMD, SPY, BTC-USD)...", text: $store.newTickerInput, onCommit: {
+                        store.addSymbol(store.newTickerInput)
+                        store.newTickerInput = ""
+                    })
+                    .textFieldStyle(.plain)
+                    .font(.system(size: 11.5, design: .monospaced))
+                    .foregroundColor(.white)
 
-                if !store.newTickerInput.isEmpty {
                     Button(action: {
                         store.addSymbol(store.newTickerInput)
                         store.newTickerInput = ""
                     }) {
-                        Text("ADD")
+                        Text("+ ADD")
                             .font(.system(size: 9.5, weight: .bold, design: .monospaced))
                             .foregroundColor(.black)
-                            .padding(.horizontal, 7)
-                            .padding(.vertical, 3)
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 4)
                             .background(Color(red: 0.13, green: 0.84, blue: 0.48))
                             .cornerRadius(4)
                     }
                     .buttonStyle(.plain)
+                }
+
+                if !availableSuggestions.isEmpty {
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 5) {
+                            ForEach(availableSuggestions, id: \.self) { suggestion in
+                                Button(action: {
+                                    store.addSymbol(suggestion)
+                                }) {
+                                    Text("+\(suggestion)")
+                                        .font(.system(size: 9.5, weight: .semibold, design: .monospaced))
+                                        .foregroundColor(Color.white.opacity(0.72))
+                                        .padding(.horizontal, 6)
+                                        .padding(.vertical, 2.5)
+                                        .background(Color.white.opacity(0.06))
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 4)
+                                                .stroke(Color.white.opacity(0.10), lineWidth: 1)
+                                        )
+                                        .cornerRadius(4)
+                                }
+                                .buttonStyle(.plain)
+                            }
+                        }
+                    }
                 }
             }
             .padding(.horizontal, 12)
@@ -661,17 +787,29 @@ struct PopoverContentView: View {
                                 }
                             )
                         } else {
-                            HStack {
-                                TickerLogoView(symbol: sym, size: 28)
+                            HStack(spacing: 10) {
+                                TickerLogoView(symbol: sym, size: 30)
                                 Text(sym)
                                     .font(.system(size: 12, weight: .bold, design: .monospaced))
                                     .foregroundColor(.white)
                                 Spacer()
-                                Text("Loading...")
+                                Text("Fetching quote...")
                                     .font(.system(size: 10.5, design: .monospaced))
                                     .foregroundColor(Color.white.opacity(0.45))
+                                Button(action: { store.removeSymbol(sym) }) {
+                                    Image(systemName: "xmark")
+                                        .font(.system(size: 9, weight: .bold))
+                                        .foregroundColor(Color.white.opacity(0.5))
+                                        .frame(width: 20, height: 20)
+                                        .background(Color.white.opacity(0.07))
+                                        .cornerRadius(5)
+                                }
+                                .buttonStyle(.plain)
                             }
-                            .padding(8)
+                            .padding(.horizontal, 10)
+                            .padding(.vertical, 7)
+                            .background(Color.white.opacity(0.02))
+                            .cornerRadius(8)
                         }
                     }
                 }
@@ -703,7 +841,7 @@ struct PopoverContentView: View {
             .padding(.vertical, 9)
             .background(Color.white.opacity(0.02))
         }
-        .frame(width: 356)
+        .frame(width: 364)
         .background(Color(red: 0.05, green: 0.055, blue: 0.075))
     }
 }
@@ -724,15 +862,13 @@ struct FloatingWidgetView: View {
                         .foregroundColor(Color.white.opacity(0.85))
                 }
                 Spacer()
-                Text("@anldrms")
-                    .font(.system(size: 9.5, weight: .medium, design: .monospaced))
-                    .foregroundColor(Color.white.opacity(0.38))
                 Button(action: { store.showFloatingWidget = false }) {
                     Image(systemName: "xmark")
                         .font(.system(size: 9, weight: .bold))
                         .foregroundColor(Color.white.opacity(0.45))
                 }
                 .buttonStyle(.plain)
+                .help("Hide Floating Widget")
             }
             .padding(.horizontal, 12)
             .padding(.vertical, 8)
@@ -741,7 +877,7 @@ struct FloatingWidgetView: View {
             Divider().background(Color.white.opacity(0.08))
 
             VStack(spacing: 5) {
-                ForEach(store.symbols.prefix(6), id: \.self) { sym in
+                ForEach(store.symbols.prefix(8), id: \.self) { sym in
                     if let q = store.quotes[sym] {
                         HStack(spacing: 8) {
                             TickerLogoView(symbol: q.symbol, size: 24)
@@ -754,10 +890,10 @@ struct FloatingWidgetView: View {
                                     .foregroundColor(Color.white.opacity(0.45))
                                     .lineLimit(1)
                             }
-                            .frame(width: 92, alignment: .leading)
+                            .frame(width: 86, alignment: .leading)
 
                             SparklineView(points: q.sparkline, isPositive: q.isPositive)
-                                .frame(width: 46, height: 16)
+                                .frame(width: 44, height: 16)
 
                             Spacer()
 
@@ -773,6 +909,17 @@ struct FloatingWidgetView: View {
                                             : Color(red: 0.96, green: 0.32, blue: 0.38)
                                     )
                             }
+
+                            Button(action: { store.removeSymbol(q.symbol) }) {
+                                Image(systemName: "xmark")
+                                    .font(.system(size: 8, weight: .bold))
+                                    .foregroundColor(Color.white.opacity(0.38))
+                                    .frame(width: 16, height: 16)
+                                    .background(Color.white.opacity(0.05))
+                                    .cornerRadius(4)
+                            }
+                            .buttonStyle(.plain)
+                            .help("Remove \(q.symbol)")
                         }
                         .padding(.horizontal, 8)
                         .padding(.vertical, 5)
@@ -789,7 +936,7 @@ struct FloatingWidgetView: View {
             }
             .padding(8)
         }
-        .frame(width: 286)
+        .frame(width: 294)
         .background(
             RoundedRectangle(cornerRadius: 12, style: .continuous)
                 .fill(Color(red: 0.05, green: 0.055, blue: 0.075).opacity(0.94))
@@ -818,7 +965,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         }
 
         popover = NSPopover()
-        popover.contentSize = NSSize(width: 356, height: 430)
+        popover.contentSize = NSSize(width: 364, height: 455)
         popover.behavior = .transient
         popover.animates = true
         popover.contentViewController = NSHostingController(rootView: PopoverContentView(store: store))
@@ -851,8 +998,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     private func setupFloatingPanel() {
         let screenRect = NSScreen.main?.visibleFrame ?? NSRect(x: 0, y: 0, width: 1440, height: 900)
-        let panelWidth: CGFloat = 286
-        let panelHeight: CGFloat = 260
+        let panelWidth: CGFloat = 294
+        let panelHeight: CGFloat = 270
         let initialRect = NSRect(
             x: screenRect.maxX - panelWidth - 24,
             y: screenRect.maxY - panelHeight - 24,
@@ -921,6 +1068,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         if popover.isShown {
             popover.performClose(sender)
         } else {
+            NSApp.activate(ignoringOtherApps: true)
             popover.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
             popover.contentViewController?.view.window?.makeKey()
         }

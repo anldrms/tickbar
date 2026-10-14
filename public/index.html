@@ -3,20 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TickBar by @anldrms — Free macOS Menu Bar &amp; Floating Stock Ticker Widget (.DMG)</title>
-  <meta name="description" content="Download TickBar by @anldrms — a 100% free native macOS Menu Bar (Status Bar) and Floating Desktop Widget for live stock tickers, company logos, and intraday sparklines." />
+  <title>TickBar — Free macOS Menu Bar &amp; Floating Stock Ticker Widget (.DMG)</title>
+  <meta name="description" content="Download TickBar — a 100% free native macOS Menu Bar (Status Bar) and Floating Desktop Widget for live stock tickers, official company logos, and intraday sparklines." />
   <meta name="keywords" content="TickBar, anldrms, macOS stock ticker, menu bar stock ticker mac, floating stock widget macOS, free mac stock app, DMG, live stock price status bar" />
   <meta name="author" content="anldrms" />
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
   <link rel="canonical" href="https://tickbar.vercel.app/" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="TickBar by @anldrms — Native macOS Menu Bar &amp; Floating Stock Ticker" />
-  <meta property="og:description" content="Pin live stock tickers, company logos, and intraday sparklines to your macOS Menu Bar or desktop. 100% free universal macOS .DMG by @anldrms." />
+  <meta property="og:title" content="TickBar — Native macOS Menu Bar &amp; Floating Stock Ticker" />
+  <meta property="og:description" content="Pin live stock tickers, official company logos, and intraday sparklines to your macOS Menu Bar or desktop. 100% free universal macOS .DMG." />
   <meta property="og:url" content="https://tickbar.vercel.app/" />
-  <meta property="og:site_name" content="TickBar by @anldrms" />
+  <meta property="og:site_name" content="TickBar" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="TickBar by @anldrms — Free macOS Menu Bar Stock Ticker" />
-  <meta name="twitter:description" content="Live stock prices, company logos, and sparklines in your macOS Menu Bar and floating desktop widget. Built by @anldrms." />
+  <meta name="twitter:title" content="TickBar — Free macOS Menu Bar Stock Ticker" />
+  <meta name="twitter:description" content="Live stock prices, official company logos, and sparklines in your macOS Menu Bar and floating desktop widget." />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -25,7 +25,7 @@
     "operatingSystem": "macOS 13.0+",
     "applicationCategory": "FinanceApplication",
     "downloadUrl": "https://tickbar.vercel.app/downloads/TickBar-macOS-Universal.dmg",
-    "softwareVersion": "1.0.0",
+    "softwareVersion": "1.1.0",
     "author": {
       "@type": "Person",
       "name": "anldrms",
@@ -36,7 +36,7 @@
       "price": "0",
       "priceCurrency": "USD"
     },
-    "description": "A 100% free native macOS Menu Bar and Floating Desktop Widget for live stock tickers, company logos, and intraday sparklines by @anldrms."
+    "description": "A 100% free native macOS Menu Bar and Floating Desktop Widget for live stock tickers, official company logos, and intraday sparklines."
   }
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -86,7 +86,6 @@
       font-weight: 400;
     }
 
-    /* Subtle architectural grid background inspired by mkdir.directory */
     .bg-grid {
       background-image:
         linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
@@ -103,7 +102,6 @@
       background: radial-gradient(circle at 50% 0%, rgba(33, 214, 122, 0.06) 0%, transparent 55%);
     }
 
-    /* Top Directory Bar */
     header.topbar {
       display: flex;
       align-items: center;
@@ -189,7 +187,6 @@
       transform: translateY(-1px);
     }
 
-    /* Hero Section */
     .hero {
       padding: 64px 28px 56px;
       border-bottom: 1px solid var(--rule);
@@ -306,7 +303,6 @@
       gap: 6px;
     }
 
-    /* Interactive macOS Preview Frame */
     .macos-stage {
       background: var(--plate);
       border: 1px solid var(--rule-strong);
@@ -356,20 +352,20 @@
     }
 
     .status-ticker-pill img {
-      width: 15px;
-      height: 15px;
+      width: 16px;
+      height: 16px;
       border-radius: 4px;
-      object-fit: contain;
+      object-fit: cover;
       background: #141720;
     }
 
     .desktop-canvas {
-      padding: 20px;
+      padding: 18px;
       background:
         radial-gradient(circle at 80% 20%, rgba(33, 214, 122, 0.09), transparent 50%),
         radial-gradient(circle at 20% 80%, rgba(56, 128, 255, 0.08), transparent 55%),
         #0b0d13;
-      min-height: 455px;
+      min-height: 465px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -377,7 +373,7 @@
 
     .app-popover {
       width: 100%;
-      max-width: 390px;
+      max-width: 400px;
       background: rgba(13, 14, 20, 0.96);
       border: 1px solid rgba(255, 255, 255, 0.14);
       border-radius: 12px;
@@ -394,13 +390,19 @@
       background: rgba(255, 255, 255, 0.02);
     }
 
+    .popover-search-wrap {
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--rule);
+      background: #0b0c11;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
     .popover-search {
       display: flex;
       align-items: center;
       gap: 8px;
-      padding: 8px 12px;
-      border-bottom: 1px solid var(--rule);
-      background: #0b0c11;
     }
 
     .popover-search input {
@@ -417,10 +419,38 @@
       color: #06080b;
       border: none;
       border-radius: 4px;
-      padding: 3px 8px;
+      padding: 4px 9px;
       font-size: 10.5px;
       font-weight: 700;
       cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .quick-chips {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+    }
+
+    .quick-chip {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      color: rgba(255, 255, 255, 0.75);
+      border-radius: 4px;
+      padding: 2px 6px;
+      font-size: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.14s ease;
+    }
+
+    .quick-chip:hover {
+      background: var(--up-soft);
+      border-color: var(--up);
+      color: var(--up);
     }
 
     .watchlist-container {
@@ -434,9 +464,9 @@
 
     .ticker-row {
       display: grid;
-      grid-template-columns: 34px 1.15fr 66px 0.95fr;
+      grid-template-columns: 34px 1.15fr 60px 0.9fr 22px;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       padding: 8px 10px;
       border-radius: 8px;
       background: rgba(255, 255, 255, 0.02);
@@ -460,7 +490,7 @@
       height: 34px;
       border-radius: 9px;
       background: #161924;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.12);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -469,10 +499,9 @@
     }
 
     .ticker-logo-box img {
-      width: 24px;
-      height: 24px;
-      border-radius: 5px;
-      object-fit: contain;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     .ticker-symbol-line {
@@ -528,6 +557,27 @@
       background: var(--down-soft);
     }
 
+    .btn-remove-row {
+      width: 22px;
+      height: 22px;
+      border-radius: 5px;
+      border: none;
+      background: rgba(255, 255, 255, 0.06);
+      color: rgba(255, 255, 255, 0.48);
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.14s ease;
+    }
+
+    .btn-remove-row:hover {
+      background: var(--down-soft);
+      color: var(--down);
+    }
+
     .popover-footer {
       display: flex;
       align-items: center;
@@ -539,7 +589,6 @@
       background: rgba(255, 255, 255, 0.015);
     }
 
-    /* Directory-style Spec Grid (mkdir.directory inspired) */
     .spec-header {
       padding: 36px 28px 20px;
       border-bottom: 1px solid var(--rule);
@@ -598,7 +647,6 @@
       color: var(--fg-muted);
     }
 
-    /* Install & Verification Strip */
     .install-section {
       padding: 48px 28px;
       border-bottom: 1px solid var(--rule);
@@ -649,10 +697,10 @@
       <div class="brand-cluster">
         <span class="pulse-dot"></span>
         <span class="brand-title mono">TICKBAR</span>
-        <span class="mono" style="font-size:11px; color:var(--fg-subtle);">v1.0.0</span>
-        <a href="https://github.com/anldrms" target="_blank" rel="noopener" class="creator-pill mono">
-          <span>crafted by</span>
-          <strong style="color:var(--fg);">@anldrms</strong>
+        <span class="mono" style="font-size:11px; color:var(--fg-subtle);">v1.1.0</span>
+        <a href="https://github.com/anldrms/tickbar" target="_blank" rel="noopener" class="creator-pill mono">
+          <span>open source on</span>
+          <strong style="color:var(--fg);">GitHub</strong>
         </a>
       </div>
       <div class="nav-actions">
@@ -670,10 +718,10 @@
           <span>MENU BAR + FLOATING DESKTOP WIDGET</span>
         </div>
         <h1 class="hero-title">
-          Live market tickers, <span class="serif-italic">company logos</span> &amp; sparklines in your macOS status bar.
+          Live market tickers, <span class="serif-italic">official logos</span> &amp; sparklines in your macOS status bar.
         </h1>
         <p class="hero-sub">
-          Designed and built by <strong>@anldrms</strong>. Pin any stock, ETF, or crypto symbol directly to your top macOS Menu Bar or detach a minimal obsidian widget onto your desktop. Zero subscriptions, zero API keys, 100% free forever.
+          Pin any stock, ETF, or crypto symbol directly to your top macOS Menu Bar or detach a minimal obsidian widget onto your desktop. Add or remove symbols anytime with zero subscriptions, zero API keys, and 100% free open-source code.
         </p>
 
         <div class="cta-cluster">
@@ -682,15 +730,15 @@
             <span>Download TickBar.dmg</span>
             <span class="mono" style="font-size:11.5px; opacity:0.65;">macOS Universal</span>
           </a>
-          <a href="#specs" class="btn-secondary mono">
-            <span>Explore Architecture →</span>
+          <a href="https://github.com/anldrms/tickbar" target="_blank" rel="noopener" class="btn-secondary mono">
+            <span>View Source on GitHub →</span>
           </a>
         </div>
 
         <div class="meta-strip mono">
           <span>✓ Apple Silicon (M1–M4) &amp; Intel</span>
           <span>✓ macOS 13.0+</span>
-          <span>✓ 100% Free by @anldrms</span>
+          <span>✓ 100% Free &amp; Open Source</span>
         </div>
       </div>
 
@@ -706,7 +754,7 @@
           </div>
           <div class="menubar-right">
             <div class="status-ticker-pill mono" id="menubar-active-pill" title="Click any ticker below to pin it to the macOS Menu Bar">
-              <img id="menubar-logo" src="https://www.google.com/s2/favicons?domain=fireflyspace.com&sz=128" alt="FLY" />
+              <img id="menubar-logo" src="https://s3-symbol-logo.tradingview.com/firefly-aerospace--big.svg" alt="FLY" />
               <span id="menubar-symbol">FLY</span>
               <span id="menubar-price">$17.03</span>
               <span id="menubar-change" style="color:var(--down);">▼1.28%</span>
@@ -721,24 +769,27 @@
               <div style="display:flex; align-items:center; gap:7px;">
                 <span class="pulse-dot" style="width:6px; height:6px;"></span>
                 <span class="mono" style="font-size:11.5px; font-weight:700; letter-spacing:0.08em;">TICKBAR</span>
-                <span class="mono" style="font-size:10px; color:var(--fg-muted);">by @anldrms</span>
+                <span class="mono" style="font-size:9.5px; padding:2px 6px; border-radius:4px; background:var(--up-soft); color:var(--up); font-weight:700;">LIVE</span>
               </div>
               <div style="display:flex; align-items:center; gap:6px;">
-                <span class="mono" style="font-size:10px; padding:3px 7px; border-radius:4px; background:var(--up-soft); color:var(--up);">● LIVE DEMO</span>
+                <span class="mono" style="font-size:10px; padding:3px 7px; border-radius:4px; background:rgba(255,255,255,0.06); color:var(--fg-muted);">Interactive Demo</span>
               </div>
             </div>
 
-            <form class="popover-search" id="add-ticker-form">
-              <span style="color:var(--fg-subtle); font-size:12px;">+</span>
-              <input type="text" id="ticker-input" class="mono" placeholder="Try adding a symbol (e.g. PLTR, AMD, COIN)..." maxlength="10" />
-              <button type="submit" class="mono">ADD</button>
-            </form>
+            <div class="popover-search-wrap">
+              <form class="popover-search" id="add-ticker-form">
+                <span style="color:var(--up); font-size:13px; font-weight:700;">+</span>
+                <input type="text" id="ticker-input" class="mono" placeholder="Add symbol (e.g. PLTR, AMD, SPY, COIN)..." maxlength="10" />
+                <button type="submit" class="mono">+ ADD</button>
+              </form>
+              <div class="quick-chips mono" id="quick-chips-bar"></div>
+            </div>
 
             <div class="watchlist-container" id="watchlist-rows"></div>
 
             <div class="popover-footer mono">
-              <span>Click any row to pin in Menu Bar</span>
-              <span style="color:var(--fg);">v1.0 · @anldrms</span>
+              <span>Click row to pin · Click × to remove</span>
+              <span style="color:var(--fg);">Cycle in Menu Bar</span>
             </div>
           </div>
         </div>
@@ -751,39 +802,39 @@
         <div class="mono" style="font-size:11px; color:var(--up); letter-spacing:0.1em; margin-bottom:6px;">INDEX // SPECIFICATIONS</div>
         <h2 style="font-size:26px; font-weight:600; letter-spacing:-0.02em;">Built natively in Swift &amp; AppKit. Zero Electron bloat.</h2>
       </div>
-      <div class="mono" style="font-size:12px; color:var(--fg-muted);">BINARY SIZE &lt; 1.5 MB · UNIVERSAL .DMG</div>
+      <div class="mono" style="font-size:12px; color:var(--fg-muted);">BINARY SIZE &lt; 1 MB · UNIVERSAL .DMG</div>
     </div>
 
     <section class="spec-grid">
       <div class="spec-cell">
         <div class="spec-index mono">01 / STATUS BAR ENGINE</div>
         <h3 class="spec-title">Always-visible Menu Bar ticker</h3>
-        <p class="spec-desc">Renders crisp company logos alongside tabular monospaced prices and color-coded percentage deltas directly inside your macOS system status bar.</p>
+        <p class="spec-desc">Renders crisp official company logos alongside tabular monospaced prices and color-coded percentage deltas directly inside your macOS system status bar.</p>
       </div>
       <div class="spec-cell">
         <div class="spec-index mono">02 / FLOATING DESKTOP PIP</div>
         <h3 class="spec-title">Detachable obsidian widget</h3>
-        <p class="spec-desc">Toggle the floating non-activating NSPanel widget with a single click. Keep your top 6 tickers, logos, and intraday sparklines pinned above your workspace.</p>
+        <p class="spec-desc">Toggle the floating non-activating NSPanel widget with a single click. Keep your watchlist, official logos, and intraday sparklines pinned above your workspace.</p>
       </div>
       <div class="spec-cell">
-        <div class="spec-index mono">03 / COMPANY LOGOS &amp; CHARTS</div>
-        <h3 class="spec-title">Automatic brand resolution</h3>
-        <p class="spec-desc">Resolves high-DPI vector/PNG company emblems for $FLY, $NVDA, $QQQ, $TSLA, $AAPL, $RKLB and thousands of equities with real-time 5m sparklines.</p>
+        <div class="spec-index mono">03 / OFFICIAL VECTOR LOGOS</div>
+        <h3 class="spec-title">Up-to-date brand resolution</h3>
+        <p class="spec-desc">Resolves current official vector company emblems for $FLY (Firefly Aerospace), $NVDA, $QQQ, $TSLA, $AAPL, $RKLB, and any stock, ETF, or crypto symbol you add.</p>
       </div>
       <div class="spec-cell">
-        <div class="spec-index mono">04 / AUTO-CYCLE MODE</div>
-        <h3 class="spec-title">Rotate watchlist in Menu Bar</h3>
-        <p class="spec-desc">Pin a single high-conviction ticker like $FLY to your top bar, or enable Auto-Cycle to smoothly rotate through your entire portfolio every 4.5 seconds.</p>
+        <div class="spec-index mono">04 / INSTANT ADD &amp; REMOVE</div>
+        <h3 class="spec-title">Full watchlist customization</h3>
+        <p class="spec-desc">Type any symbol or tap a quick-add chip to add tickers immediately, and remove any symbol with a single click from either the menu bar popover or floating widget.</p>
       </div>
       <div class="spec-cell">
         <div class="spec-index mono">05 / ZERO CONFIGURATION</div>
         <h3 class="spec-title">No API keys or sign-ups</h3>
-        <p class="spec-desc">Works the second you drag TickBar.app into Applications. Streams live market data and intraday range curves out of the box with zero registration.</p>
+        <p class="spec-desc">Works the second you drag TickBar.app into Applications. Streams live market data and 5-minute intraday sparklines out of the box with zero registration.</p>
       </div>
       <div class="spec-cell">
-        <div class="spec-index mono">06 / INDIE CRAFT BY @ANLDRMS</div>
+        <div class="spec-index mono">06 / OPEN SOURCE MACOS CRAFT</div>
         <h3 class="spec-title">100% Free &amp; Open Distribution</h3>
-        <p class="spec-desc">Released freely for the macOS trading &amp; builder community by @anldrms. Native performance, minimal RAM footprint, and clean dark-mode typography.</p>
+        <p class="spec-desc">Released under the MIT License. Native Swift + SwiftUI + AppKit architecture with a minimal memory footprint and clean dark-mode typography.</p>
       </div>
     </section>
 
@@ -793,7 +844,7 @@
         <div class="mono" style="font-size:11px; color:var(--up); letter-spacing:0.1em; margin-bottom:8px;">INSTALLATION // MACOS</div>
         <h3 style="font-size:24px; font-weight:600; margin-bottom:12px;">Install in 10 seconds</h3>
         <p style="font-size:14px; color:var(--fg-muted); line-height:1.6; margin-bottom:20px;">
-          Download <code>TickBar-macOS-Universal.dmg</code>, drag <strong>TickBar.app</strong> into your <strong>Applications</strong> folder, and launch. Since TickBar is an independent free utility by <strong>@anldrms</strong>, if macOS Gatekeeper prompts on first launch, run the one-liner on the right or right-click → Open.
+          Download <code>TickBar-macOS-Universal.dmg</code>, drag <strong>TickBar.app</strong> into your <strong>Applications</strong> folder, and launch. If macOS Gatekeeper prompts on first launch, run the one-liner on the right or right-click → Open.
         </p>
         <a href="/downloads/TickBar-macOS-Universal.dmg" download class="btn-primary">
           <span>Download TickBar-macOS-Universal.dmg</span>
@@ -802,7 +853,7 @@
       <div class="code-box mono">
         <div style="color:var(--fg-subtle); margin-bottom:6px;"># Optional: Open DMG &amp; clear Gatekeeper quarantine attribute</div>
         <div><span style="color:var(--up);">$</span> hdiutil attach ~/Downloads/TickBar-macOS-Universal.dmg</div>
-        <div><span style="color:var(--up);">$</span> cp -R "/Volumes/TickBar by anldrms/TickBar.app" /Applications/</div>
+        <div><span style="color:var(--up);">$</span> cp -R "/Volumes/TickBar/TickBar.app" /Applications/</div>
         <div><span style="color:var(--up);">$</span> xattr -cr /Applications/TickBar.app &amp;&amp; open /Applications/TickBar.app</div>
       </div>
     </section>
@@ -810,73 +861,179 @@
     <!-- Footer -->
     <footer class="site-footer mono">
       <div>
-        <span>TICKBAR v1.0.0 — Crafted by </span>
-        <a href="https://github.com/anldrms" target="_blank" rel="noopener"><strong>@anldrms</strong></a>
+        <span>TICKBAR v1.1.0 · Open Source under MIT License</span>
       </div>
       <div style="display:flex; gap:20px;">
         <a href="/downloads/TickBar-macOS-Universal.dmg" download>Download .DMG</a>
-        <a href="https://github.com/anldrms" target="_blank" rel="noopener">GitHub (@anldrms)</a>
+        <a href="https://github.com/anldrms/tickbar" target="_blank" rel="noopener">GitHub (@anldrms/tickbar)</a>
       </div>
     </footer>
   </div>
 
   <script>
-    const initialTickers = [
-      {
+    const catalog = {
+      'FLY': {
         symbol: 'FLY',
         name: 'Firefly Aerospace',
         price: 17.03,
         changePercent: -1.28,
-        logo: 'https://www.google.com/s2/favicons?domain=fireflyspace.com&sz=128',
+        logo: 'https://s3-symbol-logo.tradingview.com/firefly-aerospace--big.svg',
         spark: [17.25, 17.38, 17.15, 17.02, 17.09, 17.01, 17.05, 17.03]
       },
-      {
+      'NVDA': {
         symbol: 'NVDA',
         name: 'NVIDIA Corp.',
         price: 188.65,
         changePercent: 2.42,
-        logo: 'https://assets.parqet.com/logos/symbol/NVDA?format=png',
+        logo: 'https://s3-symbol-logo.tradingview.com/nvidia--big.svg',
         spark: [184.2, 185.1, 186.4, 185.9, 187.3, 188.1, 188.9, 188.65]
       },
-      {
+      'QQQ': {
         symbol: 'QQQ',
         name: 'Invesco QQQ Trust',
         price: 512.40,
         changePercent: 0.69,
-        logo: 'https://assets.parqet.com/logos/symbol/QQQ?format=png',
+        logo: 'https://s3-symbol-logo.tradingview.com/invesco--big.svg',
         spark: [508.9, 509.5, 510.2, 511.0, 510.8, 511.9, 512.6, 512.4]
       },
-      {
+      'TSLA': {
         symbol: 'TSLA',
         name: 'Tesla, Inc.',
         price: 254.10,
         changePercent: 1.24,
-        logo: 'https://assets.parqet.com/logos/symbol/TSLA?format=png',
+        logo: 'https://s3-symbol-logo.tradingview.com/tesla--big.svg',
         spark: [251.0, 250.4, 252.1, 253.8, 252.9, 254.6, 253.9, 254.1]
       },
-      {
+      'AAPL': {
         symbol: 'AAPL',
         name: 'Apple Inc.',
         price: 233.85,
         changePercent: 1.02,
-        logo: 'https://assets.parqet.com/logos/symbol/AAPL?format=png',
+        logo: 'https://s3-symbol-logo.tradingview.com/apple--big.svg',
         spark: [231.5, 232.0, 232.8, 232.4, 233.1, 233.9, 234.2, 233.85]
       },
-      {
+      'RKLB': {
         symbol: 'RKLB',
         name: 'Rocket Lab USA',
         price: 22.40,
         changePercent: 2.52,
-        logo: 'https://assets.parqet.com/logos/symbol/RKLB?format=png',
+        logo: 'https://s3-symbol-logo.tradingview.com/rocket-lab--big.svg',
         spark: [21.85, 21.95, 22.10, 22.05, 22.25, 22.48, 22.35, 22.40]
+      },
+      'PLTR': {
+        symbol: 'PLTR',
+        name: 'Palantir Technologies',
+        price: 43.20,
+        changePercent: 3.15,
+        logo: 'https://s3-symbol-logo.tradingview.com/palantir--big.svg',
+        spark: [41.8, 42.1, 42.0, 42.5, 42.9, 43.1, 43.2]
+      },
+      'AMD': {
+        symbol: 'AMD',
+        name: 'Advanced Micro Devices',
+        price: 156.40,
+        changePercent: 1.85,
+        logo: 'https://s3-symbol-logo.tradingview.com/advanced-micro-devices--big.svg',
+        spark: [153.5, 154.2, 153.9, 155.1, 155.8, 156.4]
+      },
+      'SPY': {
+        symbol: 'SPY',
+        name: 'SPDR S&P 500 ETF',
+        price: 584.90,
+        changePercent: 0.54,
+        logo: 'https://s3-symbol-logo.tradingview.com/spdr-sandp500-etf-tr--big.svg',
+        spark: [581.5, 582.1, 583.0, 583.8, 584.2, 584.9]
+      },
+      'COIN': {
+        symbol: 'COIN',
+        name: 'Coinbase Global',
+        price: 214.80,
+        changePercent: 4.12,
+        logo: 'https://s3-symbol-logo.tradingview.com/coinbase--big.svg',
+        spark: [206.0, 208.5, 210.2, 212.0, 213.5, 214.8]
+      },
+      'HOOD': {
+        symbol: 'HOOD',
+        name: 'Robinhood Markets',
+        price: 27.65,
+        changePercent: 2.88,
+        logo: 'https://s3-symbol-logo.tradingview.com/robinhood--big.svg',
+        spark: [26.8, 27.0, 27.1, 27.4, 27.5, 27.65]
+      },
+      'ASTS': {
+        symbol: 'ASTS',
+        name: 'AST SpaceMobile',
+        price: 28.90,
+        changePercent: 3.64,
+        logo: 'https://s3-symbol-logo.tradingview.com/ast-spacemobile--big.svg',
+        spark: [27.9, 28.1, 28.0, 28.4, 28.7, 28.9]
+      },
+      'BTC-USD': {
+        symbol: 'BTC-USD',
+        name: 'Bitcoin USD',
+        price: 68420.00,
+        changePercent: 2.15,
+        logo: 'https://s3-symbol-logo.tradingview.com/crypto/XTVCBTC--big.svg',
+        spark: [66900, 67200, 67500, 67900, 68100, 68420]
+      },
+      'MSFT': {
+        symbol: 'MSFT',
+        name: 'Microsoft Corp.',
+        price: 428.50,
+        changePercent: 0.76,
+        logo: 'https://s3-symbol-logo.tradingview.com/microsoft--big.svg',
+        spark: [425.0, 426.2, 427.1, 427.8, 428.5]
+      },
+      'AMZN': {
+        symbol: 'AMZN',
+        name: 'Amazon.com, Inc.',
+        price: 192.30,
+        changePercent: 1.18,
+        logo: 'https://s3-symbol-logo.tradingview.com/amazon--big.svg',
+        spark: [190.0, 190.8, 191.2, 191.9, 192.3]
+      },
+      'META': {
+        symbol: 'META',
+        name: 'Meta Platforms',
+        price: 589.40,
+        changePercent: 1.94,
+        logo: 'https://s3-symbol-logo.tradingview.com/meta-platforms--big.svg',
+        spark: [578.0, 581.5, 584.0, 587.2, 589.4]
+      },
+      'GOOGL': {
+        symbol: 'GOOGL',
+        name: 'Alphabet Inc.',
+        price: 168.75,
+        changePercent: 0.89,
+        logo: 'https://s3-symbol-logo.tradingview.com/alphabet--big.svg',
+        spark: [167.2, 167.6, 168.0, 168.4, 168.75]
+      },
+      'MSTR': {
+        symbol: 'MSTR',
+        name: 'MicroStrategy',
+        price: 218.40,
+        changePercent: 5.10,
+        logo: 'https://s3-symbol-logo.tradingview.com/microstrategy--big.svg',
+        spark: [207.8, 210.5, 213.0, 216.2, 218.4]
       }
+    };
+
+    const suggestedOrder = ['FLY', 'NVDA', 'QQQ', 'TSLA', 'AAPL', 'RKLB', 'PLTR', 'AMD', 'SPY', 'COIN', 'HOOD', 'ASTS', 'BTC-USD'];
+    let watchlist = [
+      catalog['FLY'],
+      catalog['NVDA'],
+      catalog['QQQ'],
+      catalog['TSLA'],
+      catalog['AAPL'],
+      catalog['RKLB']
     ];
 
     let pinnedSymbol = 'FLY';
     const watchlistEl = document.getElementById('watchlist-rows');
+    const quickChipsEl = document.getElementById('quick-chips-bar');
 
     function buildSparklineSVG(points, isUp) {
-      const w = 64, h = 22;
+      const w = 58, h = 22;
       const min = Math.min(...points);
       const max = Math.max(...points);
       const span = Math.max(max - min, 0.0001);
@@ -892,6 +1049,7 @@
     }
 
     function updateMenuBar(item) {
+      if (!item) return;
       document.getElementById('menubar-logo').src = item.logo;
       document.getElementById('menubar-symbol').textContent = item.symbol;
       document.getElementById('menubar-price').textContent = `$${item.price.toFixed(2)}`;
@@ -901,9 +1059,62 @@
       chEl.style.color = isUp ? 'var(--up)' : 'var(--down)';
     }
 
+    function addTickerSymbol(rawSym) {
+      const sym = rawSym.replace('$', '').trim().toUpperCase();
+      if (!sym) return;
+      const existing = watchlist.find(t => t.symbol === sym);
+      if (existing) {
+        pinnedSymbol = existing.symbol;
+        updateMenuBar(existing);
+        renderWatchlist();
+        return;
+      }
+
+      let entry = catalog[sym];
+      if (!entry) {
+        const base = +(20 + Math.random() * 180).toFixed(2);
+        const pct = +((Math.random() * 5) - 1.8).toFixed(2);
+        entry = {
+          symbol: sym,
+          name: `${sym} Corp.`,
+          price: base,
+          changePercent: pct,
+          logo: `https://assets.parqet.com/logos/symbol/${sym}?format=png`,
+          spark: [base * 0.98, base * 0.99, base * 0.985, base * 1.002, base * 0.996, base]
+        };
+      }
+      watchlist.unshift(entry);
+      pinnedSymbol = sym;
+      updateMenuBar(entry);
+      renderWatchlist();
+    }
+
+    function removeTickerSymbol(sym) {
+      watchlist = watchlist.filter(t => t.symbol !== sym);
+      if (pinnedSymbol === sym && watchlist.length > 0) {
+        pinnedSymbol = watchlist[0].symbol;
+        updateMenuBar(watchlist[0]);
+      }
+      renderWatchlist();
+    }
+
+    function renderQuickChips() {
+      quickChipsEl.innerHTML = '';
+      const activeSet = new Set(watchlist.map(t => t.symbol));
+      suggestedOrder.filter(s => !activeSet.has(s)).forEach(sym => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'quick-chip mono';
+        btn.textContent = `+${sym}`;
+        btn.addEventListener('click', () => addTickerSymbol(sym));
+        quickChipsEl.appendChild(btn);
+      });
+    }
+
     function renderWatchlist() {
+      renderQuickChips();
       watchlistEl.innerHTML = '';
-      initialTickers.forEach(item => {
+      watchlist.forEach(item => {
         const isUp = item.changePercent >= 0;
         const isPinned = item.symbol === pinnedSymbol;
         const row = document.createElement('div');
@@ -926,11 +1137,17 @@
               ${isUp ? '+' : ''}${item.changePercent.toFixed(2)}%
             </span>
           </div>
+          <button type="button" class="btn-remove-row mono" title="Remove ${item.symbol}">×</button>
         `;
-        row.addEventListener('click', () => {
+        row.addEventListener('click', (e) => {
+          if (e.target.closest('.btn-remove-row')) return;
           pinnedSymbol = item.symbol;
           updateMenuBar(item);
           renderWatchlist();
+        });
+        row.querySelector('.btn-remove-row').addEventListener('click', (e) => {
+          e.stopPropagation();
+          removeTickerSymbol(item.symbol);
         });
         watchlistEl.appendChild(row);
       });
@@ -939,29 +1156,8 @@
     document.getElementById('add-ticker-form').addEventListener('submit', (e) => {
       e.preventDefault();
       const input = document.getElementById('ticker-input');
-      const sym = input.value.trim().toUpperCase();
-      if (!sym) return;
-      const existing = initialTickers.find(t => t.symbol === sym);
-      if (!existing) {
-        const base = +(20 + Math.random() * 180).toFixed(2);
-        const pct = +((Math.random() * 5) - 1.8).toFixed(2);
-        const newEntry = {
-          symbol: sym,
-          name: `${sym} Equity`,
-          price: base,
-          changePercent: pct,
-          logo: `https://assets.parqet.com/logos/symbol/${sym}?format=png`,
-          spark: [base * 0.98, base * 0.99, base * 0.985, base * 1.002, base * 0.996, base]
-        };
-        initialTickers.unshift(newEntry);
-        pinnedSymbol = sym;
-        updateMenuBar(newEntry);
-      } else {
-        pinnedSymbol = existing.symbol;
-        updateMenuBar(existing);
-      }
+      addTickerSymbol(input.value);
       input.value = '';
-      renderWatchlist();
     });
 
     renderWatchlist();

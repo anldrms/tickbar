@@ -123,7 +123,7 @@ cat > "$APP_BUNDLE/Contents/Info.plist" << 'EOF'
     <key>CFBundleIconFile</key>
     <string>AppIcon</string>
     <key>CFBundleIdentifier</key>
-    <string>com.anldrms.tickbar</string>
+    <string>app.tickbar.macos</string>
     <key>CFBundleInfoDictionaryVersion</key>
     <string>6.0</string>
     <key>CFBundleName</key>
@@ -133,9 +133,9 @@ cat > "$APP_BUNDLE/Contents/Info.plist" << 'EOF'
     <key>CFBundlePackageType</key>
     <string>APPL</string>
     <key>CFBundleShortVersionString</key>
-    <string>1.0.0</string>
+    <string>1.1.0</string>
     <key>CFBundleVersion</key>
-    <string>1</string>
+    <string>2</string>
     <key>LSMinimumSystemVersion</key>
     <string>13.0</string>
     <key>LSUIElement</key>
@@ -143,7 +143,7 @@ cat > "$APP_BUNDLE/Contents/Info.plist" << 'EOF'
     <key>NSHighResolutionCapable</key>
     <true/>
     <key>NSHumanReadableCopyright</key>
-    <string>Copyright © 2026 @anldrms. 100% Free &amp; Open Source.</string>
+    <string>Copyright © 2026 TickBar. Open Source under MIT License.</string>
 </dict>
 </plist>
 EOF
@@ -171,11 +171,14 @@ ln -sf /Applications "$DMG_STAGING/Applications"
 
 rm -f "$DMG_OUTPUT"
 hdiutil create \
-    -volname "TickBar by anldrms" \
+    -volname "TickBar" \
     -srcfolder "$DMG_STAGING" \
     -ov \
     -format UDZO \
     "$DMG_OUTPUT"
+
+mkdir -p "$PROJECT_ROOT/downloads"
+cp -f "$DMG_OUTPUT" "$PROJECT_ROOT/downloads/TickBar-macOS-Universal.dmg"
 
 echo "Built DMG successfully at: $DMG_OUTPUT"
 ls -lh "$DMG_OUTPUT"
