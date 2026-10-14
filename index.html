@@ -3,2081 +3,1489 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TickBar · macOS 27 Liquid Glass Stock & Crypto Menu Bar Ticker</title>
-  <meta name="description" content="Free, native macOS 27 Liquid Glass stock & crypto ticker for your Menu Bar and Desktop. Live Yahoo Finance regular + After-Hours (AH) & Pre-Market (PM) prices, 2026 official vector logos, and intraday sparklines. Curated by anldrms." />
-  <meta name="keywords" content="TickBar, macOS 27 menu bar stock ticker, Liquid Glass macOS app, after hours stock widget mac, Yahoo Finance menu bar macOS, NVDA AAPL TSLA menu bar, anldrms" />
+  <title>TickBar · macOS 27 Menu Bar Stock & After-Hours Ticker</title>
+  <meta name="description" content="Free native macOS 27 menu bar stock ticker. Streams live Yahoo Finance regular, Pre-Market (PM), and After-Hours (AH) quotes with 2026 vector logos." />
   <meta name="author" content="anldrms" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://tickbar.vercel.app/" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="TickBar · macOS 27 Liquid Glass Stock & Crypto Menu Bar Ticker" />
-  <meta property="og:description" content="Real-time Yahoo Finance regular + After-Hours prices, official 2026 vector logos, and sparklines in your macOS 27 Menu Bar & Liquid Glass desktop widget." />
   <meta property="og:url" content="https://tickbar.vercel.app/" />
-  <meta property="og:site_name" content="TickBar" />
-
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="TickBar · macOS 27 Liquid Glass Stock & Crypto Ticker" />
-  <meta name="twitter:description" content="Native SwiftUI + AppKit stock & crypto menu bar ticker with live Yahoo Finance After-Hours quotes and 2026 vector logos." />
+  <meta property="og:title" content="TickBar · macOS 27 Menu Bar Stock & After-Hours Ticker" />
+  <meta property="og:description" content="Live Yahoo Finance regular, Pre-Market & After-Hours quotes with 2026 company logos in your macOS menu bar. Crafted by anldrms." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600;700&family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet" />
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "TickBar",
-    "operatingSystem": "macOS",
-    "applicationCategory": "FinanceApplication",
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD"
-    },
-    "author": {
-      "@type": "Person",
-      "name": "anldrms",
-      "url": "https://github.com/anldrms"
-    },
-    "downloadUrl": "https://tickbar.vercel.app/downloads/TickBar-macOS-Universal.dmg",
-    "softwareVersion": "1.2.0"
-  }
-  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&family=Geist:wght@400;500;600&display=swap" rel="stylesheet" />
 
   <style>
-    :root, [data-theme="dark"] {
-      --bg: #0d0e13;
-      --bg-elevated: #12141c;
-      --bg-surface: rgba(255, 255, 255, 0.03);
-      --bg-hover-plate: rgba(255, 255, 255, 0.045);
-      --fg: #f2f4f8;
-      --fg-muted: #9399a8;
-      --fg-subtle: #5e6472;
-      --border: rgba(255, 255, 255, 0.08);
-      --border-strong: rgba(255, 255, 255, 0.16);
-      --green: #30db7d;
-      --green-bg: rgba(48, 219, 125, 0.14);
-      --red: #ff5b66;
-      --red-bg: rgba(255, 91, 102, 0.14);
-      --ah-blue: #8ab8ff;
-      --ah-bg: rgba(88, 148, 255, 0.16);
-      --accent: #30db7d;
-      --btn-bg: #f2f4f8;
-      --btn-fg: #0d0e13;
-      --shadow-stage: 0 36px 90px -20px rgba(0, 0, 0, 0.78);
+    :root {
+      --color-page: #fafafc;
+      --color-surface: #ffffff;
+      --color-plate: #ebecf4;
+      --color-plate-soft: #f2f3f8;
+      --color-rule: #e2e3ea;
+      --color-ink: #16181f;
+      --color-ink-soft: #3b3e49;
+      --color-muted: #6b6f7b;
+      --color-up: #169c53;
+      --color-down: #d93848;
+      --color-ext: #3b63d9;
+
+      --font-sans: 'Geist', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      --font-mono: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+      --page-width: 1280px;
+      --page-gutter: clamp(16px, 4vw, 40px);
+
+      --ease-swap: cubic-bezier(0.2, 0, 0, 1);
+      --ease-lift: cubic-bezier(0.23, 1, 0.32, 1);
     }
 
-    [data-theme="light"] {
-      --bg: #fafafc;
-      --bg-elevated: #f1f2f6;
-      --bg-surface: rgba(13, 14, 19, 0.03);
-      --bg-hover-plate: rgba(13, 14, 19, 0.045);
-      --fg: #11131a;
-      --fg-muted: #5a6070;
-      --fg-subtle: #8c92a4;
-      --border: rgba(13, 14, 19, 0.09);
-      --border-strong: rgba(13, 14, 19, 0.18);
-      --green: #0d9f52;
-      --green-bg: rgba(13, 159, 82, 0.12);
-      --red: #e02d3c;
-      --red-bg: rgba(224, 45, 60, 0.12);
-      --ah-blue: #2563eb;
-      --ah-bg: rgba(37, 99, 235, 0.12);
-      --accent: #0d9f52;
-      --btn-bg: #11131a;
-      --btn-fg: #fafafc;
-      --shadow-stage: 0 30px 75px -20px rgba(17, 19, 26, 0.18);
+    :root[data-theme="dark"] {
+      color-scheme: dark;
+      --color-page: #0d0e13;
+      --color-surface: #15171f;
+      --color-plate: #20232d;
+      --color-plate-soft: #171922;
+      --color-rule: #232530;
+      --color-ink: #ecedf3;
+      --color-ink-soft: #c5c7d1;
+      --color-muted: #858997;
+      --color-up: #42c97a;
+      --color-down: #f25a67;
+      --color-ext: #88abff;
     }
 
-    * {
+    *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
 
     html {
-      scroll-behavior: smooth;
+      background-color: var(--color-page);
+      color: var(--color-ink);
+      font-family: var(--font-sans);
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+      text-size-adjust: 100%;
     }
 
     body {
-      background-color: var(--bg);
-      color: var(--fg);
-      font-family: "Geist", -apple-system, BlinkMacSystemFont, sans-serif;
+      min-height: 100svh;
+      background-color: var(--color-page);
+      color: var(--color-ink);
+      font-size: clamp(14px, 1.1vw, 16px);
       line-height: 1.5;
-      transition: background-color 0.25s ease, color 0.25s ease;
+      transition: background-color 0.2s ease, color 0.2s ease;
       overflow-x: hidden;
     }
 
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button, input {
+      font: inherit;
+      color: inherit;
+      background: none;
+      border: none;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
     .mono {
-      font-family: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-family: var(--font-mono);
       font-variant-numeric: tabular-nums;
     }
 
-    /* Live Yahoo Finance Top Tape */
-    .live-tape-wrap {
-      position: sticky;
-      top: 0;
-      z-index: 60;
-      height: 36px;
-      background: color-mix(in srgb, var(--bg) 86%, transparent);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      overflow: hidden;
-    }
-
-    .tape-status-badge {
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      padding: 0 14px;
-      height: 100%;
-      border-right: 1px solid var(--border);
-      background: var(--bg);
-      z-index: 2;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      color: var(--fg-muted);
-    }
-
-    .pulse-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--green);
-      box-shadow: 0 0 8px var(--green);
-      animation: livePulse 2s infinite ease-in-out;
-    }
-
-    @keyframes livePulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.45; transform: scale(0.86); }
-    }
-
-    .tape-marquee {
-      display: flex;
-      align-items: center;
-      gap: 24px;
-      white-space: nowrap;
-      padding-left: 20px;
-      animation: tickerSlide 52s linear infinite;
-    }
-
-    .tape-marquee:hover {
-      animation-play-state: paused;
-    }
-
-    @keyframes tickerSlide {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-
-    .tape-item {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      font-size: 11.5px;
-      cursor: pointer;
-      padding: 3px 8px;
-      border-radius: 6px;
-      transition: background 0.15s ease;
-    }
-
-    .tape-item:hover {
-      background: var(--bg-hover-plate);
-    }
-
-    .tape-item img {
-      width: 15px;
-      height: 15px;
-      border-radius: 4px;
-      object-fit: cover;
-    }
-
-    .tape-sym {
-      font-weight: 600;
-      color: var(--fg);
-    }
-
-    .tape-price {
-      color: var(--fg-muted);
-    }
-
-    .tape-chg {
-      font-weight: 600;
-      padding: 1px 5px;
-      border-radius: 99px;
-      font-size: 10.5px;
-    }
-
-    .tape-chg.up {
-      color: var(--green);
-      background: var(--green-bg);
-    }
-
-    .tape-chg.down {
-      color: var(--red);
-      background: var(--red-bg);
-    }
-
-    .tape-ah {
-      font-size: 10px;
-      color: var(--ah-blue);
-      background: var(--ah-bg);
-      padding: 1px 5px;
-      border-radius: 99px;
-      font-weight: 500;
-    }
-
-    /* Main Container */
     .page-shell {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 28px 24px 96px;
+      width: 100%;
+      max-width: var(--page-width);
+      margin-inline: auto;
+      padding-inline: var(--page-gutter);
+      display: flex;
+      flex-direction: column;
+      min-height: 100svh;
     }
 
-    /* Header (mkdir.directory inspired minimal topbar) */
-    .top-nav {
+    /* Minimal Header (mkdir.directory pattern) */
+    .site-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding-bottom: 36px;
+      min-height: 64px;
+      gap: 16px;
     }
 
     .brand-link {
       display: inline-flex;
-      align-items: center;
+      align-items: baseline;
       gap: 10px;
-      text-decoration: none;
-      color: var(--fg);
-      font-size: 14px;
-      font-weight: 600;
-      letter-spacing: -0.02em;
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
     }
 
-    .brand-glyph {
-      width: 24px;
-      height: 24px;
-      border-radius: 7px;
-      background: linear-gradient(145deg, #1b2230, #0d1018);
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22);
+    .brand-version {
+      font-size: 12px;
+      color: var(--color-muted);
     }
 
-    .brand-glyph svg {
-      width: 14px;
-      height: 14px;
-      stroke: #30db7d;
-    }
-
-    .nav-actions {
+    .header-right {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 20px;
+      font-size: 13px;
     }
 
-    .nav-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 12px;
-      color: var(--fg-muted);
-      text-decoration: none;
-      padding: 6px 11px;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      background: var(--bg-surface);
-      transition: all 0.16s ease;
+    .text-link {
+      color: var(--color-muted);
+      transition: color 0.15s ease;
     }
 
-    .nav-pill:hover {
-      color: var(--fg);
-      border-color: var(--border-strong);
-      background: var(--bg-hover-plate);
+    .text-link:hover {
+      color: var(--color-ink);
     }
 
     .theme-btn {
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      background: var(--bg-surface);
-      color: var(--fg);
       display: inline-flex;
       align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.16s ease;
+      gap: 7px;
+      height: 34px;
+      padding: 0 10px;
+      border-radius: 999px;
+      color: var(--color-muted);
+      font-size: 12px;
+      transition: background-color 0.2s ease, color 0.2s ease;
     }
 
     .theme-btn:hover {
-      border-color: var(--border-strong);
-      background: var(--bg-hover-plate);
+      background-color: var(--color-plate-soft);
+      color: var(--color-ink);
     }
 
-    /* Hero Section */
-    .hero-grid {
+    /* Editorial Hero (<hgroup> pattern) */
+    .hero-group {
+      padding-top: clamp(28px, 5vw, 56px);
+      padding-bottom: clamp(28px, 4vw, 44px);
       display: grid;
       grid-template-columns: 1fr;
-      gap: 20px;
-      margin-bottom: 28px;
+      gap: 24px;
     }
 
-    .eyebrow-row {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .eyebrow-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 4px 10px;
-      border-radius: 99px;
-      font-size: 11px;
-      font-weight: 500;
-      border: 1px solid var(--border);
-      background: var(--bg-surface);
-      color: var(--fg-muted);
-    }
-
-    .eyebrow-tag strong {
-      color: var(--fg);
-      font-weight: 600;
+    @media (min-width: 900px) {
+      .hero-group {
+        grid-template-columns: 1.2fr 0.8fr;
+        align-items: end;
+      }
     }
 
     .hero-title {
-      font-size: clamp(28px, 4.2vw, 46px);
-      font-weight: 600;
-      letter-spacing: -0.035em;
-      line-height: 1.08;
-      max-width: 780px;
+      font-size: clamp(32px, 4.2vw, 48px);
+      line-height: 1.06;
+      letter-spacing: -0.028em;
+      font-weight: 500;
+      max-width: 22ch;
+      text-wrap: balance;
     }
 
-    .hero-sub {
-      font-size: 15px;
-      color: var(--fg-muted);
-      max-width: 650px;
-      line-height: 1.6;
+    .hero-desc {
+      margin-top: 16px;
+      max-width: 54ch;
+      color: var(--color-muted);
+      font-size: clamp(14.5px, 1.15vw, 16px);
+      line-height: 1.55;
+      text-wrap: pretty;
     }
 
-    .cta-bar {
+    .hero-actions {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       gap: 10px;
-      padding-top: 4px;
     }
 
-    .btn-primary {
+    @media (min-width: 900px) {
+      .hero-actions {
+        justify-content: flex-end;
+      }
+    }
+
+    .btn-dmg {
       display: inline-flex;
       align-items: center;
-      gap: 9px;
-      padding: 10px 18px;
-      border-radius: 9px;
-      background: var(--btn-bg);
-      color: var(--btn-fg);
+      gap: 10px;
+      height: 42px;
+      padding: 0 18px;
+      border-radius: 999px;
+      background-color: var(--color-ink);
+      color: var(--color-page);
       font-size: 13.5px;
-      font-weight: 600;
-      text-decoration: none;
-      border: 1px solid transparent;
-      transition: transform 0.15s ease, opacity 0.15s ease;
+      font-weight: 500;
+      transition: transform 0.15s var(--ease-lift), opacity 0.15s ease;
     }
 
-    .btn-primary:hover {
-      opacity: 0.92;
+    .btn-dmg:hover {
+      opacity: 0.9;
       transform: translateY(-1px);
     }
 
-    .btn-secondary {
+    .btn-dmg-meta {
+      font-size: 11.5px;
+      opacity: 0.65;
+    }
+
+    .btn-ghost {
       display: inline-flex;
       align-items: center;
-      gap: 7px;
-      padding: 10px 15px;
-      border-radius: 9px;
-      background: var(--bg-surface);
-      color: var(--fg);
+      gap: 8px;
+      height: 42px;
+      padding: 0 16px;
+      border-radius: 999px;
+      background-color: var(--color-plate-soft);
+      color: var(--color-ink);
       font-size: 13px;
       font-weight: 500;
-      text-decoration: none;
-      border: 1px solid var(--border);
-      cursor: pointer;
-      transition: all 0.15s ease;
+      transition: background-color 0.15s ease;
     }
 
-    .btn-secondary:hover {
-      border-color: var(--border-strong);
-      background: var(--bg-hover-plate);
+    .btn-ghost:hover {
+      background-color: var(--color-plate);
     }
 
-    /* Interactive Stage Controls Bar */
-    .stage-toolbar {
+    /* Interactive macOS 27 Stage — 100% Fluid & Responsive */
+    .stage-wrapper {
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--color-rule);
+      background:
+        radial-gradient(900px 480px at 18% 12%, rgba(56, 138, 255, 0.24), transparent 60%),
+        radial-gradient(780px 460px at 85% 18%, rgba(66, 201, 122, 0.18), transparent 62%),
+        linear-gradient(160deg, #080c17 0%, #0f1629 52%, #090d18 100%);
+      color: #f4f6fb;
+      padding: clamp(14px, 2.5vw, 24px);
       display: flex;
-      flex-wrap: wrap;
+      flex-direction: column;
+      gap: clamp(16px, 2.5vw, 24px);
+      box-shadow: 0 24px 60px -15px rgba(0, 0, 0, 0.35);
+    }
+
+    /* Simulated macOS 27 Top Status Bar */
+    .macos-menubar {
+      display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 12px;
-      padding: 10px 14px;
-      border: 1px solid var(--border);
-      border-bottom: none;
-      border-radius: 16px 16px 0 0;
-      background: var(--bg-elevated);
-    }
-
-    .stage-toolbar-left, .stage-toolbar-right {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .stage-label {
-      font-size: 11.5px;
-      color: var(--fg-muted);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .stage-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      padding: 5px 10px;
-      border-radius: 7px;
-      font-size: 11.5px;
-      font-weight: 500;
-      border: 1px solid var(--border);
-      background: var(--bg-surface);
-      color: var(--fg);
-      cursor: pointer;
-      transition: all 0.15s ease;
-    }
-
-    .stage-chip:hover {
-      border-color: var(--border-strong);
-      background: var(--bg-hover-plate);
-    }
-
-    .stage-chip.active {
-      border-color: rgba(48, 219, 125, 0.45);
-      background: var(--green-bg);
-      color: var(--green);
-    }
-
-    /* macOS 27 Liquid Glass Desktop Stage */
-    .macos27-stage {
-      position: relative;
-      width: 100%;
-      min-height: 610px;
-      border-radius: 0 0 18px 18px;
-      border: 1px solid var(--border);
-      overflow: hidden;
-      box-shadow: var(--shadow-stage);
-      user-select: none;
-      transition: background 0.5s ease;
-    }
-
-    .macos27-stage[data-wallpaper="tahoe"] {
-      background:
-        radial-gradient(1100px 520px at 18% 15%, rgba(56, 138, 255, 0.34), transparent 60%),
-        radial-gradient(900px 540px at 85% 22%, rgba(48, 219, 125, 0.22), transparent 62%),
-        radial-gradient(850px 580px at 52% 92%, rgba(130, 87, 255, 0.28), transparent 65%),
-        linear-gradient(160deg, #070b16 0%, #0d1528 48%, #090d18 100%);
-    }
-
-    .macos27-stage[data-wallpaper="obsidian"] {
-      background:
-        radial-gradient(900px 460px at 78% 18%, rgba(48, 219, 125, 0.18), transparent 60%),
-        radial-gradient(900px 520px at 22% 80%, rgba(59, 130, 246, 0.16), transparent 62%),
-        linear-gradient(165deg, #050609 0%, #0c0e14 55%, #07080c 100%);
-    }
-
-    .macos27-stage[data-wallpaper="prism"] {
-      background:
-        radial-gradient(980px 500px at 20% 20%, rgba(244, 114, 182, 0.28), transparent 60%),
-        radial-gradient(880px 500px at 82% 28%, rgba(56, 189, 248, 0.30), transparent 60%),
-        radial-gradient(900px 520px at 50% 88%, rgba(52, 211, 153, 0.22), transparent 62%),
-        linear-gradient(155deg, #0b1021 0%, #161530 52%, #090d1a 100%);
-    }
-
-    /* Ambient light orbs behind Liquid Glass */
-    .glass-orb {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(55px);
-      pointer-events: none;
-      opacity: 0.55;
-    }
-
-    .glass-orb.one {
-      width: 280px;
-      height: 280px;
-      background: rgba(56, 189, 248, 0.26);
-      top: 60px;
-      right: 110px;
-    }
-
-    .glass-orb.two {
-      width: 240px;
-      height: 240px;
-      background: rgba(48, 219, 125, 0.20);
-      bottom: 70px;
-      left: 80px;
-    }
-
-    /* macOS 27 Top Menu Bar (Liquid Glass capsule bar) */
-    .macos27-menubar {
-      position: relative;
-      z-index: 20;
-      height: 32px;
-      margin: 8px 12px 0;
-      padding: 0 14px;
-      border-radius: 99px;
-      background: rgba(18, 22, 34, 0.52);
-      backdrop-filter: blur(28px) saturate(190%);
-      -webkit-backdrop-filter: blur(28px) saturate(190%);
+      min-height: 38px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(16, 20, 34, 0.68);
+      backdrop-filter: blur(28px) saturate(180%);
+      -webkit-backdrop-filter: blur(28px) saturate(180%);
       border: 1px solid rgba(255, 255, 255, 0.18);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.24), 0 8px 24px rgba(0, 0, 0, 0.28);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      color: rgba(255, 255, 255, 0.92);
-      font-size: 12px;
+      font-size: 12.5px;
+      flex-wrap: wrap;
     }
 
-    .menubar-left, .menubar-right {
+    .mb-left {
       display: flex;
       align-items: center;
       gap: 14px;
     }
 
-    .menubar-apple {
-      font-size: 13px;
-      opacity: 0.95;
+    .mb-menu-item {
+      color: rgba(255, 255, 255, 0.65);
     }
 
-    .menubar-appname {
-      font-weight: 600;
-      letter-spacing: -0.01em;
+    @media (max-width: 640px) {
+      .mb-menu-item {
+        display: none;
+      }
     }
 
-    .menubar-menu-item {
-      color: rgba(255, 255, 255, 0.68);
-      font-size: 11.5px;
+    .mb-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-left: auto;
+      min-width: 0;
     }
 
-    /* Pinned Stock Item inside macOS 27 Menu Bar */
-    .menubar-ticker-pill {
+    .mb-ticker-pill {
       display: inline-flex;
       align-items: center;
       gap: 7px;
-      padding: 2.5px 10px 2.5px 6px;
-      border-radius: 99px;
+      padding: 3px 10px 3px 6px;
+      border-radius: 999px;
       background: rgba(255, 255, 255, 0.12);
       border: 1px solid rgba(255, 255, 255, 0.24);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.30);
-      cursor: pointer;
-      transition: all 0.16s ease;
-    }
-
-    .menubar-ticker-pill:hover {
-      background: rgba(255, 255, 255, 0.18);
-    }
-
-    .menubar-ticker-pill img {
-      width: 15px;
-      height: 15px;
-      border-radius: 4px;
-      object-fit: cover;
-    }
-
-    .menubar-clock {
-      font-size: 11.5px;
-      color: rgba(255, 255, 255, 0.85);
-    }
-
-    /* macOS 27 Liquid Glass Popover Window */
-    .liquid-popover {
-      position: absolute;
-      top: 52px;
-      right: 28px;
-      width: 404px;
-      border-radius: 24px;
-      background: linear-gradient(
-        155deg,
-        rgba(28, 34, 52, 0.64) 0%,
-        rgba(14, 17, 28, 0.78) 100%
-      );
-      backdrop-filter: blur(42px) saturate(200%);
-      -webkit-backdrop-filter: blur(42px) saturate(200%);
-      border: 1px solid rgba(255, 255, 255, 0.24);
-      box-shadow:
-        inset 0 1.5px 0 rgba(255, 255, 255, 0.34),
-        inset 0 -1px 0 rgba(255, 255, 255, 0.08),
-        0 30px 70px rgba(0, 0, 0, 0.62);
-      color: #ffffff;
-      z-index: 15;
+      font-size: 12px;
+      white-space: nowrap;
       overflow: hidden;
-      transition: transform 0.22s cubic-bezier(0.2, 0.9, 0.2, 1);
+      text-overflow: ellipsis;
+      max-width: 100%;
     }
 
-    .popover-header {
+    .mb-ticker-pill img {
+      width: 16px;
+      height: 16px;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+
+    .mb-clock {
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 520px) {
+      .mb-clock {
+        display: none;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .mb-ext-inline {
+        display: none;
+      }
+    }
+
+    /* Responsive Two-Column Stage Body (stacks cleanly on < 860px) */
+    .stage-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: clamp(16px, 2.5vw, 28px);
+      align-items: start;
+    }
+
+    @media (min-width: 860px) {
+      .stage-grid {
+        grid-template-columns: minmax(0, 1fr) 420px;
+      }
+    }
+
+    /* Left side of stage: Interactive controls & explanation */
+    .stage-inspector {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 20px;
+      padding: clamp(8px, 1.5vw, 16px);
+    }
+
+    .inspector-kicker {
+      font-size: 11.5px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.58);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .live-indicator {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #42c97a;
+    }
+
+    .inspector-headline {
+      font-size: clamp(22px, 2.6vw, 30px);
+      font-weight: 500;
+      letter-spacing: -0.022em;
+      line-height: 1.15;
+      color: #ffffff;
+      margin-top: 8px;
+    }
+
+    .inspector-copy {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.68);
+      line-height: 1.55;
+      max-width: 46ch;
+      margin-top: 10px;
+    }
+
+    /* Active Pinned Stock Spotlight Card */
+    .spotlight-card {
+      padding: 16px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .spotlight-top {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 12px 14px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.11);
-      cursor: grab;
+      gap: 12px;
+      flex-wrap: wrap;
     }
 
-    .popover-header:active {
-      cursor: grabbing;
-    }
-
-    .popover-brand {
+    .spotlight-id {
       display: flex;
       align-items: center;
-      gap: 7px;
+      gap: 12px;
     }
 
-    .popover-brand-title {
+    .spotlight-id img {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+    }
+
+    .spotlight-sym {
+      font-size: 17px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .spotlight-name {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .spotlight-prices {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
       font-size: 13px;
-      font-weight: 700;
-      letter-spacing: -0.01em;
     }
 
-    .liquid-badge {
-      font-size: 9.5px;
-      font-weight: 700;
-      padding: 2px 7px;
-      border-radius: 99px;
-      background: rgba(88, 148, 255, 0.20);
-      border: 1px solid rgba(138, 184, 255, 0.30);
-      color: #9ec5ff;
+    .sp-metric-label {
+      display: block;
+      font-size: 10.5px;
+      color: rgba(255, 255, 255, 0.52);
+      margin-bottom: 2px;
     }
 
-    .popover-controls {
+    .stage-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .stage-btn {
+      padding: 7px 13px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.09);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      color: rgba(255, 255, 255, 0.88);
+      font-size: 12px;
+      transition: background 0.15s ease, border-color 0.15s ease;
+    }
+
+    .stage-btn:hover {
+      background: rgba(255, 255, 255, 0.16);
+    }
+
+    .stage-btn.active {
+      background: rgba(66, 201, 122, 0.2);
+      border-color: rgba(66, 201, 122, 0.5);
+      color: #7ef0ac;
+    }
+
+    /* Right side of stage: macOS 27 Liquid Glass Popover */
+    .glass-popover {
+      width: 100%;
+      border-radius: 22px;
+      background: linear-gradient(155deg, rgba(28, 35, 54, 0.78) 0%, rgba(12, 16, 26, 0.90) 100%);
+      backdrop-filter: blur(40px) saturate(190%);
+      -webkit-backdrop-filter: blur(40px) saturate(190%);
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.32), 0 24px 60px rgba(0, 0, 0, 0.55);
+      overflow: hidden;
+    }
+
+    .pop-header {
       display: flex;
       align-items: center;
+      justify-content: space-between;
+      padding: 12px 15px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 13px;
+    }
+
+    .pop-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+    }
+
+    .pop-session-tag {
+      font-size: 10.5px;
+      padding: 2px 7px;
+      border-radius: 999px;
+      background: rgba(136, 171, 255, 0.18);
+      color: #a6c2ff;
+    }
+
+    /* Search & Custom Add Input inside Popover */
+    .pop-search-area {
+      padding: 10px 12px;
+      background: rgba(0, 0, 0, 0.2);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .pop-form {
+      display: flex;
       gap: 6px;
     }
 
-    .glass-pill-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      padding: 4px 9px;
-      border-radius: 99px;
-      font-size: 10.5px;
-      font-weight: 600;
-      color: rgba(255, 255, 255, 0.88);
-      background: rgba(255, 255, 255, 0.10);
-      border: 1px solid rgba(255, 255, 255, 0.20);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22);
-      cursor: pointer;
-      transition: all 0.14s ease;
-    }
-
-    .glass-pill-btn:hover {
-      background: rgba(255, 255, 255, 0.18);
-      transform: translateY(-0.5px);
-    }
-
-    /* Search / Add Ticker Bar */
-    .popover-add-zone {
-      padding: 10px 12px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.10);
-      background: rgba(0, 0, 0, 0.14);
-    }
-
-    .add-input-row {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      padding: 6px 8px 6px 11px;
-      border-radius: 12px;
-      background: rgba(0, 0, 0, 0.30);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-    }
-
-    .add-input-row input {
+    .pop-input {
       flex: 1;
-      background: transparent;
-      border: none;
-      outline: none;
-      color: #ffffff;
+      min-width: 0;
+      padding: 7px 11px;
+      border-radius: 10px;
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      color: #fff;
       font-size: 12px;
+      outline: none;
     }
 
-    .add-input-row input::placeholder {
+    .pop-input::placeholder {
       color: rgba(255, 255, 255, 0.42);
     }
 
-    .add-submit-btn {
-      padding: 4px 10px;
-      border-radius: 99px;
-      border: none;
-      background: #30db7d;
-      color: #06110a;
-      font-size: 10.5px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: opacity 0.15s ease;
+    .pop-input:focus {
+      border-color: rgba(66, 201, 122, 0.65);
     }
 
-    .add-submit-btn:hover {
-      opacity: 0.9;
+    .pop-submit {
+      padding: 0 12px;
+      border-radius: 10px;
+      background: #42c97a;
+      color: #04140a;
+      font-size: 11.5px;
+      font-weight: 600;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
 
-    .quick-chips-row {
+    .pop-chips {
       display: flex;
-      align-items: center;
       gap: 5px;
-      margin-top: 8px;
       overflow-x: auto;
+      padding-top: 8px;
       scrollbar-width: none;
     }
 
-    .quick-chips-row::-webkit-scrollbar {
+    .pop-chips::-webkit-scrollbar {
       display: none;
     }
 
-    .quick-chip {
-      flex-shrink: 0;
-      padding: 2.5px 8px;
-      border-radius: 99px;
-      font-size: 10px;
-      font-weight: 600;
-      color: rgba(255, 255, 255, 0.80);
+    .pop-chip {
+      padding: 2px 8px;
+      border-radius: 999px;
       background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      cursor: pointer;
-      transition: all 0.14s ease;
+      border: 1px solid rgba(255, 255, 255, 0.13);
+      font-size: 10.5px;
+      color: rgba(255, 255, 255, 0.8);
+      white-space: nowrap;
+      flex-shrink: 0;
     }
 
-    .quick-chip:hover {
-      background: rgba(48, 219, 125, 0.20);
-      border-color: rgba(48, 219, 125, 0.45);
-      color: #ffffff;
+    .pop-chip:hover {
+      background: rgba(255, 255, 255, 0.16);
+      color: #fff;
     }
 
-    /* Watchlist Rows inside Popover */
-    .popover-rows {
-      max-height: 340px;
-      overflow-y: auto;
-      padding: 10px;
+    /* Watchlist Rows */
+    .pop-rows {
+      padding: 9px;
       display: flex;
       flex-direction: column;
       gap: 6px;
+      max-height: 360px;
+      overflow-y: auto;
     }
 
-    .popover-rows::-webkit-scrollbar {
-      width: 4px;
-    }
-
-    .popover-rows::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.18);
-      border-radius: 99px;
-    }
-
-    .glass-stock-row {
+    .pop-row {
       display: flex;
       align-items: center;
       gap: 10px;
       padding: 8px 10px;
-      border-radius: 14px;
-      background: linear-gradient(
-        135deg,
-        rgba(255, 255, 255, 0.09) 0%,
-        rgba(255, 255, 255, 0.03) 100%
-      );
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
+      border-radius: 13px;
+      background: rgba(255, 255, 255, 0.055);
+      border: 1px solid rgba(255, 255, 255, 0.11);
       cursor: pointer;
-      transition: all 0.16s ease;
+      transition: background 0.15s ease, border-color 0.15s ease;
     }
 
-    .glass-stock-row:hover {
-      background: linear-gradient(
-        135deg,
-        rgba(255, 255, 255, 0.15) 0%,
-        rgba(255, 255, 255, 0.06) 100%
-      );
-      border-color: rgba(255, 255, 255, 0.26);
+    .pop-row:hover {
+      background: rgba(255, 255, 255, 0.1);
     }
 
-    .glass-stock-row.pinned {
-      border-color: rgba(48, 219, 125, 0.50);
-      box-shadow: inset 0 1px 0 rgba(48, 219, 125, 0.28);
+    .pop-row.pinned {
+      border-color: rgba(66, 201, 122, 0.55);
+      background: rgba(66, 201, 122, 0.08);
     }
 
-    .glass-stock-row.flash-up {
-      animation: rowFlashGreen 0.7s ease;
-    }
-
-    .glass-stock-row.flash-down {
-      animation: rowFlashRed 0.7s ease;
-    }
-
-    @keyframes rowFlashGreen {
-      0% { background: rgba(48, 219, 125, 0.28); }
-      100% { background: rgba(255, 255, 255, 0.06); }
-    }
-
-    @keyframes rowFlashRed {
-      0% { background: rgba(255, 91, 102, 0.28); }
-      100% { background: rgba(255, 255, 255, 0.06); }
-    }
-
-    .stock-logo-squircle {
-      position: relative;
-      width: 34px;
-      height: 34px;
-      border-radius: 10px;
-      background: rgba(255, 255, 255, 0.10);
-      border: 1px solid rgba(255, 255, 255, 0.24);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .pop-logo {
+      width: 32px;
+      height: 32px;
+      border-radius: 9px;
       overflow: hidden;
       flex-shrink: 0;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: #141824;
     }
 
-    .stock-logo-squircle img {
+    .pop-logo img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      display: block;
     }
 
-    .stock-meta {
-      width: 108px;
+    .pop-meta {
       min-width: 0;
+      flex: 1;
     }
 
-    .stock-sym-line {
+    .pop-sym {
+      font-size: 13px;
+      font-weight: 600;
+      color: #fff;
       display: flex;
       align-items: center;
       gap: 5px;
     }
 
-    .stock-sym {
-      font-size: 13px;
-      font-weight: 700;
-      color: #ffffff;
+    .pop-bar-badge {
+      font-size: 9px;
+      padding: 0.5px 5px;
+      border-radius: 999px;
+      background: rgba(66, 201, 122, 0.22);
+      color: #6ce89e;
     }
 
-    .bar-pin-tag {
-      font-size: 8.5px;
-      font-weight: 700;
-      padding: 1px 5px;
-      border-radius: 99px;
-      background: rgba(48, 219, 125, 0.18);
-      color: #30db7d;
-    }
-
-    .stock-name {
+    .pop-name {
       font-size: 10.5px;
-      color: rgba(255, 255, 255, 0.56);
+      color: rgba(255, 255, 255, 0.54);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
-    .stock-spark {
-      width: 54px;
-      height: 22px;
+    .pop-spark {
+      width: 48px;
+      height: 20px;
       flex-shrink: 0;
     }
 
-    .stock-prices {
-      margin-left: auto;
+    @media (max-width: 420px) {
+      .pop-spark {
+        display: none;
+      }
+    }
+
+    .pop-quote {
       text-align: right;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 2.5px;
+      flex-shrink: 0;
     }
 
-    .reg-price-line {
+    .pop-reg {
       display: flex;
       align-items: center;
+      justify-content: flex-end;
       gap: 5px;
+      font-size: 12.5px;
+      font-weight: 500;
     }
 
-    .reg-price {
-      font-size: 13px;
-      font-weight: 600;
-      color: #ffffff;
+    .pop-delta {
+      font-size: 10.5px;
+      padding: 1px 5px;
+      border-radius: 999px;
     }
 
-    .reg-pct {
-      font-size: 10px;
-      font-weight: 600;
-      padding: 1.5px 6px;
-      border-radius: 99px;
+    .pop-delta.up {
+      color: #5ce395;
+      background: rgba(66, 201, 122, 0.16);
     }
 
-    .reg-pct.up {
-      color: #30db7d;
-      background: rgba(48, 219, 125, 0.16);
+    .pop-delta.down {
+      color: #ff7582;
+      background: rgba(242, 90, 103, 0.16);
     }
 
-    .reg-pct.down {
-      color: #ff646e;
-      background: rgba(255, 91, 102, 0.16);
-    }
-
-    .ext-price-line {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
+    .pop-ext {
       font-size: 9.5px;
+      color: rgba(255, 255, 255, 0.65);
+      margin-top: 2px;
     }
 
-    .ext-badge {
-      font-size: 8px;
-      font-weight: 700;
-      padding: 0.5px 4.5px;
-      border-radius: 99px;
-      background: rgba(88, 148, 255, 0.22);
-      color: #9ec5ff;
-    }
-
-    .ext-val {
-      color: rgba(255, 255, 255, 0.78);
-    }
-
-    .ext-pct.up {
-      color: #4be38f;
-    }
-
-    .ext-pct.down {
-      color: #ff7982;
-    }
-
-    .row-remove-btn {
+    .pop-remove {
       width: 20px;
       height: 20px;
       border-radius: 50%;
-      border: none;
-      background: rgba(255, 255, 255, 0.08);
-      color: rgba(255, 255, 255, 0.52);
-      font-size: 11px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      cursor: pointer;
+      color: rgba(255, 255, 255, 0.45);
+      font-size: 12px;
       flex-shrink: 0;
-      transition: all 0.14s ease;
+      transition: background 0.15s ease, color 0.15s ease;
     }
 
-    .row-remove-btn:hover {
-      background: rgba(255, 91, 102, 0.24);
-      color: #ff646e;
+    .pop-remove:hover {
+      background: rgba(242, 90, 103, 0.28);
+      color: #ff8590;
     }
 
-    .popover-footer {
+    .pop-footer {
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 9px 14px;
-      border-top: 1px solid rgba(255, 255, 255, 0.10);
-      font-size: 10.5px;
-      color: rgba(255, 255, 255, 0.68);
-    }
-
-    /* Floating Desktop Liquid Glass Widget inside Stage */
-    .liquid-desktop-widget {
-      position: absolute;
-      left: 28px;
-      top: 64px;
-      width: 312px;
-      border-radius: 22px;
-      background: linear-gradient(
-        150deg,
-        rgba(26, 32, 48, 0.58) 0%,
-        rgba(12, 15, 24, 0.74) 100%
-      );
-      backdrop-filter: blur(36px) saturate(190%);
-      -webkit-backdrop-filter: blur(36px) saturate(190%);
-      border: 1px solid rgba(255, 255, 255, 0.22);
-      box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.30),
-        0 24px 55px rgba(0, 0, 0, 0.52);
-      color: #ffffff;
-      z-index: 12;
-      overflow: hidden;
-      transition: opacity 0.2s ease, transform 0.2s ease;
-    }
-
-    .liquid-desktop-widget.hidden {
-      opacity: 0;
-      pointer-events: none;
-      transform: scale(0.95);
-    }
-
-    .widget-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 13px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.10);
-      cursor: grab;
+      border-top: 1px solid rgba(255, 255, 255, 0.09);
       font-size: 11px;
-      font-weight: 600;
+      color: rgba(255, 255, 255, 0.6);
     }
 
-    .widget-body {
-      padding: 8px;
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
+    /* mkdir.directory Signature Indexed Directory Section */
+    .directory-section {
+      margin-top: clamp(48px, 7vw, 88px);
     }
 
-    .widget-mini-row {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 8px;
-      border-radius: 11px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.10);
-      cursor: pointer;
-    }
-
-    .widget-mini-row:hover {
-      background: rgba(255, 255, 255, 0.10);
-    }
-
-    .widget-mini-row img {
-      width: 24px;
-      height: 24px;
-      border-radius: 7px;
-      object-fit: cover;
-    }
-
-    /* mkdir.directory Inspired Interactive Directory Section */
-    .mkdir-section {
-      margin-top: 64px;
-    }
-
-    .mkdir-header {
+    .directory-header {
       display: flex;
       flex-wrap: wrap;
       align-items: baseline;
       justify-content: space-between;
       gap: 12px;
-      padding-bottom: 14px;
-      border-bottom: 1px solid var(--border);
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--color-rule);
     }
 
-    .mkdir-title {
+    .directory-title {
       font-size: 13px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--fg-muted);
+      font-weight: 500;
+      color: var(--color-muted);
     }
 
-    .mkdir-subtitle {
+    .directory-hint {
       font-size: 12px;
-      color: var(--fg-subtle);
+      color: var(--color-muted);
     }
 
-    .mkdir-list {
-      position: relative;
-      display: flex;
-      flex-direction: column;
+    .directory-list {
+      list-style: none;
     }
 
-    .mkdir-hover-plate {
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      height: 0;
-      background: var(--bg-hover-plate);
-      border-radius: 10px;
-      pointer-events: none;
-      opacity: 0;
-      transition: transform 0.22s cubic-bezier(0.2, 0.9, 0.2, 1), height 0.22s cubic-bezier(0.2, 0.9, 0.2, 1), opacity 0.16s ease;
-    }
-
-    .mkdir-row {
-      position: relative;
-      z-index: 1;
-      display: grid;
-      grid-template-columns: 44px 230px 1fr auto;
-      align-items: center;
-      gap: 16px;
-      padding: 16px 14px;
-      border-bottom: 1px solid var(--border);
-      text-decoration: none;
-      color: var(--fg);
-      cursor: pointer;
-    }
-
-    .mkdir-idx-cell {
-      position: relative;
-      height: 20px;
+    .dir-row {
       display: flex;
       align-items: center;
-      font-size: 12px;
-      color: var(--fg-subtle);
-    }
-
-    .idx-num, .idx-cd {
-      position: absolute;
-      left: 0;
-      transition: opacity 0.18s ease, filter 0.18s ease, transform 0.18s ease;
-    }
-
-    .idx-cd {
-      opacity: 0;
-      filter: blur(4px);
-      transform: translateY(3px);
-      color: var(--green);
-      font-weight: 600;
-    }
-
-    .mkdir-row:hover .idx-num {
-      opacity: 0;
-      filter: blur(4px);
-      transform: translateY(-3px);
-    }
-
-    .mkdir-row:hover .idx-cd {
-      opacity: 1;
-      filter: blur(0);
-      transform: translateY(0);
-    }
-
-    .mkdir-row-name {
-      font-size: 14px;
-      font-weight: 600;
-      letter-spacing: -0.01em;
-    }
-
-    .mkdir-row-desc {
-      font-size: 13.5px;
-      color: var(--fg-muted);
-    }
-
-    .mkdir-row-meta {
-      font-size: 11.5px;
-      color: var(--fg-subtle);
-      padding: 3px 9px;
-      border-radius: 99px;
-      border: 1px solid var(--border);
-    }
-
-    /* Live Popular Stocks Grid (2026 Verified Logos + Live Yahoo Quotes) */
-    .popular-grid {
-      margin-top: 20px;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(205px, 1fr));
-      gap: 10px;
-    }
-
-    .popular-card {
-      padding: 12px 14px;
+      justify-content: space-between;
+      gap: 12px;
+      padding: clamp(12px, 1.8vw, 16px) 12px;
+      margin-inline: -12px;
+      border-bottom: 1px solid var(--color-rule);
       border-radius: 12px;
-      border: 1px solid var(--border);
-      background: var(--bg-surface);
+      cursor: pointer;
+      transition: background-color 0.18s ease;
+    }
+
+    .dir-row:hover {
+      background-color: var(--color-plate-soft);
+    }
+
+    .dir-left {
       display: flex;
       align-items: center;
-      gap: 11px;
-      cursor: pointer;
-      transition: all 0.16s ease;
-    }
-
-    .popular-card:hover {
-      border-color: var(--border-strong);
-      background: var(--bg-hover-plate);
-      transform: translateY(-1px);
-    }
-
-    .popular-card img {
-      width: 32px;
-      height: 32px;
-      border-radius: 9px;
-      object-fit: cover;
-      flex-shrink: 0;
-    }
-
-    .popular-card-info {
+      gap: clamp(10px, 2vw, 20px);
       min-width: 0;
       flex: 1;
     }
 
-    .popular-card-top {
+    /* 01 -> pin swap on hover (mkdir.directory exact interaction) */
+    .dir-index {
+      display: grid;
+      width: 3.2ch;
+      flex-shrink: 0;
+      font-size: 12px;
+      color: var(--color-muted);
+    }
+
+    .dir-index > span {
+      grid-area: 1 / 1;
+      transition: opacity 0.18s var(--ease-swap), filter 0.18s var(--ease-swap);
+    }
+
+    .dir-index-action {
+      opacity: 0;
+      filter: blur(3px);
+      color: var(--color-ink);
+      font-weight: 500;
+    }
+
+    .dir-row:hover .dir-index-num {
+      opacity: 0;
+      filter: blur(3px);
+    }
+
+    .dir-row:hover .dir-index-action {
+      opacity: 1;
+      filter: blur(0);
+    }
+
+    .dir-logo {
+      width: clamp(28px, 3vw, 34px);
+      height: clamp(28px, 3vw, 34px);
+      border-radius: 8px;
+      flex-shrink: 0;
+      border: 1px solid var(--color-rule);
+    }
+
+    .dir-name-wrap {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 4px;
+      align-items: baseline;
+      gap: 10px;
+      min-width: 0;
+      flex-wrap: wrap;
     }
 
-    .popular-card-sym {
-      font-size: 13px;
-      font-weight: 700;
+    .dir-company {
+      font-size: clamp(20px, 2.8vw, 32px);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      color: var(--color-ink);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
-    .popular-card-price {
+    .dir-symbol {
       font-size: 12.5px;
-      font-weight: 600;
+      color: var(--color-muted);
     }
 
-    .popular-card-bottom {
+    .dir-right {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-top: 2px;
-      font-size: 11px;
+      align-items: baseline;
+      gap: clamp(10px, 2vw, 22px);
+      flex-shrink: 0;
+      text-align: right;
     }
 
-    /* Footer */
+    .dir-ext-tag {
+      font-size: 12px;
+      color: var(--color-ext);
+    }
+
+    @media (max-width: 680px) {
+      .dir-ext-tag {
+        display: none;
+      }
+    }
+
+    .dir-price {
+      font-size: clamp(14px, 1.5vw, 17px);
+      font-weight: 500;
+      color: var(--color-ink);
+    }
+
+    .dir-pct {
+      font-size: 13px;
+      min-width: 6.5ch;
+    }
+
+    .dir-pct.up {
+      color: var(--color-up);
+    }
+
+    .dir-pct.down {
+      color: var(--color-down);
+    }
+
+    /* Minimal 3-Column Spec Strip (No Repetitive Badges) */
+    .specs-grid {
+      margin-top: clamp(48px, 7vw, 80px);
+      padding-top: 28px;
+      border-top: 1px solid var(--color-rule);
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+
+    @media (min-width: 768px) {
+      .specs-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .spec-item-num {
+      font-size: 12px;
+      color: var(--color-muted);
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .spec-item-title {
+      font-size: 17px;
+      font-weight: 500;
+      letter-spacing: -0.015em;
+      margin-bottom: 6px;
+    }
+
+    .spec-item-body {
+      font-size: 14px;
+      color: var(--color-muted);
+      line-height: 1.55;
+    }
+
+    /* Giant Editorial Wordmark Band (mkdir.directory signature bottom band) */
+    .wordmark-band {
+      margin-top: clamp(56px, 9vw, 110px);
+      overflow: hidden;
+      user-select: none;
+      line-height: 0.86;
+      letter-spacing: -0.04em;
+      font-weight: 500;
+      font-size: clamp(72px, 21vw, 270px);
+      color: var(--color-plate);
+      text-align: left;
+      white-space: nowrap;
+    }
+
+    /* Minimal Footer */
     .site-footer {
-      margin-top: 72px;
-      padding-top: 24px;
-      border-top: 1px solid var(--border);
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
-      font-size: 12.5px;
-      color: var(--fg-muted);
+      gap: 16px;
+      padding: 24px 0 32px;
+      border-top: 1px solid var(--color-rule);
+      font-size: 13.5px;
+      color: var(--color-muted);
     }
 
-    .site-footer a {
-      color: var(--fg);
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .underline-link {
       text-decoration: underline;
+      text-decoration-color: var(--color-rule);
       text-underline-offset: 3px;
+      transition: color 0.15s ease, text-decoration-color 0.15s ease;
     }
 
-    @media (max-width: 860px) {
-      .liquid-desktop-widget {
-        display: none;
-      }
-      .liquid-popover {
-        position: relative;
-        top: 0;
-        right: 0;
-        margin: 24px auto;
-        width: calc(100% - 24px);
-        max-width: 404px;
-      }
-      .mkdir-row {
-        grid-template-columns: 36px 1fr;
-        gap: 8px;
-      }
-      .mkdir-row-desc, .mkdir-row-meta {
-        grid-column: 2;
-      }
+    .underline-link:hover {
+      color: var(--color-ink);
+      text-decoration-color: currentColor;
     }
   </style>
 </head>
 <body>
-
-  <!-- Top Real-Time Yahoo Finance Ticker Tape -->
-  <div class="live-tape-wrap">
-    <div class="tape-status-badge mono">
-      <span class="pulse-dot"></span>
-      <span id="yahooStatusText">YAHOO FINANCE LIVE · 24/5 + AH</span>
-    </div>
-    <div class="tape-marquee mono" id="liveTapeMarquee"></div>
-  </div>
-
   <div class="page-shell">
-    <!-- Minimal Navigation -->
-    <nav class="top-nav">
+    <!-- Minimal Header -->
+    <header class="site-header">
       <a href="/" class="brand-link">
-        <span class="brand-glyph">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="3 17 9 11 13 15 21 7"></polyline>
-            <polyline points="16 7 21 7 21 12"></polyline>
-          </svg>
-        </span>
-        <span>TickBar</span>
-        <span class="mono" style="font-size:11px; color:var(--fg-subtle); font-weight:500;">v1.2 · macOS 27</span>
+        <span>tickbar</span>
+        <span class="brand-version mono">1.2 · macOS 27</span>
       </a>
-
-      <div class="nav-actions">
-        <a href="#directory" class="nav-pill mono">01 / specs</a>
-        <a href="#popular" class="nav-pill mono">02 / live stocks</a>
-        <a href="https://github.com/anldrms/tickbar" target="_blank" rel="noopener" class="nav-pill mono">github ↗</a>
-        <button class="theme-btn" id="themeToggleBtn" title="Toggle Dark / Light Theme" aria-label="Toggle Theme">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="5"></circle>
-            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
-          </svg>
+      <div class="header-right">
+        <a href="https://github.com/anldrms/tickbar" target="_blank" rel="noopener" class="text-link mono">github ↗</a>
+        <button type="button" class="theme-btn mono" id="themeToggle" aria-label="Toggle color theme">
+          <span id="themeLabel">light</span>
+          <span aria-hidden="true">☀</span>
         </button>
       </div>
-    </nav>
+    </header>
 
-    <!-- Hero -->
-    <section class="hero-grid">
-      <div class="eyebrow-row mono">
-        <span class="eyebrow-tag"><strong>macOS 27</strong> Liquid Glass UI</span>
-        <span class="eyebrow-tag"><strong>Yahoo Finance</strong> Regular + After-Hours (AH/PM)</span>
-        <span class="eyebrow-tag"><strong>2026</strong> Official Vector Logos</span>
-      </div>
-
-      <h1 class="hero-title">
-        Live market &amp; after-hours quotes, sculpted in native macOS 27 Liquid Glass.
-      </h1>
-
-      <p class="hero-sub">
-        Pin any stock, ETF, or crypto pair to your macOS Menu Bar and floating desktop glass widget. Streams real-time regular session, Pre-Market (<span class="mono">PM</span>), and After-Hours (<span class="mono">AH</span>) prices directly from Yahoo Finance with zero API keys.
-      </p>
-
-      <div class="cta-bar">
-        <a href="/downloads/TickBar-macOS-Universal.dmg" download="TickBar-macOS-Universal.dmg" class="btn-primary">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-            <polyline points="7 10 12 15 17 10"></polyline>
-            <line x1="12" y1="15" x2="12" y2="3"></line>
-          </svg>
-          <span>Download TickBar.dmg</span>
-          <span class="mono" style="font-size:11px; opacity:0.68;">macOS Universal</span>
-        </a>
-
-        <button class="btn-secondary mono" id="heroShuffleBtn">
-          <span>🎲 Shuffle Live Watchlist</span>
-        </button>
-
-        <a href="https://github.com/anldrms/tickbar" target="_blank" rel="noopener" class="btn-secondary mono">
-          <span>Source on GitHub</span>
-        </a>
-      </div>
-    </section>
-
-    <!-- Interactive Stage Toolbar -->
-    <div class="stage-toolbar mono">
-      <div class="stage-toolbar-left">
-        <span class="stage-label">
-          <span class="pulse-dot"></span>
-          <span id="stageSyncCounter">Live Yahoo Finance feed · 7 active tickers</span>
-        </span>
-      </div>
-
-      <div class="stage-toolbar-right">
-        <button class="stage-chip" id="toolbarShuffleBtn" title="Randomize popular stocks in window">
-          🎲 Randomize Stocks
-        </button>
-        <button class="stage-chip active" id="toolbarToggleAhBtn" title="Toggle After-Hours / Pre-Market in Menu Bar">
-          AH/PM in Bar: ON
-        </button>
-        <button class="stage-chip active" id="toolbarToggleWidgetBtn" title="Toggle Floating Desktop Glass Widget">
-          Desktop Widget
-        </button>
-        <button class="stage-chip" id="wallpaperCycleBtn" title="Switch macOS 27 Wallpaper">
-          Wallpaper: Tahoe Dusk
-        </button>
-      </div>
-    </div>
-
-    <!-- Interactive macOS 27 Liquid Glass Stage -->
-    <div class="macos27-stage" id="macosStage" data-wallpaper="tahoe">
-      <div class="glass-orb one"></div>
-      <div class="glass-orb two"></div>
-
-      <!-- Simulated macOS 27 Liquid Glass Menu Bar -->
-      <div class="macos27-menubar">
-        <div class="menubar-left">
-          <span class="menubar-apple"></span>
-          <span class="menubar-appname">TickBar</span>
-          <span class="menubar-menu-item">Watchlist</span>
-          <span class="menubar-menu-item">Session</span>
-          <span class="menubar-menu-item">Window</span>
-        </div>
-
-        <div class="menubar-right mono">
-          <div class="menubar-ticker-pill" id="menubarPinnedPill" title="Click to cycle pinned ticker">
-            <img id="menubarLogo" src="https://s3-symbol-logo.tradingview.com/nvidia--big.svg" alt="Ticker" />
-            <span id="menubarText">NVDA $221.30 ▼3.16% · AH $221.36 ▲0.03%</span>
-          </div>
-          <span class="menubar-clock" id="menubarClock">Wed Oct 14  5:14 PM</span>
-        </div>
-      </div>
-
-      <!-- Draggable Floating Desktop Widget -->
-      <div class="liquid-desktop-widget" id="floatingDesktopWidget">
-        <div class="widget-head" id="widgetDragHandle">
-          <div style="display:flex; align-items:center; gap:6px;">
-            <span class="pulse-dot"></span>
-            <span>TickBar Glass</span>
-            <span class="liquid-badge mono">YAHOO LIVE</span>
-          </div>
-          <div style="display:flex; align-items:center; gap:6px;">
-            <button class="glass-pill-btn mono" id="widgetShuffleBtn" style="padding:2px 7px; font-size:9.5px;">Shuffle</button>
-          </div>
-        </div>
-        <div class="widget-body" id="floatingWidgetRows"></div>
-      </div>
-
-      <!-- Draggable macOS 27 Liquid Glass Popover Window -->
-      <div class="liquid-popover" id="liquidPopoverWindow">
-        <div class="popover-header" id="popoverDragHandle">
-          <div class="popover-brand">
-            <span class="pulse-dot"></span>
-            <span class="popover-brand-title">TickBar</span>
-            <span class="liquid-badge mono">24/5 + AH</span>
-          </div>
-          <div class="popover-controls">
-            <button class="glass-pill-btn mono" id="popoverShuffleBtn" title="Randomize Popular Stocks">
-              <span>⇄ Shuffle</span>
-            </button>
-            <button class="glass-pill-btn mono" id="popoverRefreshBtn" title="Fetch Latest Yahoo Finance Quotes">
-              <span>↻ Sync</span>
-            </button>
-          </div>
-        </div>
-
-        <div class="popover-add-zone">
-          <form class="add-input-row" id="addTickerForm">
-            <input
-              type="text"
-              id="addTickerInput"
-              class="mono"
-              placeholder="Add any Yahoo symbol (e.g. NVDA, TSLA, FLY, MSTR, BTC-USD)..."
-              autocomplete="off"
-            />
-            <button type="submit" class="add-submit-btn mono">+ Add</button>
-          </form>
-          <div class="quick-chips-row mono" id="quickChipsRow"></div>
-        </div>
-
-        <div class="popover-rows" id="popoverStockRows"></div>
-
-        <div class="popover-footer mono">
-          <label style="display:inline-flex; align-items:center; gap:6px; cursor:pointer;">
-            <input type="checkbox" id="autoCycleCheckbox" style="accent-color:#30db7d;" />
-            <span>Cycle Menu Bar</span>
-          </label>
-          <span id="lastUpdatedLabel">Yahoo Finance · Live</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- mkdir.directory Inspired Interactive Specification Directory -->
-    <section class="mkdir-section" id="directory">
-      <div class="mkdir-header mono">
-        <h2 class="mkdir-title">Architecture &amp; Craft Directory</h2>
-        <span class="mkdir-subtitle">Hover rows to inspect · Built for macOS Universal</span>
-      </div>
-
-      <div class="mkdir-list" id="mkdirList">
-        <div class="mkdir-hover-plate" id="mkdirHoverPlate"></div>
-
-        <div class="mkdir-row">
-          <div class="mkdir-idx-cell mono">
-            <span class="idx-num">01</span>
-            <span class="idx-cd">cd</span>
-          </div>
-          <div class="mkdir-row-name">Extended-Hours (AH / PM)</div>
-          <div class="mkdir-row-desc">Streams regular market close alongside live Pre-Market and After-Hours price &amp; delta directly from Yahoo Finance v8.</div>
-          <div class="mkdir-row-meta mono">includePrePost=true</div>
-        </div>
-
-        <div class="mkdir-row">
-          <div class="mkdir-idx-cell mono">
-            <span class="idx-num">02</span>
-            <span class="idx-cd">cd</span>
-          </div>
-          <div class="mkdir-row-name">macOS 27 Liquid Glass</div>
-          <div class="mkdir-row-desc">Built with native NSVisualEffectView translucent materials, specular inner rim highlights, and concentric continuous squircles.</div>
-          <div class="mkdir-row-meta mono">SwiftUI + AppKit</div>
-        </div>
-
-        <div class="mkdir-row">
-          <div class="mkdir-idx-cell mono">
-            <span class="idx-num">03</span>
-            <span class="idx-cd">cd</span>
-          </div>
-          <div class="mkdir-row-name">2026 Official Vector Logos</div>
-          <div class="mkdir-row-desc">Every ticker resolves crisp 2026 vector artwork (including Strategy MSTR, Firefly FLY, NVDA, TSLA, PLTR, RKLB, and crypto).</div>
-          <div class="mkdir-row-meta mono">TradingView SVG</div>
-        </div>
-
-        <div class="mkdir-row">
-          <div class="mkdir-idx-cell mono">
-            <span class="idx-num">04</span>
-            <span class="idx-cd">cd</span>
-          </div>
-          <div class="mkdir-row-name">Instant Add, Remove &amp; Shuffle</div>
-          <div class="mkdir-row-desc">Add any global stock or crypto pair, remove with a single click, or hit Shuffle to sample top market movers.</div>
-          <div class="mkdir-row-meta mono">Zero API Key</div>
-        </div>
-
-        <div class="mkdir-row">
-          <div class="mkdir-idx-cell mono">
-            <span class="idx-num">05</span>
-            <span class="idx-cd">cd</span>
-          </div>
-          <div class="mkdir-row-name">Universal Native Binary</div>
-          <div class="mkdir-row-desc">Compiled as a single lightweight macOS Universal bundle with zero Electron overhead and under 1% CPU usage.</div>
-          <div class="mkdir-row-meta mono">macOS Universal</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Live Popular Market Movers Grid -->
-    <section class="mkdir-section" id="popular">
-      <div class="mkdir-header mono">
-        <h2 class="mkdir-title">Live Popular Market Movers (Click any stock to add/pin)</h2>
-        <span class="mkdir-subtitle" id="gridSyncBadge">Streaming from Yahoo Finance</span>
-      </div>
-      <div class="popular-grid" id="popularStocksGrid"></div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="site-footer mono">
+    <!-- Editorial Hero -->
+    <hgroup class="hero-group">
       <div>
-        <span>TickBar · Open-Source macOS 27 Menu Bar &amp; Desktop Ticker · Crafted by </span>
-        <a href="https://github.com/anldrms" target="_blank" rel="noopener">anldrms</a>
+        <h1 class="hero-title">Live market &amp; after-hours ticker for the macOS 27 menu bar.</h1>
+        <p class="hero-desc">
+          A native SwiftUI and AppKit utility that streams real-time Yahoo Finance regular, Pre-Market, and After-Hours quotes with 2026 vector company emblems. Add or remove any global ticker in seconds, free and open-source.
+        </p>
       </div>
-      <div style="display:flex; gap:16px;">
-        <a href="/downloads/TickBar-macOS-Universal.dmg" download="TickBar-macOS-Universal.dmg">Download .DMG</a>
-        <a href="https://github.com/anldrms/tickbar" target="_blank" rel="noopener">GitHub Repository</a>
+      <div class="hero-actions">
+        <a href="/downloads/TickBar-macOS-Universal.dmg" download class="btn-dmg">
+          <span>Download TickBar.dmg</span>
+          <span class="btn-dmg-meta mono">macOS Universal</span>
+        </a>
+        <button type="button" class="btn-ghost mono" id="heroShuffleBtn">
+          <span>⇄ Shuffle stocks</span>
+        </button>
+      </div>
+    </hgroup>
+
+    <!-- Responsive Interactive macOS 27 Stage -->
+    <section class="stage-wrapper" aria-label="Interactive macOS 27 preview">
+      <!-- Top macOS 27 Menu Bar -->
+      <div class="macos-menubar">
+        <div class="mb-left">
+          <span></span>
+          <strong>TickBar</strong>
+          <span class="mb-menu-item">Watchlist</span>
+          <span class="mb-menu-item">Session</span>
+          <span class="mb-menu-item">Window</span>
+        </div>
+        <div class="mb-right mono">
+          <div class="mb-ticker-pill" id="menuBarPill">
+            <img id="mbLogo" src="https://s3-symbol-logo.tradingview.com/nvidia--big.svg" alt="" />
+            <span id="mbText"><strong>NVDA</strong> $221.30 <span style="color:#ff7582;">▼3.16%</span> · <span style="color:#a6c2ff;">AH $221.36 ▲0.03%</span></span>
+          </div>
+          <span class="mb-clock" id="mbClock">Wed 5:24 PM</span>
+        </div>
+      </div>
+
+      <!-- Fluid 2-Column Stage Body -->
+      <div class="stage-grid">
+        <!-- Left Column: Live Inspector & Spotlight -->
+        <div class="stage-inspector">
+          <div>
+            <div class="inspector-kicker mono">
+              <span class="live-indicator"></span>
+              <span id="feedStatusText">Yahoo Finance Live · Regular + Extended Hours</span>
+            </div>
+            <h2 class="inspector-headline">Customize your watchlist directly in the popover.</h2>
+            <p class="inspector-copy">
+              Type any stock, ETF, or crypto symbol in the search box, click any row to pin it to the top macOS status bar, or click × to remove it from your watchlist.
+            </p>
+          </div>
+
+          <!-- Currently Pinned Menu Bar Stock Card -->
+          <div class="spotlight-card" id="spotlightCard">
+            <div class="spotlight-top">
+              <div class="spotlight-id">
+                <img id="spotLogo" src="https://s3-symbol-logo.tradingview.com/nvidia--big.svg" alt="" />
+                <div>
+                  <div class="spotlight-sym mono" id="spotSym">NVDA</div>
+                  <div class="spotlight-name" id="spotName">NVIDIA Corp.</div>
+                </div>
+              </div>
+              <span class="pop-session-tag mono">Pinned in Menu Bar</span>
+            </div>
+            <div class="spotlight-prices mono">
+              <div>
+                <span class="sp-metric-label">Regular Session</span>
+                <strong id="spotReg">$221.30 (-3.16%)</strong>
+              </div>
+              <div>
+                <span class="sp-metric-label" id="spotExtLabel">After-Hours (AH)</span>
+                <strong id="spotExt" style="color:#a6c2ff;">$221.36 (+0.03%)</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="stage-toolbar mono">
+            <button type="button" class="stage-btn active" id="stageToggleAhBtn">Extended Hours in Bar: ON</button>
+          </div>
+        </div>
+
+        <!-- Right Column: Single macOS 27 Liquid Glass Popover -->
+        <div class="glass-popover">
+          <div class="pop-header">
+            <div class="pop-title">
+              <span class="live-indicator"></span>
+              <span>TickBar</span>
+              <span class="pop-session-tag mono">24/5 + AH</span>
+            </div>
+            <button type="button" class="stage-btn mono" style="padding:3px 10px; font-size:11px;" id="popRefreshBtn">↻ Sync</button>
+          </div>
+
+          <div class="pop-search-area">
+            <form class="pop-form" id="addSymbolForm">
+              <input
+                type="text"
+                id="symbolInput"
+                class="pop-input mono"
+                placeholder="Add ticker (e.g. AMD, FLY, SOFI, BTC-USD)..."
+                autocomplete="off"
+              />
+              <button type="submit" class="pop-submit mono">+ Add</button>
+            </form>
+            <div class="pop-chips mono" id="quickChips"></div>
+          </div>
+
+          <div class="pop-rows" id="popoverRows"></div>
+
+          <div class="pop-footer mono">
+            <span>Click row to pin · Click × to remove</span>
+            <span style="color:#5ce395;">● Live</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- mkdir.directory Signature Indexed Directory of Popular Stocks -->
+    <section class="directory-section" aria-labelledby="dirHeading">
+      <div class="directory-header">
+        <h2 class="directory-title mono" id="dirHeading">Popular market movers · 16 symbols</h2>
+        <span class="directory-hint mono">Click any row to add &amp; pin to the macOS menu bar</span>
+      </div>
+      <ol class="directory-list" id="directoryList"></ol>
+    </section>
+
+    <!-- Concise 3-Column Craft & Architecture Summary -->
+    <section class="specs-grid" aria-label="Technical specifications">
+      <div>
+        <span class="spec-item-num mono">01</span>
+        <h3 class="spec-item-title">Pre-Market &amp; After-Hours</h3>
+        <p class="spec-item-body">
+          Queries Yahoo Finance with <span class="mono">includePrePost=true</span> so earnings reactions after 4:00 PM ET and early pre-market moves appear right beside regular close.
+        </p>
+      </div>
+      <div>
+        <span class="spec-item-num mono">02</span>
+        <h3 class="spec-item-title">2026 Vector Company Logos</h3>
+        <p class="spec-item-body">
+          Resolves crisp vector corporate emblems for equities, ETFs, and crypto pairs, including updated 2026 identities for Strategy (<span class="mono">MSTR</span>), Firefly (<span class="mono">FLY</span>), and Rocket Lab (<span class="mono">RKLB</span>).
+        </p>
+      </div>
+      <div>
+        <span class="spec-item-num mono">03</span>
+        <h3 class="spec-item-title">Native macOS Universal Binary</h3>
+        <p class="spec-item-body">
+          Compiled directly with <span class="mono">swiftc</span> using <span class="mono">NSStatusItem</span>, <span class="mono">NSPopover</span>, and <span class="mono">NSVisualEffectView</span> in an 820 KB Universal <span class="mono">.dmg</span> with zero API keys required.
+        </p>
+      </div>
+    </section>
+
+    <!-- Signature Editorial Wordmark Band -->
+    <div class="wordmark-band" aria-hidden="true">tickbar</div>
+
+    <!-- Minimal Footer -->
+    <footer class="site-footer">
+      <p>
+        Crafted by <a href="https://github.com/anldrms" target="_blank" rel="noopener" class="underline-link">anldrms</a>.
+      </p>
+      <div class="footer-links">
+        <a href="/downloads/TickBar-macOS-Universal.dmg" download class="underline-link">Download .DMG</a>
+        <a href="https://github.com/anldrms/tickbar" target="_blank" rel="noopener" class="underline-link">GitHub Repository</a>
       </div>
     </footer>
   </div>
 
   <script>
-    // Verified 2026 Official Vector Logos & Initial Live Snapshot
-    const POPULAR_STOCKS_CATALOG = {
-      NVDA: { name: "NVIDIA Corp.", price: 221.30, changePercent: -3.16, extendedLabel: "AH", extendedPrice: 221.36, extendedChangePercent: 0.03, logo: "https://s3-symbol-logo.tradingview.com/nvidia--big.svg", sparkline: [228.5, 226.1, 224.8, 223.2, 222.0, 220.9, 221.6, 221.30] },
-      AAPL: { name: "Apple Inc.", price: 342.96, changePercent: 0.50, extendedLabel: "AH", extendedPrice: 343.09, extendedChangePercent: 0.04, logo: "https://s3-symbol-logo.tradingview.com/apple--big.svg", sparkline: [341.2, 341.8, 342.1, 341.9, 342.6, 343.1, 342.8, 342.96] },
-      TSLA: { name: "Tesla, Inc.", price: 367.16, changePercent: -2.15, extendedLabel: "AH", extendedPrice: 366.90, extendedChangePercent: -0.07, logo: "https://s3-symbol-logo.tradingview.com/tesla--big.svg", sparkline: [375.2, 373.4, 371.0, 369.8, 368.5, 367.9, 366.9, 367.16] },
-      MSFT: { name: "Microsoft Corp.", price: 533.69, changePercent: -1.80, extendedLabel: "AH", extendedPrice: 533.05, extendedChangePercent: -0.12, logo: "https://s3-symbol-logo.tradingview.com/microsoft--big.svg", sparkline: [543.4, 540.8, 538.9, 536.5, 535.1, 534.0, 533.2, 533.69] },
-      AMZN: { name: "Amazon.com, Inc.", price: 254.08, changePercent: -1.74, extendedLabel: "AH", extendedPrice: 253.50, extendedChangePercent: -0.23, logo: "https://s3-symbol-logo.tradingview.com/amazon--big.svg", sparkline: [258.5, 257.4, 256.2, 255.8, 254.9, 254.3, 253.9, 254.08] },
-      META: { name: "Meta Platforms", price: 737.54, changePercent: -3.27, extendedLabel: "AH", extendedPrice: 737.75, extendedChangePercent: 0.03, logo: "https://s3-symbol-logo.tradingview.com/meta-platforms--big.svg", sparkline: [762.4, 756.0, 750.2, 746.8, 742.1, 739.5, 738.0, 737.54] },
-      GOOGL: { name: "Alphabet Inc.", price: 347.64, changePercent: -1.74, extendedLabel: "AH", extendedPrice: 347.25, extendedChangePercent: -0.11, logo: "https://s3-symbol-logo.tradingview.com/alphabet--big.svg", sparkline: [353.8, 352.1, 350.4, 349.2, 348.5, 347.9, 347.4, 347.64] },
-      PLTR: { name: "Palantir Technologies", price: 200.97, changePercent: -3.69, extendedLabel: "AH", extendedPrice: 199.82, extendedChangePercent: -0.57, logo: "https://s3-symbol-logo.tradingview.com/palantir--big.svg", sparkline: [208.6, 206.2, 204.5, 203.1, 202.0, 201.4, 200.6, 200.97] },
-      AMD: { name: "Advanced Micro Devices", price: 570.82, changePercent: -5.73, extendedLabel: "AH", extendedPrice: 568.56, extendedChangePercent: -0.40, logo: "https://s3-symbol-logo.tradingview.com/advanced-micro-devices--big.svg", sparkline: [605.5, 597.2, 589.4, 582.0, 577.5, 573.8, 571.2, 570.82] },
-      NFLX: { name: "Netflix, Inc.", price: 70.57, changePercent: 0.16, extendedLabel: "AH", extendedPrice: 70.50, extendedChangePercent: -0.10, logo: "https://s3-symbol-logo.tradingview.com/netflix--big.svg", sparkline: [70.4, 70.5, 70.3, 70.6, 70.7, 70.5, 70.6, 70.57] },
-      COIN: { name: "Coinbase Global", price: 172.89, changePercent: -4.90, extendedLabel: "AH", extendedPrice: 173.00, extendedChangePercent: 0.06, logo: "https://s3-symbol-logo.tradingview.com/coinbase--big.svg", sparkline: [181.8, 179.5, 177.2, 175.8, 174.1, 173.4, 172.6, 172.89] },
-      MSTR: { name: "Strategy Inc.", price: 143.24, changePercent: -5.87, extendedLabel: "AH", extendedPrice: 143.26, extendedChangePercent: 0.01, logo: "https://s3-symbol-logo.tradingview.com/strategy-cad-hedged-cibc-cdr--big.svg", sparkline: [152.1, 149.8, 147.5, 146.0, 144.8, 143.9, 143.1, 143.24] },
-      SPY: { name: "SPDR S&P 500 ETF", price: 769.60, changePercent: -1.08, extendedLabel: "AH", extendedPrice: 769.18, extendedChangePercent: -0.05, logo: "https://s3-symbol-logo.tradingview.com/spdr-sandp500-etf-tr--big.svg", sparkline: [778.0, 776.2, 774.5, 772.8, 771.4, 770.2, 769.4, 769.60] },
-      QQQ: { name: "Invesco QQQ Trust", price: 728.95, changePercent: -1.97, extendedLabel: "AH", extendedPrice: 727.96, extendedChangePercent: -0.14, logo: "https://s3-symbol-logo.tradingview.com/invesco--big.svg", sparkline: [743.6, 740.1, 736.8, 733.9, 731.5, 729.8, 728.7, 728.95] },
-      HOOD: { name: "Robinhood Markets", price: 101.08, changePercent: -8.54, extendedLabel: "AH", extendedPrice: 100.60, extendedChangePercent: -0.47, logo: "https://s3-symbol-logo.tradingview.com/robinhood--big.svg", sparkline: [110.5, 108.2, 106.0, 104.5, 103.1, 102.0, 101.3, 101.08] },
-      RKLB: { name: "Rocket Lab USA", price: 59.18, changePercent: -7.85, extendedLabel: "AH", extendedPrice: 54.20, extendedChangePercent: -8.42, logo: "https://s3-symbol-logo.tradingview.com/rocket-lab--big.svg", sparkline: [64.2, 62.8, 61.5, 60.9, 60.1, 59.6, 59.0, 59.18] },
-      FLY: { name: "Firefly Aerospace", price: 17.02, changePercent: -7.20, extendedLabel: "AH", extendedPrice: 17.14, extendedChangePercent: 0.71, logo: "https://s3-symbol-logo.tradingview.com/firefly-aerospace--big.svg", sparkline: [18.3, 17.9, 17.6, 17.4, 17.2, 17.1, 16.98, 17.02] },
-      SOFI: { name: "SoFi Technologies", price: 14.22, changePercent: -6.69, extendedLabel: "AH", extendedPrice: 14.19, extendedChangePercent: -0.21, logo: "https://s3-symbol-logo.tradingview.com/sofi--big.svg", sparkline: [15.2, 14.9, 14.7, 14.5, 14.4, 14.3, 14.2, 14.22] },
-      ASTS: { name: "AST SpaceMobile", price: 42.14, changePercent: -10.46, extendedLabel: "AH", extendedPrice: 41.80, extendedChangePercent: -0.81, logo: "https://s3-symbol-logo.tradingview.com/ast-spacemobile--big.svg", sparkline: [47.0, 45.8, 44.6, 43.9, 43.1, 42.6, 42.0, 42.14] },
-      "BTC-USD": { name: "Bitcoin USD", price: 81597.60, changePercent: -1.80, extendedLabel: null, extendedPrice: null, extendedChangePercent: null, logo: "https://s3-symbol-logo.tradingview.com/crypto/XTVCBTC--big.svg", sparkline: [83100, 82800, 82400, 82100, 81900, 81450, 81680, 81597.60] }
+    const CATALOG = {
+      "NVDA":    { name: "NVIDIA", logo: "https://s3-symbol-logo.tradingview.com/nvidia--big.svg", price: 221.30, changePct: -3.16, extLabel: "AH", extPrice: 221.36, extPct: 0.03, spark: [228,226,225,224,223,222,221.3] },
+      "AAPL":    { name: "Apple", logo: "https://s3-symbol-logo.tradingview.com/apple--big.svg", price: 342.96, changePct: 0.50, extLabel: "AH", extPrice: 343.09, extPct: 0.04, spark: [340,341,341.4,342,342.5,342.8,342.96] },
+      "TSLA":    { name: "Tesla", logo: "https://s3-symbol-logo.tradingview.com/tesla--big.svg", price: 367.16, changePct: -2.15, extLabel: "AH", extPrice: 366.90, extPct: -0.07, spark: [375,373,371,370,368,367.5,367.16] },
+      "MSFT":    { name: "Microsoft", logo: "https://s3-symbol-logo.tradingview.com/microsoft--big.svg", price: 533.69, changePct: -1.80, extLabel: "AH", extPrice: 533.05, extPct: -0.12, spark: [543,540,538,537,535,534,533.69] },
+      "AMZN":    { name: "Amazon", logo: "https://s3-symbol-logo.tradingview.com/amazon--big.svg", price: 254.08, changePct: -1.74, extLabel: "AH", extPrice: 253.50, extPct: -0.23, spark: [258,257,256,255.5,254.8,254.2,254.08] },
+      "META":    { name: "Meta Platforms", logo: "https://s3-symbol-logo.tradingview.com/meta-platforms--big.svg", price: 737.54, changePct: -3.27, extLabel: "AH", extPrice: 737.75, extPct: 0.03, spark: [760,754,749,745,740,738,737.54] },
+      "GOOGL":   { name: "Alphabet", logo: "https://s3-symbol-logo.tradingview.com/alphabet--big.svg", price: 347.64, changePct: -1.74, extLabel: "AH", extPrice: 347.25, extPct: -0.11, spark: [353,351,350,349,348.2,347.9,347.64] },
+      "PLTR":    { name: "Palantir", logo: "https://s3-symbol-logo.tradingview.com/palantir--big.svg", price: 200.97, changePct: -3.69, extLabel: "AH", extPrice: 199.82, extPct: -0.57, spark: [208,206,204,203,202,201.3,200.97] },
+      "AMD":     { name: "AMD", logo: "https://s3-symbol-logo.tradingview.com/advanced-micro-devices--big.svg", price: 570.82, changePct: -5.73, extLabel: "AH", extPrice: 568.56, extPct: -0.40, spark: [602,594,588,582,576,572,570.82] },
+      "NFLX":    { name: "Netflix", logo: "https://s3-symbol-logo.tradingview.com/netflix--big.svg", price: 70.57, changePct: 0.16, extLabel: "AH", extPrice: 70.50, extPct: -0.10, spark: [70.1,70.2,70.3,70.4,70.5,70.55,70.57] },
+      "COIN":    { name: "Coinbase", logo: "https://s3-symbol-logo.tradingview.com/coinbase--big.svg", price: 172.89, changePct: -4.90, extLabel: "AH", extPrice: 173.00, extPct: 0.06, spark: [181,179,177,175,174,173.2,172.89] },
+      "MSTR":    { name: "Strategy", logo: "https://s3-symbol-logo.tradingview.com/strategy-cad-hedged-cibc-cdr--big.svg", price: 143.24, changePct: -5.87, extLabel: "AH", extPrice: 143.26, extPct: 0.01, spark: [152,149,147,146,144.5,143.8,143.24] },
+      "SPY":     { name: "S&P 500 ETF", logo: "https://s3-symbol-logo.tradingview.com/spdr-sandp500-etf-tr--big.svg", price: 769.60, changePct: -1.08, extLabel: "AH", extPrice: 769.18, extPct: -0.05, spark: [777,775,773,772,771,770,769.6] },
+      "RKLB":    { name: "Rocket Lab", logo: "https://s3-symbol-logo.tradingview.com/rocket-lab--big.svg", price: 59.18, changePct: -7.85, extLabel: "AH", extPrice: 54.20, extPct: -8.42, spark: [64,62.5,61.5,60.8,60,59.5,59.18] },
+      "FLY":     { name: "Firefly Aerospace", logo: "https://s3-symbol-logo.tradingview.com/firefly-aerospace--big.svg", price: 17.02, changePct: -7.20, extLabel: "AH", extPrice: 17.14, extPct: 0.71, spark: [18.3,18,17.7,17.5,17.3,17.1,17.02] },
+      "BTC-USD": { name: "Bitcoin USD", logo: "https://s3-symbol-logo.tradingview.com/crypto/XTVCBTC--big.svg", price: 81597.60, changePct: -1.80, extLabel: null, extPrice: null, extPct: null, spark: [83100,82800,82400,82100,81900,81700,81597.6] }
     };
 
-    const ALL_POPULAR_KEYS = Object.keys(POPULAR_STOCKS_CATALOG);
-    const quotesStore = JSON.parse(JSON.stringify(POPULAR_STOCKS_CATALOG));
-    const flashState = {};
+    const ALL_KEYS = Object.keys(CATALOG);
+    let watchlist = [];
+    let pinnedSymbol = "NVDA";
+    let showExtendedInBar = true;
 
-    // Pick a randomized set of 7 popular stocks on every page load!
-    function pickRandomPopularWatchlist(count = 7) {
-      const mustIncludePool = ["NVDA", "AAPL", "TSLA", "MSFT", "META", "AMZN", "PLTR", "AMD", "GOOGL"];
-      const anchor = mustIncludePool[Math.floor(Math.random() * mustIncludePool.length)];
-      const rest = ALL_POPULAR_KEYS.filter((k) => k !== anchor).sort(() => Math.random() - 0.5);
-      return [anchor, ...rest.slice(0, count - 1)];
+    function fmtPrice(v) {
+      if (v === null || v === undefined || isNaN(v)) return "0.00";
+      if (v >= 1000) return Number(v).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      return Number(v).toFixed(2);
     }
 
-    let activeWatchlist = pickRandomPopularWatchlist(7);
-    let pinnedSymbol = activeWatchlist[0];
-    let showAhInBar = true;
-    let showFloatingWidget = true;
-    let autoCycleBar = false;
-    let cycleCursor = 0;
-
-    function formatPrice(val) {
-      const n = Number(val || 0);
-      if (n >= 1000) {
-        return "$" + n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-      }
-      return "$" + n.toFixed(2);
-    }
-
-    function formatPct(val) {
-      const n = Number(val || 0);
-      return (n >= 0 ? "+" : "") + n.toFixed(2) + "%";
-    }
-
-    function createSparklineSvg(points, isUp) {
-      const pts = Array.isArray(points) && points.length > 1 ? points : [1, 1];
-      const min = Math.min(...pts);
-      const max = Math.max(...pts);
-      const span = Math.max(max - min, 0.0001);
-      const w = 54;
-      const h = 22;
-      const coords = pts.map((v, idx) => {
-        const x = (w * idx) / (pts.length - 1);
-        const y = h - ((v - min) / span) * (h - 4) - 2;
+    function makeSparkSvg(points, isUp) {
+      const arr = (points && points.length > 1) ? points : [1, 2, 1.5, 2.4, 2.2];
+      const min = Math.min(...arr);
+      const max = Math.max(...arr);
+      const span = (max - min) || 1;
+      const coords = arr.map((v, i) => {
+        const x = (i / (arr.length - 1)) * 46 + 1;
+        const y = 18 - ((v - min) / span) * 14 - 1;
         return `${x.toFixed(1)},${y.toFixed(1)}`;
-      });
-      const color = isUp ? "#30db7d" : "#ff646e";
-      return `
-        <svg viewBox="0 0 ${w} ${h}" class="stock-spark" fill="none">
-          <polyline
-            fill="none"
-            stroke="${color}"
-            stroke-width="1.7"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            points="${coords.join(" ")}"
-          />
-        </svg>
-      `;
+      }).join(" ");
+      const stroke = isUp ? "#5ce395" : "#ff7582";
+      return `<svg class="pop-spark" viewBox="0 0 48 20"><polyline fill="none" stroke="${stroke}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" points="${coords}"/></svg>`;
     }
 
-    function renderMenuBar() {
-      const sym = autoCycleBar && activeWatchlist.length
-        ? activeWatchlist[cycleCursor % activeWatchlist.length]
-        : (quotesStore[pinnedSymbol] ? pinnedSymbol : activeWatchlist[0]);
-
-      const q = quotesStore[sym];
-      if (!q) return;
-
-      const logoEl = document.getElementById("menubarLogo");
-      const textEl = document.getElementById("menubarText");
-      logoEl.src = q.logo;
-
-      const regArrow = q.changePercent >= 0 ? "▲" : "▼";
-      const regColor = q.changePercent >= 0 ? "#30db7d" : "#ff646e";
-      let html = `<strong>${sym}</strong> ${formatPrice(q.price)} <span style="color:${regColor}">${regArrow}${Math.abs(q.changePercent).toFixed(2)}%</span>`;
-
-      if (showAhInBar && q.extendedLabel && q.extendedPrice != null && q.extendedChangePercent != null) {
-        const extArrow = q.extendedChangePercent >= 0 ? "▲" : "▼";
-        html += ` <span style="color:#9ec5ff">· ${q.extendedLabel} ${formatPrice(q.extendedPrice)} ${extArrow}${Math.abs(q.extendedChangePercent).toFixed(2)}%</span>`;
+    function randomizeWatchlist(count = 6) {
+      const pool = [...ALL_KEYS];
+      for (let i = pool.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [pool[i], pool[j]] = [pool[j], pool[i]];
       }
-      textEl.innerHTML = html;
+      watchlist = pool.slice(0, count);
+      pinnedSymbol = watchlist[0];
+      renderAll();
+      fetchLiveQuotes(watchlist);
     }
 
-    function renderQuickChips() {
-      const container = document.getElementById("quickChipsRow");
-      const available = ALL_POPULAR_KEYS.filter((s) => !activeWatchlist.includes(s));
-      container.innerHTML = available
-        .map((sym) => `<button type="button" class="quick-chip mono" data-add="${sym}">+${sym}</button>`)
-        .join("");
+    function renderMenuBarAndSpotlight() {
+      const sym = watchlist.includes(pinnedSymbol) ? pinnedSymbol : (watchlist[0] || "NVDA");
+      pinnedSymbol = sym;
+      const item = CATALOG[sym] || CATALOG["NVDA"];
+      const up = item.changePct >= 0;
+      const arrow = up ? "▲" : "▼";
+      const regColor = up ? "#5ce395" : "#ff7582";
 
-      container.querySelectorAll("[data-add]").forEach((btn) => {
-        btn.addEventListener("click", () => {
-          addSymbolToWatchlist(btn.getAttribute("data-add"));
-        });
-      });
+      document.getElementById("mbLogo").src = item.logo;
+      let extHtml = "";
+      if (showExtendedInBar && item.extLabel && item.extPrice) {
+        const eUp = (item.extPct || 0) >= 0;
+        const eArrow = eUp ? "▲" : "▼";
+        extHtml = `<span class="mb-ext-inline"> · <span style="color:#a6c2ff;">${item.extLabel} $${fmtPrice(item.extPrice)} ${eArrow}${Math.abs(item.extPct || 0).toFixed(2)}%</span></span>`;
+      }
+      document.getElementById("mbText").innerHTML =
+        `<strong>${sym}</strong> $${fmtPrice(item.price)} <span style="color:${regColor};">${arrow}${Math.abs(item.changePct).toFixed(2)}%</span>${extHtml}`;
+
+      // Update Spotlight Card
+      document.getElementById("spotLogo").src = item.logo;
+      document.getElementById("spotSym").textContent = sym;
+      document.getElementById("spotName").textContent = item.name;
+      const sign = up ? "+" : "";
+      const spotRegEl = document.getElementById("spotReg");
+      spotRegEl.textContent = `$${fmtPrice(item.price)} (${sign}${item.changePct.toFixed(2)}%)`;
+      spotRegEl.style.color = regColor;
+
+      const spotExtLabelEl = document.getElementById("spotExtLabel");
+      const spotExtEl = document.getElementById("spotExt");
+      if (item.extLabel && item.extPrice) {
+        const eSign = (item.extPct || 0) >= 0 ? "+" : "";
+        spotExtLabelEl.textContent = item.extLabel === "PM" ? "Pre-Market (PM)" : "After-Hours (AH)";
+        spotExtEl.textContent = `$${fmtPrice(item.extPrice)} (${eSign}${(item.extPct || 0).toFixed(2)}%)`;
+      } else {
+        spotExtLabelEl.textContent = "Session";
+        spotExtEl.textContent = "24/7 Spot Feed";
+      }
     }
 
-    function renderPopoverWatchlist() {
-      const container = document.getElementById("popoverStockRows");
-      container.innerHTML = activeWatchlist
-        .map((sym) => {
-          const q = quotesStore[sym] || {
-            symbol: sym,
-            name: sym,
-            price: 0,
-            changePercent: 0,
-            sparkline: [1, 1],
-            logo: `https://assets.parqet.com/logos/symbol/${sym}?format=png`
-          };
-          const isUp = q.changePercent >= 0;
-          const isPinned = sym === pinnedSymbol && !autoCycleBar;
-          const flashClass = flashState[sym] || "";
-
-          let extHtml = "";
-          if (q.extendedLabel && q.extendedPrice != null && q.extendedChangePercent != null) {
-            const extUp = q.extendedChangePercent >= 0;
-            extHtml = `
-              <div class="ext-price-line mono">
-                <span class="ext-badge">${q.extendedLabel}</span>
-                <span class="ext-val">${formatPrice(q.extendedPrice)}</span>
-                <span class="ext-pct ${extUp ? "up" : "down"}">${formatPct(q.extendedChangePercent)}</span>
-              </div>
-            `;
-          }
-
-          return `
-            <div class="glass-stock-row ${isPinned ? "pinned" : ""} ${flashClass}" data-pin="${sym}">
-              <div class="stock-logo-squircle">
-                <img src="${q.logo}" alt="${sym}" loading="lazy" />
-              </div>
-              <div class="stock-meta">
-                <div class="stock-sym-line">
-                  <span class="stock-sym mono">${sym}</span>
-                  ${isPinned ? `<span class="bar-pin-tag mono">BAR</span>` : ""}
-                </div>
-                <div class="stock-name">${q.name}</div>
-              </div>
-              ${createSparklineSvg(q.sparkline, isUp)}
-              <div class="stock-prices mono">
-                <div class="reg-price-line">
-                  <span class="reg-price">${q.price ? formatPrice(q.price) : "..."}</span>
-                  <span class="reg-pct ${isUp ? "up" : "down"}">${formatPct(q.changePercent)}</span>
-                </div>
-                ${extHtml}
-              </div>
-              <button type="button" class="row-remove-btn" data-remove="${sym}" title="Remove ${sym}">×</button>
-            </div>
-          `;
-        })
-        .join("");
-
-      container.querySelectorAll("[data-pin]").forEach((row) => {
-        row.addEventListener("click", (e) => {
-          if (e.target.closest("[data-remove]")) return;
-          pinnedSymbol = row.getAttribute("data-pin");
-          autoCycleBar = false;
-          document.getElementById("autoCycleCheckbox").checked = false;
-          renderAll();
-        });
-      });
-
-      container.querySelectorAll("[data-remove]").forEach((btn) => {
-        btn.addEventListener("click", (e) => {
-          e.stopPropagation();
-          const sym = btn.getAttribute("data-remove");
-          activeWatchlist = activeWatchlist.filter((s) => s !== sym);
-          if (pinnedSymbol === sym && activeWatchlist.length) {
-            pinnedSymbol = activeWatchlist[0];
-          }
-          renderAll();
-        });
-      });
-
-      document.getElementById("stageSyncCounter").textContent =
-        `Live Yahoo Finance feed · ${activeWatchlist.length} active tickers`;
-    }
-
-    function renderFloatingWidget() {
-      const container = document.getElementById("floatingWidgetRows");
-      container.innerHTML = activeWatchlist
-        .slice(0, 5)
-        .map((sym) => {
-          const q = quotesStore[sym];
-          if (!q) return "";
-          const isUp = q.changePercent >= 0;
-          const extText = q.extendedLabel && q.extendedPrice != null
-            ? `<div class="mono" style="font-size:9px; color:#9ec5ff;">${q.extendedLabel} ${formatPrice(q.extendedPrice)} (${formatPct(q.extendedChangePercent)})</div>`
-            : "";
-
-          return `
-            <div class="widget-mini-row" data-widget-pin="${sym}">
-              <img src="${q.logo}" alt="${sym}" />
-              <div style="min-width:0; flex:1;">
-                <div class="mono" style="font-size:11.5px; font-weight:700;">${sym}</div>
-                <div style="font-size:9.5px; color:rgba(255,255,255,0.52); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${q.name}</div>
-              </div>
-              <div style="text-align:right;" class="mono">
-                <div style="font-size:11.5px; font-weight:600;">
-                  ${formatPrice(q.price)}
-                  <span style="color:${isUp ? "#30db7d" : "#ff646e"}; font-size:10px; margin-left:3px;">${formatPct(q.changePercent)}</span>
-                </div>
-                ${extText}
-              </div>
-            </div>
-          `;
-        })
-        .join("");
-
-      container.querySelectorAll("[data-widget-pin]").forEach((row) => {
-        row.addEventListener("click", () => {
-          pinnedSymbol = row.getAttribute("data-widget-pin");
-          renderAll();
-        });
-      });
-    }
-
-    function renderLiveTape() {
-      const marquee = document.getElementById("liveTapeMarquee");
-      const itemsHtml = ALL_POPULAR_KEYS.map((sym) => {
-        const q = quotesStore[sym];
-        if (!q) return "";
-        const isUp = q.changePercent >= 0;
-        const ahChip = q.extendedLabel && q.extendedPrice != null
-          ? `<span class="tape-ah">${q.extendedLabel} ${formatPrice(q.extendedPrice)} (${formatPct(q.extendedChangePercent)})</span>`
-          : "";
+    function renderPopover() {
+      const container = document.getElementById("popoverRows");
+      container.innerHTML = watchlist.map(sym => {
+        const item = CATALOG[sym];
+        if (!item) return "";
+        const up = item.changePct >= 0;
+        const sign = up ? "+" : "";
+        const pinned = sym === pinnedSymbol;
+        let extRow = "";
+        if (item.extLabel && item.extPrice) {
+          const eUp = (item.extPct || 0) >= 0;
+          const eSign = eUp ? "+" : "";
+          const eColor = eUp ? "#5ce395" : "#ff7582";
+          extRow = `<div class="pop-ext"><span style="color:#a6c2ff;font-weight:600;">${item.extLabel}</span> $${fmtPrice(item.extPrice)} <span style="color:${eColor};">${eSign}${(item.extPct || 0).toFixed(2)}%</span></div>`;
+        }
         return `
-          <div class="tape-item" data-tape-sym="${sym}">
-            <img src="${q.logo}" alt="${sym}" />
-            <span class="tape-sym">${sym}</span>
-            <span class="tape-price">${formatPrice(q.price)}</span>
-            <span class="tape-chg ${isUp ? "up" : "down"}">${formatPct(q.changePercent)}</span>
-            ${ahChip}
+          <div class="pop-row ${pinned ? 'pinned' : ''}" data-pin="${sym}">
+            <div class="pop-logo"><img src="${item.logo}" alt="${sym}" /></div>
+            <div class="pop-meta">
+              <div class="pop-sym mono">${sym} ${pinned ? '<span class="pop-bar-badge">BAR</span>' : ''}</div>
+              <div class="pop-name">${item.name}</div>
+            </div>
+            ${makeSparkSvg(item.spark, up)}
+            <div class="pop-quote mono">
+              <div class="pop-reg">
+                <span>$${fmtPrice(item.price)}</span>
+                <span class="pop-delta ${up ? 'up' : 'down'}">${sign}${item.changePct.toFixed(2)}%</span>
+              </div>
+              ${extRow}
+            </div>
+            <button type="button" class="pop-remove" data-remove="${sym}" title="Remove ${sym}">×</button>
           </div>
         `;
       }).join("");
 
-      marquee.innerHTML = itemsHtml + itemsHtml;
-      marquee.querySelectorAll("[data-tape-sym]").forEach((el) => {
-        el.addEventListener("click", () => {
-          addSymbolToWatchlist(el.getAttribute("data-tape-sym"));
-        });
-      });
+      const chipsEl = document.getElementById("quickChips");
+      const suggestions = ALL_KEYS.filter(k => !watchlist.includes(k)).slice(0, 7);
+      chipsEl.innerHTML = suggestions.map(sym =>
+        `<button type="button" class="pop-chip" data-add="${sym}">+${sym}</button>`
+      ).join("");
     }
 
-    function renderPopularGrid() {
-      const grid = document.getElementById("popularStocksGrid");
-      grid.innerHTML = ALL_POPULAR_KEYS.map((sym) => {
-        const q = quotesStore[sym];
-        if (!q) return "";
-        const isUp = q.changePercent >= 0;
-        const ext = q.extendedLabel && q.extendedPrice != null
-          ? `<span class="mono" style="color:var(--ah-blue); font-size:10px;">${q.extendedLabel} ${formatPrice(q.extendedPrice)}</span>`
-          : `<span class="mono" style="color:var(--fg-subtle); font-size:10px;">24/7 Spot</span>`;
-
+    function renderDirectory() {
+      const listEl = document.getElementById("directoryList");
+      listEl.innerHTML = ALL_KEYS.map((sym, idx) => {
+        const item = CATALOG[sym];
+        const up = item.changePct >= 0;
+        const sign = up ? "+" : "";
+        const num = String(idx + 1).padStart(2, "0");
+        const extText = (item.extLabel && item.extPrice)
+          ? `${item.extLabel} $${fmtPrice(item.extPrice)}`
+          : "24/7 Spot";
         return `
-          <div class="popular-card" data-grid-sym="${sym}">
-            <img src="${q.logo}" alt="${sym}" loading="lazy" />
-            <div class="popular-card-info">
-              <div class="popular-card-top mono">
-                <span class="popular-card-sym">${sym}</span>
-                <span class="popular-card-price">${formatPrice(q.price)}</span>
-              </div>
-              <div class="popular-card-bottom">
-                ${ext}
-                <span class="mono" style="font-weight:600; color:${isUp ? "var(--green)" : "var(--red)"};">${formatPct(q.changePercent)}</span>
+          <li class="dir-row" data-dir-sym="${sym}">
+            <div class="dir-left">
+              <span class="dir-index mono">
+                <span class="dir-index-num">${num}</span>
+                <span class="dir-index-action">pin</span>
+              </span>
+              <img class="dir-logo" src="${item.logo}" alt="${sym}" />
+              <div class="dir-name-wrap">
+                <span class="dir-company">${item.name}</span>
+                <span class="dir-symbol mono">${sym}</span>
               </div>
             </div>
-          </div>
+            <div class="dir-right mono">
+              <span class="dir-ext-tag">${extText}</span>
+              <span class="dir-price">$${fmtPrice(item.price)}</span>
+              <span class="dir-pct ${up ? 'up' : 'down'}">${sign}${item.changePct.toFixed(2)}%</span>
+            </div>
+          </li>
         `;
       }).join("");
-
-      grid.querySelectorAll("[data-grid-sym]").forEach((card) => {
-        card.addEventListener("click", () => {
-          const sym = card.getAttribute("data-grid-sym");
-          addSymbolToWatchlist(sym);
-          pinnedSymbol = sym;
-          renderAll();
-          document.getElementById("macosStage").scrollIntoView({ behavior: "smooth", block: "center" });
-        });
-      });
     }
 
     function renderAll() {
-      renderMenuBar();
-      renderQuickChips();
-      renderPopoverWatchlist();
-      renderFloatingWidget();
-      renderLiveTape();
-      renderPopularGrid();
+      renderMenuBarAndSpotlight();
+      renderPopover();
+      renderDirectory();
     }
 
-    async function fetchLiveYahooQuotes(symbolsToFetch) {
-      const list = Array.from(new Set([...symbolsToFetch, ...ALL_POPULAR_KEYS]));
+    async function fetchLiveQuotes(symbolsToFetch) {
+      const list = Array.from(new Set([...symbolsToFetch, ...ALL_KEYS]));
       try {
         const res = await fetch(`/api/quotes?symbols=${encodeURIComponent(list.join(","))}`);
         if (!res.ok) throw new Error("API status " + res.status);
         const data = await res.json();
-        if (data && data.quotes) {
-          Object.entries(data.quotes).forEach(([sym, incoming]) => {
-            const prev = quotesStore[sym];
-            if (prev && prev.price && incoming.price !== prev.price) {
-              flashState[sym] = incoming.price > prev.price ? "flash-up" : "flash-down";
-              setTimeout(() => {
-                delete flashState[sym];
-              }, 800);
-            }
-            quotesStore[sym] = {
-              ...(prev || {}),
-              ...incoming
+        if (data && Array.isArray(data.quotes)) {
+          data.quotes.forEach(q => {
+            if (!q || !q.symbol) return;
+            const ex = CATALOG[q.symbol] || {
+              name: q.name || q.symbol,
+              logo: `https://ui-avatars.com/api/?name=${encodeURIComponent(q.symbol)}&background=1D2433&color=fff&bold=true`,
+              spark: [q.price, q.price]
+            };
+            CATALOG[q.symbol] = {
+              ...ex,
+              name: q.name || ex.name,
+              price: q.price ?? ex.price,
+              changePct: q.changePct ?? ex.changePct,
+              extLabel: q.extLabel ?? ex.extLabel,
+              extPrice: q.extPrice ?? ex.extPrice,
+              extPct: q.extPct ?? ex.extPct,
+              spark: (q.spark && q.spark.length > 2) ? q.spark : ex.spark
             };
           });
-          const nowStr = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" });
-          document.getElementById("lastUpdatedLabel").textContent = `Yahoo Live · ${nowStr}`;
-          document.getElementById("gridSyncBadge").textContent = `Yahoo Finance v8 · Synced ${nowStr}`;
           renderAll();
         }
       } catch (_) {
-        // Fallback when opened locally as static file without serverless backend
-        document.getElementById("lastUpdatedLabel").textContent = "Yahoo Live · Active";
+        // Keep curated snapshot when running offline
       }
     }
 
-    function addSymbolToWatchlist(rawSym) {
-      const clean = (rawSym || "").replace(/\$/g, "").trim().toUpperCase();
-      if (!clean) return;
-      if (!activeWatchlist.includes(clean)) {
-        activeWatchlist.unshift(clean);
+    // Event Delegation
+    document.getElementById("popoverRows").addEventListener("click", e => {
+      const rem = e.target.closest("[data-remove]");
+      if (rem) {
+        e.stopPropagation();
+        const s = rem.getAttribute("data-remove");
+        if (watchlist.length > 1) {
+          watchlist = watchlist.filter(x => x !== s);
+          if (pinnedSymbol === s) pinnedSymbol = watchlist[0];
+          renderAll();
+        }
+        return;
       }
-      pinnedSymbol = clean;
-      if (!quotesStore[clean]) {
-        quotesStore[clean] = {
-          symbol: clean,
-          name: clean,
-          price: 0,
-          changePercent: 0,
-          sparkline: [1, 1],
-          logo: `https://assets.parqet.com/logos/symbol/${clean.split("-")[0]}?format=png`
+      const row = e.target.closest("[data-pin]");
+      if (row) {
+        pinnedSymbol = row.getAttribute("data-pin");
+        renderAll();
+      }
+    });
+
+    document.getElementById("quickChips").addEventListener("click", e => {
+      const btn = e.target.closest("[data-add]");
+      if (!btn) return;
+      const sym = btn.getAttribute("data-add");
+      if (!watchlist.includes(sym)) watchlist.unshift(sym);
+      pinnedSymbol = sym;
+      renderAll();
+    });
+
+    document.getElementById("directoryList").addEventListener("click", e => {
+      const row = e.target.closest("[data-dir-sym]");
+      if (!row) return;
+      const sym = row.getAttribute("data-dir-sym");
+      if (!watchlist.includes(sym)) watchlist.unshift(sym);
+      pinnedSymbol = sym;
+      renderAll();
+      document.querySelector(".stage-wrapper").scrollIntoView({ behavior: "smooth", block: "nearest" });
+    });
+
+    document.getElementById("addSymbolForm").addEventListener("submit", e => {
+      e.preventDefault();
+      const input = document.getElementById("symbolInput");
+      const raw = input.value.trim().toUpperCase();
+      if (!raw) return;
+      if (!CATALOG[raw]) {
+        CATALOG[raw] = {
+          name: `${raw} Corp.`,
+          logo: `https://ui-avatars.com/api/?name=${encodeURIComponent(raw)}&background=1E293B&color=fff&bold=true`,
+          price: 100.00,
+          changePct: 0.00,
+          extLabel: null,
+          extPrice: null,
+          extPct: null,
+          spark: [100, 100.2, 99.9, 100.1, 100]
         };
       }
-      renderAll();
-      fetchLiveYahooQuotes([clean]);
-    }
-
-    function randomizeStageNow() {
-      activeWatchlist = pickRandomPopularWatchlist(7);
-      pinnedSymbol = activeWatchlist[0];
-      const pop = document.getElementById("liquidPopoverWindow");
-      const offsetTop = 48 + Math.floor(Math.random() * 18);
-      const offsetRight = 22 + Math.floor(Math.random() * 24);
-      pop.style.top = offsetTop + "px";
-      pop.style.right = offsetRight + "px";
-      renderAll();
-    }
-
-    // Draggable Windows inside Stage
-    function makeDraggable(windowEl, handleEl) {
-      let isDragging = false;
-      let startX = 0;
-      let startY = 0;
-      let origLeft = 0;
-      let origTop = 0;
-
-      handleEl.addEventListener("mousedown", (e) => {
-        if (e.target.closest("button")) return;
-        isDragging = true;
-        const stageRect = document.getElementById("macosStage").getBoundingClientRect();
-        const winRect = windowEl.getBoundingClientRect();
-        origLeft = winRect.left - stageRect.left;
-        origTop = winRect.top - stageRect.top;
-        windowEl.style.left = origLeft + "px";
-        windowEl.style.top = origTop + "px";
-        windowEl.style.right = "auto";
-        startX = e.clientX;
-        startY = e.clientY;
-        e.preventDefault();
-      });
-
-      window.addEventListener("mousemove", (e) => {
-        if (!isDragging) return;
-        const dx = e.clientX - startX;
-        const dy = e.clientY - startY;
-        windowEl.style.left = Math.max(8, origLeft + dx) + "px";
-        windowEl.style.top = Math.max(42, origTop + dy) + "px";
-      });
-
-      window.addEventListener("mouseup", () => {
-        isDragging = false;
-      });
-    }
-
-    // mkdir.directory Hover Plate Interaction
-    function setupMkdirDirectoryHover() {
-      const list = document.getElementById("mkdirList");
-      const plate = document.getElementById("mkdirHoverPlate");
-      const rows = list.querySelectorAll(".mkdir-row");
-
-      rows.forEach((row) => {
-        row.addEventListener("mouseenter", () => {
-          const listRect = list.getBoundingClientRect();
-          const rowRect = row.getBoundingClientRect();
-          plate.style.opacity = "1";
-          plate.style.height = `${rowRect.height}px`;
-          plate.style.transform = `translateY(${rowRect.top - listRect.top}px)`;
-        });
-      });
-
-      list.addEventListener("mouseleave", () => {
-        plate.style.opacity = "0";
-      });
-    }
-
-    // Theme Toggle
-    document.getElementById("themeToggleBtn").addEventListener("click", () => {
-      const root = document.documentElement;
-      const next = root.getAttribute("data-theme") === "light" ? "dark" : "light";
-      root.setAttribute("data-theme", next);
-    });
-
-    // Event Listeners
-    document.getElementById("addTickerForm").addEventListener("submit", (e) => {
-      e.preventDefault();
-      const input = document.getElementById("addTickerInput");
-      addSymbolToWatchlist(input.value);
+      if (!watchlist.includes(raw)) watchlist.unshift(raw);
+      pinnedSymbol = raw;
       input.value = "";
-    });
-
-    document.getElementById("heroShuffleBtn").addEventListener("click", randomizeStageNow);
-    document.getElementById("toolbarShuffleBtn").addEventListener("click", randomizeStageNow);
-    document.getElementById("popoverShuffleBtn").addEventListener("click", randomizeStageNow);
-    document.getElementById("widgetShuffleBtn").addEventListener("click", randomizeStageNow);
-
-    document.getElementById("popoverRefreshBtn").addEventListener("click", () => {
-      fetchLiveYahooQuotes(activeWatchlist);
-    });
-
-    document.getElementById("toolbarToggleAhBtn").addEventListener("click", (e) => {
-      showAhInBar = !showAhInBar;
-      e.currentTarget.classList.toggle("active", showAhInBar);
-      e.currentTarget.textContent = `AH/PM in Bar: ${showAhInBar ? "ON" : "OFF"}`;
-      renderMenuBar();
-    });
-
-    document.getElementById("toolbarToggleWidgetBtn").addEventListener("click", (e) => {
-      showFloatingWidget = !showFloatingWidget;
-      e.currentTarget.classList.toggle("active", showFloatingWidget);
-      document.getElementById("floatingDesktopWidget").classList.toggle("hidden", !showFloatingWidget);
-    });
-
-    const wallpapers = [
-      { id: "tahoe", label: "Tahoe Dusk" },
-      { id: "obsidian", label: "Sequoia Obsidian" },
-      { id: "prism", label: "Solar Prism" }
-    ];
-    let wpIdx = 0;
-    document.getElementById("wallpaperCycleBtn").addEventListener("click", (e) => {
-      wpIdx = (wpIdx + 1) % wallpapers.length;
-      const wp = wallpapers[wpIdx];
-      document.getElementById("macosStage").setAttribute("data-wallpaper", wp.id);
-      e.currentTarget.textContent = `Wallpaper: ${wp.label}`;
-    });
-
-    document.getElementById("menubarPinnedPill").addEventListener("click", () => {
-      const idx = (activeWatchlist.indexOf(pinnedSymbol) + 1) % activeWatchlist.length;
-      pinnedSymbol = activeWatchlist[idx];
       renderAll();
+      fetchLiveQuotes([raw]);
     });
 
-    document.getElementById("autoCycleCheckbox").addEventListener("change", (e) => {
-      autoCycleBar = e.target.checked;
-      renderMenuBar();
+    document.getElementById("heroShuffleBtn").addEventListener("click", () => randomizeWatchlist(6));
+    document.getElementById("popRefreshBtn").addEventListener("click", () => fetchLiveQuotes(watchlist));
+
+    document.getElementById("stageToggleAhBtn").addEventListener("click", e => {
+      showExtendedInBar = !showExtendedInBar;
+      e.currentTarget.classList.toggle("active", showExtendedInBar);
+      e.currentTarget.textContent = `Extended Hours in Bar: ${showExtendedInBar ? "ON" : "OFF"}`;
+      renderMenuBarAndSpotlight();
     });
 
-    setInterval(() => {
-      if (autoCycleBar && activeWatchlist.length) {
-        cycleCursor = (cycleCursor + 1) % activeWatchlist.length;
-        renderMenuBar();
-      }
-    }, 3800);
+    document.getElementById("themeToggle").addEventListener("click", () => {
+      const root = document.documentElement;
+      const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      root.setAttribute("data-theme", next);
+      document.getElementById("themeLabel").textContent = next === "dark" ? "light" : "dark";
+    });
 
     function updateClock() {
       const now = new Date();
-      const str = now.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" }) +
-        "  " +
-        now.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" });
-      document.getElementById("menubarClock").textContent = str;
+      document.getElementById("mbClock").textContent = now.toLocaleTimeString("en-US", {
+        weekday: "short",
+        hour: "numeric",
+        minute: "2-digit"
+      });
     }
-
-    // Initialize
     updateClock();
     setInterval(updateClock, 15000);
-    setupMkdirDirectoryHover();
-    makeDraggable(document.getElementById("liquidPopoverWindow"), document.getElementById("popoverDragHandle"));
-    makeDraggable(document.getElementById("floatingDesktopWidget"), document.getElementById("widgetDragHandle"));
-    randomizeStageNow();
-    fetchLiveYahooQuotes(activeWatchlist);
-    setInterval(() => fetchLiveYahooQuotes(activeWatchlist), 15000);
+
+    // Initialize with a randomized popular watchlist
+    randomizeWatchlist(6);
+    setInterval(() => fetchLiveQuotes(watchlist), 25000);
   </script>
 </body>
 </html>
