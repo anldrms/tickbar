@@ -1,14 +1,16 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+export COPYFILE_DISABLE=1
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
-BUILD_DIR="$SCRIPT_DIR/build"
+BUILD_DIR="$(mktemp -d /tmp/tickbar-build.XXXXXX)"
+trap 'rm -rf "$BUILD_DIR"' EXIT
 APP_BUNDLE="$BUILD_DIR/TickBar.app"
 DMG_STAGING="$BUILD_DIR/dmg-staging"
 DMG_OUTPUT="$PROJECT_ROOT/public/downloads/TickBar-macOS-Universal.dmg"
 
-mkdir -p "$BUILD_DIR" "$APP_BUNDLE/Contents/MacOS" "$APP_BUNDLE/Contents/Resources" "$DMG_STAGING" "$PROJECT_ROOT/public/downloads"
+mkdir -p "$APP_BUNDLE/Contents/MacOS" "$APP_BUNDLE/Contents/Resources" "$DMG_STAGING" "$PROJECT_ROOT/public/downloads"
 
 cat > "$BUILD_DIR/make_icon.swift" << 'EOF'
 import Cocoa
@@ -163,22 +165,25 @@ lipo -create -output "$APP_BUNDLE/Contents/MacOS/TickBar" \
     "$BUILD_DIR/TickBar-arm64" \
     "$BUILD_DIR/TickBar-x86_64"
 
-xattr -cr "$APP_BUNDLE"
-codesign --force --deep --sign - "$APP_BUNDLE"
+ditto --norsrc --noextattr "$APP_BUNDLE" "$DMG_STAGING/TickBar.app"
+xattr -cr "$DMG_STAGING/TickBar.app"
+codesign --force --deep --sign - "$DMG_STAGING/TickBar.app"
+codesign --verify --deep --strict --verbose=2 "$DMG_STAGING/TickBar.app"
 
-cp -R "$APP_BUNDLE" "$DMG_STAGING/"
 ln -sf /Applications "$DMG_STAGING/Applications"
 
-rm -f "$DMG_OUTPUT"
+TMP_DMG="$BUILD_DIR/TickBar-macOS-Universal.dmg"
 hdiutil create \
     -volname "TickBar" \
     -srcfolder "$DMG_STAGING" \
+    -fs HFS+ \
     -ov \
     -format UDZO \
-    "$DMG_OUTPUT"
+    "$TMP_DMG"
 
+cp -f "$TMP_DMG" "$DMG_OUTPUT"
 mkdir -p "$PROJECT_ROOT/downloads"
-cp -f "$DMG_OUTPUT" "$PROJECT_ROOT/downloads/TickBar-macOS-Universal.dmg"
+cp -f "$TMP_DMG" "$PROJECT_ROOT/downloads/TickBar-macOS-Universal.dmg"
 
 echo "Built DMG successfully at: $DMG_OUTPUT"
 ls -lh "$DMG_OUTPUT"

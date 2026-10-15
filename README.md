@@ -79,11 +79,17 @@ TickBar resolves high-contrast vector corporate emblems for your watchlist, incl
 
 ## 04 · Installation
 
+### One-Line Terminal Installer (Recommended, Zero Gatekeeper Prompts)
+
+```bash
+curl -fsSL https://tickbar.vercel.app/install.sh | bash
+```
+
 ### Direct Universal `.DMG` Installer
 
 1. Download **[`TickBar-macOS-Universal.dmg`](https://tickbar.vercel.app/downloads/TickBar-macOS-Universal.dmg)**.
 2. Open the `.dmg` disk image and drag **`TickBar.app`** to **`/Applications`**.
-3. Launch **TickBar** from Applications or Spotlight. It attaches directly to your top-right macOS menu bar.
+3. If macOS Gatekeeper blocks the first launch (unsigned/open-source build), run `xattr -cr /Applications/TickBar.app` in Terminal or allow it under **System Settings -> Privacy & Security -> Open Anyway**.
 
 ### Build from Source
 

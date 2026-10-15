@@ -258,6 +258,41 @@
       background-color: var(--color-plate);
     }
 
+    .cli-install-pill {
+      margin-top: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      max-width: 100%;
+      padding: 8px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--color-rule);
+      background-color: var(--color-plate-soft);
+      color: var(--color-ink);
+      font-size: 12px;
+      cursor: pointer;
+      transition: border-color 0.15s ease, background-color 0.15s ease;
+    }
+
+    .cli-install-pill:hover {
+      background-color: var(--color-plate);
+    }
+
+    .cli-install-cmd {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .cli-install-badge {
+      padding: 2px 8px;
+      border-radius: 999px;
+      background-color: var(--color-plate);
+      color: var(--color-muted);
+      font-size: 11px;
+      flex-shrink: 0;
+    }
+
     /* Interactive macOS 27 Stage — 100% Fluid & Responsive */
     .stage-wrapper {
       border-radius: 20px;
@@ -1023,6 +1058,11 @@
         <p class="hero-desc">
           A native SwiftUI and AppKit utility that streams real-time Yahoo Finance regular, Pre-Market, and After-Hours quotes with 2026 vector company emblems. Add or remove any global ticker in seconds, free and open-source.
         </p>
+        <button type="button" class="cli-install-pill mono" id="copyCliBtn" title="Copy one-line macOS installer (bypasses Gatekeeper quarantine)">
+          <span style="opacity:0.5">$</span>
+          <span class="cli-install-cmd">curl -fsSL https://tickbar.vercel.app/install.sh | bash</span>
+          <span class="cli-install-badge" id="copyCliBadge">Copy</span>
+        </button>
       </div>
       <div class="hero-actions">
         <a href="/downloads/TickBar-macOS-Universal.dmg" download class="btn-dmg">
@@ -1457,6 +1497,12 @@
 
     document.getElementById("heroShuffleBtn").addEventListener("click", () => randomizeWatchlist(6));
     document.getElementById("popRefreshBtn").addEventListener("click", () => fetchLiveQuotes(watchlist));
+    document.getElementById("copyCliBtn").addEventListener("click", () => {
+      navigator.clipboard.writeText("curl -fsSL https://tickbar.vercel.app/install.sh | bash");
+      const badge = document.getElementById("copyCliBadge");
+      badge.textContent = "Copied ✓";
+      setTimeout(() => { badge.textContent = "Copy"; }, 2000);
+    });
 
     document.getElementById("stageToggleAhBtn").addEventListener("click", e => {
       showExtendedInBar = !showExtendedInBar;

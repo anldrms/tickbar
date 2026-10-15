@@ -14,6 +14,15 @@
           "value": "attachment; filename=\"TickBar-macOS-Universal.dmg\""
         }
       ]
+    },
+    {
+      "source": "/install.sh",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/plain; charset=utf-8"
+        }
+      ]
     }
   ]
 }
